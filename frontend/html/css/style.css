@@ -1,0 +1,98 @@
+/* NombreDelRepo/frontend/css/style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #EEE6FF;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #1F2033;
+    color: #EEE6FF;
+    padding: 1rem 0;
+    text-align: left;
+    display: flex;
+}
+
+header h1 {
+    margin-left: 20px;
+}
+
+nav ul {
+    padding: 0;
+    list-style: none;
+    margin-left: 40px;
+    margin-top: 35px;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #EEE6FF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+    max-width: 960px;
+    margin: 20px auto;
+    border-radius: 5px;
+}
+
+section {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+h2, h3 {
+    color: #2E3478;
+}
+
+button {
+    background-color: #2E3478;
+    color: #EEE6FF;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #084920;
+}
+
+section ul li{
+    color: #2E3478
+}
+p {
+    color:#2E3478;
+    font-size: 20px;
+    font-weight:bold;
+}
+label {
+    color:#2E3478
+}
+input {
+    width: 100%;
+    padding: 12px;
+    border: 5px solid #A5AFE6;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: #2E3478;
+}
+input:focus {
+    border-color: #1F2033;
+    outline: none; /* Elimina el contorno azul por defecto en algunos navegadores */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
