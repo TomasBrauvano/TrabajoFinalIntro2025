@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido a StoryStack</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <header>
-        <h1>StoryStack</h1>
+        <img id="logo" src="./imagenes/LOGO.png">
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
@@ -19,27 +19,42 @@
                 <li><a href="micuenta.html">Mi Perfil</a></li>
             </ul>
         </nav>
+        
     </header>
 
     <main id="inicio">
-        <section id="hero">
-            <h2>Bienvenido a StoryStack</h2>
+        <section id="bienvenido">
+            
+            <h2 id="titulo-principal">Bienvenido a StoryStack</h2>
             <p>Descubre un mundo de posibilidades para tus listas personales. Organiza tus
                 peliculas, series, libros y juegos.
             </p>
             <button onclick="location.href='login.html'">Iniciar Sesión</button>
             <button onclick="location.href='register.html'">Registrarse</button>
+            <div>
+                <h3>Características Principales</h3>
+                <ul>
+                    <li>Crea listas personalizadas.</li>
+                    <li>Rastrea tu progreso.</li>
+                </ul>
+            </div>
         </section>
 
+        
         <section>
-            <h3>Características Principales</h3>
-            <ul>
-                <li>Crea listas personalizadas.</li>
-                <li>Rastrea tu progreso.</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Algunas recomendaciones:</h2>
+            <h2>Algunas recomendaciones para vos:</h2>
+            <div id="horizontal-1" class="horizontal">
+                <div class="tarjeta">
+                    Recomendacion 1
+                </div>
+                <div class="tarjeta">
+                    Recomendacion 2
+                </div>
+                <div class="tarjeta">
+                    Recomendacion 3
+                </div>
+
+            </div>
         </section>
     </main>
 

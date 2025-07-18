@@ -1,19 +1,20 @@
-/* NombreDelRepo/frontend/css/style.css */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #EEE6FF;
-    color: #333;
     line-height: 1.6;
+    width: 100%;
+    height: 100%;
+    background-color: #1e1e1e;
+    color: #EEE6FF;
 }
 
 header {
     background-color: #1F2033;
     color: #EEE6FF;
-    padding: 1rem 0;
     text-align: left;
     display: flex;
+    width: 100%;
 }
 
 header h1 {
@@ -24,7 +25,7 @@ nav ul {
     padding: 0;
     list-style: none;
     margin-left: 40px;
-    margin-top: 35px;
+    margin-top: 55px;
 }
 
 nav ul li {
@@ -39,20 +40,23 @@ nav ul li a {
 }
 
 main {
-    padding: 20px;
-    max-width: 960px;
-    margin: 20px auto;
     border-radius: 5px;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    display:contents;
 }
 
 section {
     margin-bottom: 20px;
-    padding: 20px;
     border-radius: 5px;
 }
 
 h2, h3 {
-    color: #2E3478;
+    color: #EEE6FF;
+}
+#titulo-principal {
+    font-size: 48px;
 }
 
 button {
@@ -68,16 +72,32 @@ button {
 }
 
 button:hover {
-    background-color: #084920;
+    outline: 2px solid #EEE6FF;
+    outline-offset: 2px;
 }
 
 section ul li{
-    color: #2E3478
+    color: #EEE6FF
 }
 p {
-    color:#2E3478;
+    color:#EEE6FF;
     font-size: 20px;
     font-weight:bold;
+}
+#bienvenido {
+    text-align: center;
+    background:
+        linear-gradient(180deg, transparent, #1e1e1e), url("../imagenes/personas-viendo-television-smart-tv-3225758.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 780px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 label {
     color:#2E3478
@@ -95,4 +115,37 @@ input:focus {
     border-color: #1F2033;
     outline: none; /* Elimina el contorno azul por defecto en algunos navegadores */
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+.horizontal {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 20px;
+    scroll-snap-type: x mandatory;
+    background: linear-gradient(to right,#40489c,90%,#1e1e1e);
+    width: 100%
+}
+.tarjeta {
+    min-width: 160px;
+    height: 240px;
+    background-color: #2E3478;
+    color:white;
+    border-radius: 8px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    scroll-snap-align: start;
+
+}
+#logo {
+    max-width: 250px;
+    height: auto;
+}
+.mostrador-de-contenido {
+    display: flex;
+    gap: 16px;
+    max-width: 80%;
+    background: linear-gradient(180deg,#2E3478,70%,#1e1e1e);
 }
