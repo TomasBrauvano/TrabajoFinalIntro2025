@@ -23,3 +23,8 @@ services:
       - DB_USER=postgres
       - DB_PASSWORD=postgres
       - DB_NAME=StoryStack
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
