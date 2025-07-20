@@ -10,8 +10,8 @@ router.post('/registro', async (req, res) => {
     }
 
     try {
-        const existe = await usuarioModelo.obtenerPorNombreUsuario(nombre_usuario);
-        if (existe) {
+        const usuario = await usuarioModelo.obtenerPorNombreUsuario(nombre_usuario);
+        if (usuario) {
             return res.status(409).json({ error: 'El nombre de usuario ya esta en uso' });
         }
 
@@ -51,7 +51,7 @@ router.delete('/:id', async (req, res) => {
     try {
         const usuarioEliminado = await usuarioModelo.eliminarPorId(id);
         if (usuarioEliminado) {
-            res.status(201).json({ mensaje: 'Usuario eliminado' });
+            res.status(200).json({ mensaje: 'Usuario eliminado' });
         } else {
             res.status(404).json({ error: 'Usuario no encontrado' });
         }
@@ -59,6 +59,26 @@ router.delete('/:id', async (req, res) => {
         console.error(err);
         res.status(500).json({ error: 'Error en el servidor' });
     }
+})
+
+router.post("/login", async (req, res) => {
+    const { nombre_usuario, contraseña } = req.body;
+
+    try {
+        const usuario = await usuarioModelo.obtenerPorNombreUsuario(nombre_usuario);
+        if (!usuario) {
+            return res.status(404).json({ error: 'El nombre de usuario no existe' });
+        }
+        if (usuario.contrasenia === contraseña) {
+            res.status(200).json({ mensaje: 'Usuario logeado' });
+        } else {
+            res.status(401).json({ mensaje: 'La contraseña no coincide' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+
 })
 
 module.exports = router;
