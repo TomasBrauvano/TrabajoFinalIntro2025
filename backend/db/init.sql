@@ -61,3 +61,11 @@ CREATE TABLE IF NOT EXISTS usuario_libro (
     estado VARCHAR(50) NOT NULL,
     PRIMARY KEY (usuario_id, libro_id)
 );
+
+INSERT INTO categorias (nombre) VALUES 
+    ('terror'),
+    ('aventura'),
+    ('romance'),
+    ('ciencia ficción'),
+    ('fantasía')
+ON CONFLICT (nombre) DO NOTHING;
