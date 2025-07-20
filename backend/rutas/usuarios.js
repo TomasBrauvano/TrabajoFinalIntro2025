@@ -23,4 +23,26 @@ router.post('/registro', async (req, res) => {
     }
 })
 
+router.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    const { nombre_usuario, nombre, apellido, contraseña, categoria_preferida } = req.body;
+
+    if (!nombre_usuario || !nombre || !apellido || !contraseña || !categoria_preferida) {
+        return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    try {
+        const usuarioActualizado = await usuarioModelo.actualizar(id, { nombre_usuario, nombre, apellido, contraseña, categoria_preferida });
+        if (usuarioActualizado) {
+            res.status(201).json({ mensaje: 'Usuario actualizado' });
+        } else {
+            res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+
+})
+
 module.exports = router;
