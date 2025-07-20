@@ -16,5 +16,17 @@ async function crear({ nombre_usuario, nombre, apellido, contraseña, categoria_
     }
 }
 
+async function actualizar(id, { nombre_usuario, nombre, apellido, contraseña, categoria_preferida }) {
+    try {
+        const resultado = await pool.query(
+            'UPDATE usuarios SET nombre_usuario = $1 , nombre = $2 , apellido = $3 , contrasenia = $4 , categoria_preferida = $5 WHERE id = $6 RETURNING *',
+            [nombre_usuario, nombre, apellido, contraseña, categoria_preferida, id]
+        );
+        return resultado.rows[0];
+    } catch (err) {
+        throw err;
+    }
+}
 
-module.exports = { obtenerPorNombreUsuario, crear };
+
+module.exports = { obtenerPorNombreUsuario, crear, actualizar };
