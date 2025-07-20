@@ -45,4 +45,20 @@ router.put('/:id', async (req, res) => {
 
 })
 
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const usuarioEliminado = await usuarioModelo.eliminarPorId(id);
+        if (usuarioEliminado) {
+            res.status(201).json({ mensaje: 'Usuario eliminado' });
+        } else {
+            res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 module.exports = router;

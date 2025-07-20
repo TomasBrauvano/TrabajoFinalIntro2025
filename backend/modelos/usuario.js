@@ -5,6 +5,11 @@ async function obtenerPorNombreUsuario(nombre_usuario) {
     return res.rows[0];
 }
 
+async function obtenerPorId(id) {
+    const res = await pool.query('SELECT * FROM usuarios WHERE id = $1', [id]);
+    return res.rows[0];
+}
+
 async function crear({ nombre_usuario, nombre, apellido, contraseña, categoria_preferida }) {
     try {
         await pool.query(
@@ -28,5 +33,16 @@ async function actualizar(id, { nombre_usuario, nombre, apellido, contraseña, c
     }
 }
 
+async function eliminarPorId(id) {
+    try {
+        const resultado = await pool.query(
+            'DELETE FROM usuarios WHERE id = $1 RETURNING *', [id]
+        )
+        return resultado.rows[0];
+    } catch (err) {
+        throw err;
+    }
+}
 
-module.exports = { obtenerPorNombreUsuario, crear, actualizar };
+
+module.exports = { obtenerPorNombreUsuario, obtenerPorId, crear, actualizar, eliminarPorId };
