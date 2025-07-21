@@ -1,0 +1,248 @@
+/* Barra de Navegación */
+header {
+    background-color: #1F2033;
+    color: #EEE6FF;
+    text-align: left;
+    display: flex;
+    width: 100%;
+}
+
+nav ul {
+    padding: 0;
+    list-style: none;
+    margin-left: 40px;
+    margin-top: 55px;
+    background-color: #1F2033;
+}
+
+nav ul li {
+    display: block;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #EEE6FF;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+}
+nav ul > li {
+    float: left;
+}
+nav li a:hover {
+    background-color: #2E3478;
+}
+nav ul li ul {
+    display: none;
+    position: absolute;
+    min-width: 140px;
+    background-color: #1F203380;
+    outline: 2px solid #1e1e1e;
+}
+nav ul li:hover > ul {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+/* Cuerpo */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    width: 100%;
+    height: 100%;
+    background-color: #1e1e1e;
+    color: #EEE6FF;
+}
+#inicio {
+    display:contents;
+}
+
+section {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+h2, h3 {
+    color: #EEE6FF;
+}
+#titulo-principal {
+    font-size: 48px;
+}
+
+button {
+    background-color: #2E3478;
+    color: #EEE6FF;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+button:hover {
+    outline: 2px solid #EEE6FF;
+    outline-offset: 2px;
+}
+
+section ul li{
+    color: #EEE6FF
+}
+p {
+    color:#EEE6FF;
+    font-size: 20px;
+    font-weight:bold;
+}
+#bienvenido {
+    text-align: center;
+    background:
+        linear-gradient(180deg, transparent, #1e1e1e), url("../imagenes/personas-viendo-television-smart-tv-3225758.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 780px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+input:focus {
+    border-color: #1F2033;
+    outline: none; /* Elimina el contorno azul por defecto en algunos navegadores */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+.horizontal {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 20px;
+    scroll-snap-type: x mandatory;
+    background: linear-gradient(to right,#40489c,90%,#1e1e1e);
+    width: 100%
+}
+.tarjeta {
+    min-width: 160px;
+    height: 240px;
+    background-color: #2E3478;
+    color:white;
+    border-radius: 8px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    scroll-snap-align: start;
+
+}
+#logo {
+    max-width: 250px;
+    height: auto;
+}
+.mostrador-de-contenido {
+    display: flex;
+    gap: 16px;
+    max-width: 80%;
+    background: linear-gradient(180deg,#2E3478,70%,#1e1e1e);
+}
+.cuadro-de-ingreso {
+    max-width: 500px;
+    background-color: #1F2033;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow:#000;
+}
+.formulario-ingreso {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 350px;
+    gap:15px;
+}
+
+label {
+    color: #A5AFE6;
+    font-size: 18px;
+    font-weight: bold;
+}
+input {
+    padding: 10px;
+    border: 2px solid #2E3478;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: #2E3478;
+}
+main {
+    border-radius: 5px;
+    padding: 0;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#main-de-busqueda {
+    display: block;
+}
+.barra-busqueda form {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+}
+.barra-busqueda form button {
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+#configuraciones {
+    background: linear-gradient(180deg,#2E3478,#1e1e1e);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 95%;
+}
+.conf-input {
+    display: none;
+}
+
+input:checked + .conf-input {
+    display: block;
+}
+input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+}
+#configuraciones > * {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+#configuraciones > * > * {
+    margin-right: 10px;
+}
+#configuraciones > * > button {
+    border: 4px solid #1e1e1e;
+}
+#usuario {
+    background-color: #2E3478;
+    border-radius: 100px;
+    padding: 20px;
+    margin: 20px auto;
+}
