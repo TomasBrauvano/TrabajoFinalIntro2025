@@ -63,39 +63,42 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     const { id } = req.params;
-    const { nombre, anio, director, sinopsis, imagen, categoria } = req.body;
+    const { nombre, anio, director, sinopsis, imagen, creador_id, categoria, usuario_id } = req.body;
 
-    if (!nombre || !anio || !director || !sinopsis || !imagen || !categoria) {
+    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria) {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
     try {
-        const peliculaActualizada = await peliculaModelo.actualizar(id, { nombre, anio, director, sinopsis, imagen, categoria });
-        if (peliculaActualizada) {
-            res.status(201).json({ mensaje: 'Pelicula actualizada' });
-        } else {
-            res.status(404).json({ error: 'Pelicula no encontrada' });
+        const pelicula = await peliculaModelo.obtenerPorId(id);
+        if (!pelicula) {
+            return res.status(404).json({ error: 'Pelicula no encontrada' });
         }
-
+        if (creador_id != usuario_id) {
+            return res.status(403).json({ error: 'No tenes permisos para actualizar esta pelicula' });
+        }
+        await peliculaModelo.actualizar(id, { nombre, anio, director, sinopsis, imagen, creador_id, categoria });
+        res.status(201).json({ mensaje: 'Pelicula actualizada' });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Error en el servidor' });
     }
 })
 
-router.delete("/:id/:creador_id", async (req, res) => {
-    const { id, creador_id } = req.params;
+router.delete("/:id", async (req, res) => {
+    const { id } = req.params;
+    const usuario_id = req.body.usuario_id
 
     try {
-        if (id != creador_id) {
-            return res.status(400).json({ error: 'No podes eliminar esta pelicula' });
+        const pelicula = await peliculaModelo.obtenerPorId(id);
+        if (!pelicula) {
+            return res.status(404).json({ error: 'Pelicula no encontrada' });
         }
-        const peliculaEliminada = await peliculaModelo.eliminarPorId(id);
-        if (peliculaEliminada) {
-            res.status(200).json({ mensaje: 'Pelicula eliminada' });
-        } else {
-            res.status(404).json({ error: 'Pelicula no encontrada' });
+        if (pelicula.creador_id !== usuario_id) {
+            return res.status(403).json({ error: 'No tenes permisos para eliminar esta pelicula' });
         }
+        await peliculaModelo.eliminarPorId(id);
+        res.status(200).json({ mensaje: 'Pelicula eliminada' });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Error en el servidor' });
