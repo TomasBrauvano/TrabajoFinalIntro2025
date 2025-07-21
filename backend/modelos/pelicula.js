@@ -26,4 +26,16 @@ async function crear({ nombre, anio, director, sinopsis, imagen, categoria }) {
     }
 }
 
-module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodas, crear };
+async function actualizar(id, { nombre, anio, director, sinopsis, imagen, categoria }) {
+    try {
+        const resultado = await pool.query(
+            'UPDATE peliculas SET nombre = $1 , anio = $2 , director = $3 , sinopsis = $4 , imagen = $5 , categoria = $6  WHERE id = $7 RETURNING *',
+            [nombre, anio, director, sinopsis, imagen, categoria, id]
+        );
+        return resultado.rows[0];
+    } catch (err) {
+        throw err;
+    }
+}
+
+module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodas, crear, actualizar };
