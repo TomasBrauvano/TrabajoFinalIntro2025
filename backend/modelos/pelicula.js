@@ -15,4 +15,15 @@ async function obtenerTodas() {
     return res.rows;
 }
 
-module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodas };
+async function crear({ nombre, anio, director, sinopsis, imagen, categoria }) {
+    try {
+        await pool.query(
+            'INSERT INTO peliculas (nombre, anio, director, sinopsis, imagen, categoria) VALUES ($1, $2, $3, $4, $5, $6)',
+            [nombre, anio, director, sinopsis, imagen, categoria]
+        );
+    } catch (err) {
+        throw err;
+    }
+}
+
+module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodas, crear };
