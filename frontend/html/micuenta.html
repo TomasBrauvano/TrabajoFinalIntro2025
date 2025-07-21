@@ -28,6 +28,47 @@
                 </ul>
             </nav>
         </header>
+        <main>
+            <section id="usuario">
+                <h1>Nombre Apellido</h1>
+                <p>nombre_de_usuario</p>
+            </section>
+            
+            <section id="configuraciones">
+                <h2>Configuraciones:</h2>
+                <label for="toggle-nombre">Cambiar Nombre y/o Apellido</label>
+                <input type="checkbox" id="toggle-nombre">
+                <div class="conf-input">
+                    <label for="cambio-nombre">Nombre Nuevo:</label>
+                    <input type="text" id="cambio-nombre" name="cambio-nombre">
+                    <label for="cambio-apellido">Apellido Nuevo:</label>
+                    <input type="text" id="cambio-apellido" name="cambio-apellido">
+                    <button id="cambiar-nombre">Cambiar</button>
+                </div>
+                <label for="toggle-contrasenia">Cambiar Contraseña</label>
+                <input type="checkbox" id="toggle-contrasenia">
+                <div class="conf-input">
+                    <label for="cambio-contrasenia">Contraseña Nueva:</label>
+                    <input type="password" id="cambio-contrasenia" name="cambio-contrasenia">
+                    <label for="cambio-confirmacion-contra">Confirmar Contraseña:</label>
+                    <input type="password" id="cambio-confirmacion-contra" name="cambio-confirmacion-contra">
+                    <button id="cambiar-contrasenia">Cambiar</button>
+                </div>
+                <label for="toggle-categoria">Cambiar Categoria</label>
+                <input type="checkbox" id="toggle-categoria">
+                <div class="conf-input">
+                    <label for="cambio-categoria">Nueva Categoria:</label>
+                    <input type="text" id="cambio-categoria" name="cambio-categoria">
+                    <button id="cambiar-categoria">Cambiar</button>
+                </div>
+                <label for="toggle-eliminar">Eliminar Cuenta</label>
+                <input type="checkbox" id="toggle-eliminar">
+                <div class="conf-input">
+                    <strong>Estás Seguro/a?</strong>
+                    <button>Eliminar</button>
+                </div>
+            </section>
+        </main>
 
     </body>
 </html>

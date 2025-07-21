@@ -7,10 +7,6 @@ header {
     width: 100%;
 }
 
-header h1 {
-    margin-left: 20px;
-}
-
 nav ul {
     padding: 0;
     list-style: none;
@@ -60,17 +56,14 @@ body {
     background-color: #1e1e1e;
     color: #EEE6FF;
 }
-main {
-    border-radius: 5px;
-    padding: 0;
-    margin: 0;
-    align-items: center;
+#inicio {
     display:contents;
 }
 
 section {
     margin-bottom: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
+    margin: 0 auto;
 }
 
 h2, h3 {
@@ -120,18 +113,7 @@ p {
     align-items: center;
     padding: 20px;
 }
-label {
-    color:#2E3478
-}
-input {
-    width: 100%;
-    padding: 12px;
-    border: 5px solid #A5AFE6;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 1rem;
-    color: #2E3478;
-}
+
 input:focus {
     border-color: #1F2033;
     outline: none; /* Elimina el contorno azul por defecto en algunos navegadores */
@@ -169,4 +151,98 @@ input:focus {
     gap: 16px;
     max-width: 80%;
     background: linear-gradient(180deg,#2E3478,70%,#1e1e1e);
+}
+.cuadro-de-ingreso {
+    max-width: 500px;
+    background-color: #1F2033;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow:#000;
+}
+.formulario-ingreso {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 350px;
+    gap:15px;
+}
+
+label {
+    color: #A5AFE6;
+    font-size: 18px;
+    font-weight: bold;
+}
+input {
+    padding: 10px;
+    border: 2px solid #2E3478;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: #2E3478;
+}
+main {
+    border-radius: 5px;
+    padding: 0;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#main-de-busqueda {
+    display: block;
+}
+.barra-busqueda form {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+}
+.barra-busqueda form button {
+    margin-left: 10px;
+    margin-bottom: 3px;
+}
+#configuraciones {
+    background: linear-gradient(180deg,#2E3478,#1e1e1e);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 95%;
+}
+.conf-input {
+    display: none;
+}
+
+input:checked + .conf-input {
+    display: block;
+}
+input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+}
+#configuraciones > * {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+#configuraciones > * > * {
+    margin-right: 10px;
+}
+#configuraciones > * > button {
+    border: 4px solid #1e1e1e;
+}
+#usuario {
+    background-color: #2E3478;
+    border-radius: 100px;
+    padding: 20px;
+    margin: 20px auto;
 }

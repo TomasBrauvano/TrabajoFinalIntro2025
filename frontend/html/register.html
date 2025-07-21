@@ -30,30 +30,36 @@
             
         </header>
         <main>
-            <section>
+            <section class="cuadro-de-ingreso">
                 <h2>Registrar una cuenta nueva</h2>
                 <p>Completa los siguietes datos:</p>
-                <div class="formulario-inscripcion">
-                    <label for="nombreusuario">Nombre de Usuario:</label>
-                    <input type="text" id="nombreusuario" name="nombreusuario" required>
-                </div>
-                <div class="formulario-inscripcion">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                </div>
-                <div class="formulario-inscripcion">
-                    <label for="apellido">Apellido:</label>
-                    <input type="text" id="apellido" name="apellido" required>
-                </div>
-                <div class="formulario-inscripcion">
-                    <label for="contrasenia">Contraseña:</label>
-                    <input type="password" id="contrasenia" name="contrasenia" required>
-                </div>
-                <div class="formulario-inscripcion">
-                    <label for="confirmar_contrasenia">Confirmar Contraseña:</label>
-                    <input type="password" id="confirmar_contrasenia" name="confirmar_contrasenia" required>
-                </div>
-                <button id="crear-cuenta">Crear Cuenta</button>
+                <form action="" method="POST">
+                    <div class="formulario-inscripcion">
+                        <label for="nombreusuario">Nombre de Usuario:</label>
+                        <input type="text" id="nombreusuario" name="nombreusuario" required>
+                    </div>
+                    <div class="formulario-inscripcion">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="formulario-inscripcion">
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" id="apellido" name="apellido" required>
+                    </div>
+                    <div class="formulario-inscripcion">
+                        <label for="contrasenia">Contraseña:</label>
+                        <input type="password" id="contrasenia" name="contrasenia" required>
+                    </div>
+                    <div class="formulario-inscripcion">
+                        <label for="confirmar_contrasenia">Confirmar Contraseña:</label>
+                        <input type="password" id="confirmar_contrasenia" name="confirmar_contrasenia" required>
+                    </div>
+                    <div class="formulario-inscripcion">
+                        <label for="categoria_preferida">Cuál es tu categoria preferida?:</label>
+                        <input type="text" id="categoria_preferida" name="categoria_preferida" required>
+                    </div>
+                    <button id="crear-cuenta">Crear Cuenta</button>
+                </form>
 
             </section>
         </main>
