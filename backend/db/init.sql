@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS peliculas (
     director VARCHAR(50) NOT NULL,
     sinopsis TEXT NOT NULL,
     imagen TEXT NOT NULL,
+    creador_id INT REFERENCES usuarios(id) NOT NULL,
     categoria INT REFERENCES categorias(id) NOT NULL
 );
 
@@ -29,6 +30,7 @@ CREATE TABLE IF NOT EXISTS series (
     director VARCHAR(50) NOT NULL,
     sinopsis TEXT NOT NULL,
     imagen TEXT NOT NULL,
+    creador_id INT REFERENCES usuarios(id) NOT NULL,
     categoria INT REFERENCES categorias(id) NOT NULL
 );
 
@@ -38,6 +40,7 @@ CREATE TABLE IF NOT EXISTS libros (
     anio SMALLINT NOT NULL,
     autor VARCHAR(50) NOT NULL,
     imagen TEXT NOT NULL,
+    creador_id INT REFERENCES usuarios(id) NOT NULL,
     categoria INT REFERENCES categorias(id) NOT NULL
 );
 
@@ -71,4 +74,8 @@ INSERT INTO categorias (nombre) VALUES
     ('romance'),
     ('ciencia ficción'),
     ('fantasía')
+ON CONFLICT (nombre) DO NOTHING;
+
+INSERT INTO usuarios (nombre_usuario,nombre,apellido,contrasenia,categoria_preferida) VALUES 
+    ('admin','admin','admin','admin','admin',1)
 ON CONFLICT (nombre) DO NOTHING;
