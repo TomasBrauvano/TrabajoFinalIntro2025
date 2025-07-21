@@ -72,4 +72,20 @@ router.put("/:id", async (req, res) => {
     }
 })
 
+router.delete("/:id", async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const peliculaEliminada = await peliculaModelo.eliminarPorId(id);
+        if (peliculaEliminada) {
+            res.status(200).json({ mensaje: 'Pelicula eliminada' });
+        } else {
+            res.status(404).json({ error: 'Pelicula no encontrada' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 module.exports = router
