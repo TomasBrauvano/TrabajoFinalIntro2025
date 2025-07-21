@@ -12,6 +12,17 @@ router.get("/", async (req, res) => {
     }
 })
 
+router.get("/:creador_id", async (req, res) => {
+    const { creador_id } = req.params;
+    try {
+        const peliculas = await peliculaModelo.obtenerPorCreador(creador_id);
+        res.status(200).json(peliculas);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 router.get("/:id", async (req, res) => {
     const { id } = req.params;
     try {
@@ -35,14 +46,14 @@ router.get("/categorias/:id_categoria", async (req, res) => {
 })
 
 router.post("/", async (req, res) => {
-    const { nombre, anio, director, sinopsis, imagen, categoria } = req.body;
+    const { nombre, anio, director, sinopsis, imagen, creador_id, categoria } = req.body;
 
-    if (!nombre || !anio || !director || !sinopsis || !imagen || !categoria) {
+    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria) {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
     try {
-        await peliculaModelo.crear({ nombre, anio, director, sinopsis, imagen, categoria });
+        await peliculaModelo.crear({ nombre, anio, director, sinopsis, imagen, creador_id, categoria });
         res.status(201).json({ mensaje: 'Pelicula creada' });
     } catch (err) {
         console.error(err);
@@ -72,10 +83,13 @@ router.put("/:id", async (req, res) => {
     }
 })
 
-router.delete("/:id", async (req, res) => {
-    const { id } = req.params;
+router.delete("/:id/:creador_id", async (req, res) => {
+    const { id, creador_id } = req.params;
 
     try {
+        if (id != creador_id) {
+            return res.status(400).json({ error: 'No podes eliminar esta pelicula' });
+        }
         const peliculaEliminada = await peliculaModelo.eliminarPorId(id);
         if (peliculaEliminada) {
             res.status(200).json({ mensaje: 'Pelicula eliminada' });
