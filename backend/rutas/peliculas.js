@@ -50,4 +50,26 @@ router.post("/", async (req, res) => {
     }
 })
 
+router.put("/:id", async (req, res) => {
+    const { id } = req.params;
+    const { nombre, anio, director, sinopsis, imagen, categoria } = req.body;
+
+    if (!nombre || !anio || !director || !sinopsis || !imagen || !categoria) {
+        return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    try {
+        const peliculaActualizada = await peliculaModelo.actualizar(id, { nombre, anio, director, sinopsis, imagen, categoria });
+        if (peliculaActualizada) {
+            res.status(201).json({ mensaje: 'Pelicula actualizada' });
+        } else {
+            res.status(404).json({ error: 'Pelicula no encontrada' });
+        }
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 module.exports = router
