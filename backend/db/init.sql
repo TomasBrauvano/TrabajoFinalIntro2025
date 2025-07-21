@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
     contrasenia VARCHAR(50) NOT NULL,
-    categoria_preferida INT REFERENCES categorias(id)
+    categoria_preferida INT REFERENCES categorias(id) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS peliculas (
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS peliculas (
     director VARCHAR(50) NOT NULL,
     sinopsis TEXT NOT NULL,
     imagen TEXT NOT NULL,
-    categoria INT REFERENCES categorias(id)
+    categoria INT REFERENCES categorias(id) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS series (
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS series (
     director VARCHAR(50) NOT NULL,
     sinopsis TEXT NOT NULL,
     imagen TEXT NOT NULL,
-    categoria INT REFERENCES categorias(id)
+    categoria INT REFERENCES categorias(id) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS libros (
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS libros (
     anio SMALLINT NOT NULL,
     autor VARCHAR(50) NOT NULL,
     imagen TEXT NOT NULL,
-    categoria INT REFERENCES categorias(id)
+    categoria INT REFERENCES categorias(id) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS usuario_pelicula (
