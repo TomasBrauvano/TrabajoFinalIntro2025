@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS peliculas (
     anio SMALLINT NOT NULL,
     director VARCHAR(50) NOT NULL,
     sinopsis TEXT NOT NULL,
+    imagen TEXT NOT NULL,
     categoria INT REFERENCES categorias(id)
 );
 
@@ -27,6 +28,7 @@ CREATE TABLE IF NOT EXISTS series (
     anio SMALLINT NOT NULL,
     director VARCHAR(50) NOT NULL,
     sinopsis TEXT NOT NULL,
+    imagen TEXT NOT NULL,
     categoria INT REFERENCES categorias(id)
 );
 
@@ -35,6 +37,7 @@ CREATE TABLE IF NOT EXISTS libros (
     nombre VARCHAR(50) NOT NULL,
     anio SMALLINT NOT NULL,
     autor VARCHAR(50) NOT NULL,
+    imagen TEXT NOT NULL,
     categoria INT REFERENCES categorias(id)
 );
 
