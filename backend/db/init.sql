@@ -76,6 +76,6 @@ INSERT INTO categorias (nombre) VALUES
     ('fantasía')
 ON CONFLICT (nombre) DO NOTHING;
 
-INSERT INTO usuarios (nombre_usuario,nombre,apellido,contrasenia,categoria_preferida) VALUES 
-    ('admin','admin','admin','admin','admin',1)
-ON CONFLICT (nombre) DO NOTHING;
+INSERT INTO usuarios (nombre_usuario,nombre,apellido,contrasenia,categoria_preferida) 
+VALUES ('admin','admin','admin','admin',1)
+ON CONFLICT (nombre_usuario) DO NOTHING;
