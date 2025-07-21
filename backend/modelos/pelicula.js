@@ -38,4 +38,15 @@ async function actualizar(id, { nombre, anio, director, sinopsis, imagen, catego
     }
 }
 
-module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodas, crear, actualizar };
+async function eliminarPorId(id) {
+    try {
+        const resultado = await pool.query(
+            'DELETE FROM peliculas WHERE id = $1 RETURNING *', [id]
+        )
+        return resultado.rows[0];
+    } catch (err) {
+        throw err;
+    }
+}
+
+module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodas, crear, actualizar, eliminarPorId };
