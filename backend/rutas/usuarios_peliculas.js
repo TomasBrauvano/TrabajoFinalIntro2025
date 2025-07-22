@@ -52,4 +52,23 @@ router.put('/', async (req, res) => {
     }
 })
 
+router.delete('/', async (req, res) => {
+    const { usuario_id, pelicula_id } = req.body;
+
+    if (!usuario_id || !pelicula_id) {
+        return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    try {
+        const relacionEliminada = await usuarioPeliculaModelo.eliminar(usuario_id, pelicula_id);
+        if (!relacionEliminada) {
+            return res.status(404).json({ error: 'La relacion no existe' });
+        }
+        res.status(201).json({ message: 'Pelicula eliminada del perfil del usuario' });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 module.exports = router;
