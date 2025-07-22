@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.get("/:creador_id", async (req, res) => {
+router.get("/creadores/:creador_id", async (req, res) => {
     const { creador_id } = req.params;
     try {
         const libros = await libroModelo.obtenerPorCreador(creador_id);
@@ -53,7 +53,7 @@ router.post("/", async (req, res) => {
     }
 
     try {
-        await libroModelo.crear({ nombre, anio, autor, sinopsis, imagen, creador_id, categoria });
+        await libroModelo.crear(creador_id, { nombre, anio, autor, sinopsis, imagen, categoria });
         res.status(201).json({ mensaje: 'Libro creado' });
     } catch (err) {
         console.error(err);
