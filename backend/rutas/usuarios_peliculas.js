@@ -8,12 +8,28 @@ router.get('/:usuario_id', async (req, res) => {
     try {
         const peliculas = await usuarioPeliculaModelo.obtenerPeliculasPorIdUsuario(usuario_id);
         if (!peliculas) {
-            return res.statusCode(404).json({ error: 'El usuario no existe' });
+            return res.status(404).json({ error: 'El usuario no existe' });
         }
         res.status(200).json(peliculas);
     } catch (err) {
         console.log(err);
-        res.statusCode(500).json({ error: 'Error en el servidor' });
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
+router.post('/', async (req, res) => {
+    const { usuario_id, pelicula_id, calificacion, estado } = req.body;
+
+    if (!usuario_id || !pelicula_id || !estado) {
+        return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    try {
+        await usuarioPeliculaModelo.agregar(usuario_id, pelicula_id, calificacion, estado);
+        res.status(201).json({ message: 'Pelicula agregada al perfil del usuario' });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Error en el servidor' });
     }
 })
 
