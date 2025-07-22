@@ -43,4 +43,15 @@ async function actualizar(id, { nombre, anio, autor, sinopsis, imagen, creador_i
     }
 }
 
-module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodos, obtenerPorCreador, crear, actualizar };
+async function eliminarPorId(id) {
+    try {
+        const resultado = await pool.query(
+            'DELETE FROM libros WHERE id = $1 RETURNING *', [id]
+        )
+        return resultado.rows[0];
+    } catch (err) {
+        throw err;
+    }
+}
+
+module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodos, obtenerPorCreador, crear, actualizar, eliminarPorId };
