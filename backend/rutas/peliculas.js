@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.get("/:creador_id", async (req, res) => {
+router.get("/creadores/:creador_id", async (req, res) => {
     const { creador_id } = req.params;
     try {
         const peliculas = await peliculaModelo.obtenerPorCreador(creador_id);
@@ -53,7 +53,7 @@ router.post("/", async (req, res) => {
     }
 
     try {
-        await peliculaModelo.crear({ nombre, anio, director, sinopsis, imagen, creador_id, categoria });
+        await peliculaModelo.crear(creador_id, { nombre, anio, director, sinopsis, imagen, categoria });
         res.status(201).json({ mensaje: 'Pelicula creada' });
     } catch (err) {
         console.error(err);
