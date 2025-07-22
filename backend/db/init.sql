@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS libros (
 CREATE TABLE IF NOT EXISTS usuario_pelicula (
     usuario_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
     pelicula_id INT NOT NULL REFERENCES peliculas(id) ON DELETE CASCADE,
-    calificacion INT NOT NULL,
+    calificacion INT,
     estado INT REFERENCES estados(id) NOT NULL,
     PRIMARY KEY (usuario_id, pelicula_id)
 );
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS usuario_pelicula (
 CREATE TABLE IF NOT EXISTS usuario_serie (
     usuario_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
     serie_id INT NOT NULL REFERENCES series(id) ON DELETE CASCADE,
-    calificacion VARCHAR(50) NOT NULL,
+    calificacion INT,
     estado INT REFERENCES estados(id) NOT NULL,
     PRIMARY KEY (usuario_id, serie_id)
 );
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS usuario_serie (
 CREATE TABLE IF NOT EXISTS usuario_libro (
     usuario_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
     libro_id INT NOT NULL REFERENCES libros(id) ON DELETE CASCADE,
-    calificacion VARCHAR(50) NOT NULL,
+    calificacion INT,
     estado INT REFERENCES estados(id) NOT NULL,
     PRIMARY KEY (usuario_id, libro_id)
 );
