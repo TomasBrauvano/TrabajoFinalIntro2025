@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const usuariosRouter = require('./rutas/usuarios');
-const peliculasRouter = require('./rutas/peliculaslibros');
+const peliculasRouter = require('./rutas/peliculas');
 const librosRouter = require('./rutas/libros');
 
 const PORT = process.env.PORT || 3000;
