@@ -2,6 +2,21 @@ const express = require('express');
 const router = express.Router();
 const usuarioModelo = require('../modelos/usuario');
 
+router.get('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const usuario = await usuarioModelo.obtenerPorId(id);
+        if (!usuario) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+        return res.status(200).json(usuario);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 router.post('/registro', async (req, res) => {
     const { nombre_usuario, nombre, apellido, contraseña, categoria_preferida } = req.body;
 
