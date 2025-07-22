@@ -4,6 +4,7 @@ const usuariosRouter = require('./rutas/usuarios');
 const seriesRouter = require('./rutas/series');
 const peliculasRouter = require('./rutas/peliculas');
 const librosRouter = require('./rutas/libros');
+const usuariosPeliculasRouter = require('./rutas/usuarios_peliculas')
 
 
 const PORT = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ app.use('/api/usuarios', usuariosRouter);
 app.use('/api/series', seriesRouter);
 app.use('/api/peliculas', peliculasRouter);
 app.use('/api/libros', librosRouter);
+app.use('/api/usuarios_peliculas', usuariosPeliculasRouter)
 
 
 app.listen(PORT, () => {
