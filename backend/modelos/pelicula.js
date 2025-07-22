@@ -5,8 +5,8 @@ async function obtenerPorId(id) {
     return res.rows[0];
 }
 
-async function obtenerPorCategoria(id_categoria) {
-    const res = await pool.query(`SELECT * FROM peliculas WHERE categoria = $1`, [id_categoria]);
+async function obtenerPorCategoria(categoria) {
+    const res = await pool.query(`SELECT * FROM peliculas WHERE categoria = $1`, [categoria]);
     return res.rows;
 }
 
