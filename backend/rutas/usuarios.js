@@ -25,19 +25,22 @@ router.post('/registro', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { nombre_usuario, nombre, apellido, contraseña, categoria_preferida } = req.body;
+    const { nombre_usuario, nombre, apellido, contrasenia, categoria_preferida, usuario_id } = req.body;
 
-    if (!nombre_usuario || !nombre || !apellido || !contraseña || !categoria_preferida) {
+    if (!nombre_usuario || !nombre || !apellido || !contrasenia || !categoria_preferida) {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
     try {
-        const usuarioActualizado = await usuarioModelo.actualizar(id, { nombre_usuario, nombre, apellido, contraseña, categoria_preferida });
-        if (usuarioActualizado) {
-            res.status(201).json({ mensaje: 'Usuario actualizado' });
-        } else {
-            res.status(404).json({ error: 'Usuario no encontrado' });
+        const usuario = await usuarioModelo.obtenerPorId(id);
+        if (!usuario) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
         }
+        if (parseInt(id, 10) !== usuario_id) {
+            return res.status(403).json({ error: 'No tenes permisos para actualizar a este usuario' });
+        }
+        const usuarioActualizado = await usuarioModelo.actualizar(id, { nombre_usuario, nombre, apellido, contrasenia, categoria_preferida });
+        res.status(201).json({ mensaje: 'Usuario actualizado' });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Error en el servidor' });
@@ -47,14 +50,18 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
+    const usuario_id = req.body.usuario_id;
 
     try {
-        const usuarioEliminado = await usuarioModelo.eliminarPorId(id);
-        if (usuarioEliminado) {
-            res.status(200).json({ mensaje: 'Usuario eliminado' });
-        } else {
-            res.status(404).json({ error: 'Usuario no encontrado' });
+        const usuario = await usuarioModelo.obtenerPorId(id);
+        if (!usuario) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
         }
+        if (parseInt(id, 10) !== usuario_id) {
+            return res.status(403).json({ error: 'No tenes permisos para eliminar a este usuario' });
+        }
+        await usuarioModelo.eliminarPorId(id);
+        res.status(200).json({ mensaje: 'Usuario eliminado' });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Error en el servidor' });
