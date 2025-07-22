@@ -1,3 +1,8 @@
+CREATE TABLE estados (
+  id SERIAL PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL UNIQUE
+);
+
 CREATE TABLE IF NOT EXISTS categorias (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(50) UNIQUE NOT NULL
@@ -19,7 +24,7 @@ CREATE TABLE IF NOT EXISTS peliculas (
     director VARCHAR(50) NOT NULL,
     sinopsis TEXT NOT NULL,
     imagen TEXT NOT NULL,
-    creador_id INT REFERENCES usuarios(id) NOT NULL,
+    creador_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
     categoria INT REFERENCES categorias(id) NOT NULL
 );
 
@@ -30,7 +35,7 @@ CREATE TABLE IF NOT EXISTS series (
     director VARCHAR(50) NOT NULL,
     sinopsis TEXT NOT NULL,
     imagen TEXT NOT NULL,
-    creador_id INT REFERENCES usuarios(id) NOT NULL,
+    creador_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
     categoria INT REFERENCES categorias(id) NOT NULL
 );
 
@@ -40,31 +45,31 @@ CREATE TABLE IF NOT EXISTS libros (
     anio SMALLINT NOT NULL,
     autor VARCHAR(50) NOT NULL,
     imagen TEXT NOT NULL,
-    creador_id INT REFERENCES usuarios(id) NOT NULL,
+    creador_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
     categoria INT REFERENCES categorias(id) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS usuario_pelicula (
-    usuario_id INT REFERENCES usuarios(id) NOT NULL,
-    pelicula_id INT REFERENCES peliculas(id) NOT NULL,
-    calificacion VARCHAR(50) NOT NULL,
-    estado VARCHAR(50) NOT NULL,
+    usuario_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+    pelicula_id INT NOT NULL REFERENCES peliculas(id) ON DELETE CASCADE,
+    calificacion INT NOT NULL,
+    estado INT REFERENCES estados(id) NOT NULL,
     PRIMARY KEY (usuario_id, pelicula_id)
 );
 
 CREATE TABLE IF NOT EXISTS usuario_serie (
-    usuario_id INT REFERENCES usuarios(id) NOT NULL,
-    serie_id INT REFERENCES series(id) NOT NULL,
+    usuario_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+    serie_id INT NOT NULL REFERENCES series(id) ON DELETE CASCADE,
     calificacion VARCHAR(50) NOT NULL,
-    estado VARCHAR(50) NOT NULL,
+    estado INT REFERENCES estados(id) NOT NULL,
     PRIMARY KEY (usuario_id, serie_id)
 );
 
 CREATE TABLE IF NOT EXISTS usuario_libro (
-    usuario_id INT REFERENCES usuarios(id) NOT NULL,
-    libro_id INT REFERENCES libros(id) NOT NULL,
+    usuario_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+    libro_id INT NOT NULL REFERENCES libros(id) ON DELETE CASCADE,
     calificacion VARCHAR(50) NOT NULL,
-    estado VARCHAR(50) NOT NULL,
+    estado INT REFERENCES estados(id) NOT NULL,
     PRIMARY KEY (usuario_id, libro_id)
 );
 
@@ -79,3 +84,9 @@ ON CONFLICT (nombre) DO NOTHING;
 INSERT INTO usuarios (nombre_usuario,nombre,apellido,contrasenia,categoria_preferida) 
 VALUES ('admin','admin','admin','admin',1)
 ON CONFLICT (nombre_usuario) DO NOTHING;
+
+INSERT INTO estados (nombre) VALUES
+  ('pendiente'),
+  ('viendo'),
+  ('vista')
+ON CONFLICT (nombre) DO NOTHING;  
