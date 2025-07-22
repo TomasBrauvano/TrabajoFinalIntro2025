@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const peliculaModelo = require('../modelos/pelicula');
+const usuarioPeliculaModelo = require('../modelos/usuario_pelicula');
 
 router.get("/", async (req, res) => {
     try {
@@ -46,14 +47,15 @@ router.get("/categorias/:id_categoria", async (req, res) => {
 })
 
 router.post("/", async (req, res) => {
-    const { nombre, anio, director, sinopsis, imagen, creador_id, categoria } = req.body;
+    const { nombre, anio, director, sinopsis, imagen, creador_id, categoria, calificacion, estado } = req.body;
 
-    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria) {
+    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria || !estado) {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
     try {
-        await peliculaModelo.crear(creador_id, { nombre, anio, director, sinopsis, imagen, categoria });
+        const pelicula = await peliculaModelo.crear(creador_id, { nombre, anio, director, sinopsis, imagen, categoria });
+        await usuarioPeliculaModelo.agregar(creador_id, pelicula.id, calificacion, estado);
         res.status(201).json({ mensaje: 'Pelicula creada' });
     } catch (err) {
         console.error(err);
