@@ -21,4 +21,11 @@ async function actualizar(usuario_id, pelicula_id, calificacion, estado) {
     return res.rows[0];
 }
 
-module.exports = { obtenerPeliculasPorIdUsuario, agregar, actualizar };
+async function eliminar(usuario_id, pelicula_id) {
+    const res = await pool.query(
+        'DELETE FROM usuario_pelicula WHERE usuario_id = $1 AND pelicula_id = $2 RETURNING *',
+        [usuario_id, pelicula_id]);
+    return res.rows[0];
+}
+
+module.exports = { obtenerPeliculasPorIdUsuario, agregar, actualizar, eliminar };
