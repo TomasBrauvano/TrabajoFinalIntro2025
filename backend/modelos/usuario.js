@@ -10,22 +10,22 @@ async function obtenerPorId(id) {
     return res.rows[0];
 }
 
-async function crear({ nombre_usuario, nombre, apellido, contraseña, categoria_preferida }) {
+async function crear({ nombre_usuario, nombre, apellido, contrasenia, categoria_preferida }) {
     try {
         await pool.query(
             'INSERT INTO usuarios (nombre_usuario, nombre, apellido, contrasenia, categoria_preferida) VALUES ($1, $2, $3, $4, $5)',
-            [nombre_usuario, nombre, apellido, contraseña, categoria_preferida]
+            [nombre_usuario, nombre, apellido, contrasenia, categoria_preferida]
         );
     } catch (err) {
         throw err;
     }
 }
 
-async function actualizar(id, { nombre_usuario, nombre, apellido, contraseña, categoria_preferida }) {
+async function actualizar(id, { nombre_usuario, nombre, apellido, contrasenia, categoria_preferida }) {
     try {
         const resultado = await pool.query(
             'UPDATE usuarios SET nombre_usuario = $1 , nombre = $2 , apellido = $3 , contrasenia = $4 , categoria_preferida = $5 WHERE id = $6 RETURNING *',
-            [nombre_usuario, nombre, apellido, contraseña, categoria_preferida, id]
+            [nombre_usuario, nombre, apellido, contrasenia, categoria_preferida, id]
         );
         return resultado.rows[0];
     } catch (err) {
