@@ -45,4 +45,20 @@ router.get("/categorias/:id_categoria", async (req, res) => {
     }
 })
 
+router.post("/", async (req, res) => {
+    const { nombre, anio, autor, sinopsis, imagen, creador_id, categoria } = req.body;
+
+    if (!nombre || !anio || !autor || !sinopsis || !imagen || !creador_id || !categoria) {
+        return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    try {
+        await libroModelo.crear({ nombre, anio, autor, sinopsis, imagen, creador_id, categoria });
+        res.status(201).json({ mensaje: 'Libro creado' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 module.exports = router
