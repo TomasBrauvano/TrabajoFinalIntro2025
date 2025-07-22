@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS libros (
     nombre VARCHAR(50) NOT NULL,
     anio SMALLINT NOT NULL,
     autor VARCHAR(50) NOT NULL,
+    sinopsis TEXT NOT NULL,
     imagen TEXT NOT NULL,
     creador_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
     categoria INT REFERENCES categorias(id) NOT NULL
