@@ -20,4 +20,15 @@ async function obtenerTodos() {
     return res.rows;
 }
 
-module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodos, obtenerPorCreador };
+async function crear(creador_id, { nombre, anio, autor, sinopsis, imagen, categoria }) {
+    try {
+        await pool.query(
+            'INSERT INTO libros (nombre, anio, director, sinopsis, imagen, creador_id, categoria) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+            [nombre, anio, autor, sinopsis, imagen, creador_id, categoria]
+        );
+    } catch (err) {
+        throw err;
+    }
+}
+
+module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodos, obtenerPorCreador, crear };
