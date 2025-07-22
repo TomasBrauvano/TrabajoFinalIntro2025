@@ -23,7 +23,7 @@ async function obtenerTodos() {
 async function crear(creador_id, { nombre, anio, autor, sinopsis, imagen, categoria }) {
     try {
         await pool.query(
-            'INSERT INTO libros (nombre, anio, director, sinopsis, imagen, creador_id, categoria) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+            'INSERT INTO libros (nombre, anio, autor, sinopsis, imagen, creador_id, categoria) VALUES ($1, $2, $3, $4, $5, $6, $7)',
             [nombre, anio, autor, sinopsis, imagen, creador_id, categoria]
         );
     } catch (err) {
@@ -31,4 +31,16 @@ async function crear(creador_id, { nombre, anio, autor, sinopsis, imagen, catego
     }
 }
 
-module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodos, obtenerPorCreador, crear };
+async function actualizar(id, { nombre, anio, autor, sinopsis, imagen, creador_id, categoria }) {
+    try {
+        const resultado = await pool.query(
+            'UPDATE libros SET nombre = $1 , anio = $2 , autor = $3 , sinopsis = $4 , imagen = $5 , creador_id = $6 , categoria = $7  WHERE id = $8 RETURNING *',
+            [nombre, anio, autor, sinopsis, imagen, creador_id, categoria, id]
+        );
+        return resultado.rows[0];
+    } catch (err) {
+        throw err;
+    }
+}
+
+module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodos, obtenerPorCreador, crear, actualizar };
