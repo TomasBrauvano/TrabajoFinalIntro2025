@@ -17,10 +17,10 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.post('/registro', async (req, res) => {
-    const { nombre_usuario, nombre, apellido, contraseña, categoria_preferida } = req.body;
+router.post('/register', async (req, res) => {
+    const { nombre_usuario, nombre, apellido, contrasenia, categoria_preferida } = req.body;
 
-    if (!nombre_usuario || !nombre || !apellido || !contraseña || !categoria_preferida) {
+    if (!nombre_usuario || !nombre || !apellido || !contrasenia || !categoria_preferida) {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
@@ -30,7 +30,7 @@ router.post('/registro', async (req, res) => {
             return res.status(409).json({ error: 'El nombre de usuario ya esta en uso' });
         }
 
-        await usuarioModelo.crear({ nombre_usuario, nombre, apellido, contraseña, categoria_preferida });
+        await usuarioModelo.crear({ nombre_usuario, nombre, apellido, contrasenia, categoria_preferida });
         res.status(201).json({ mensaje: 'Usuario creado' });
     } catch (err) {
         console.error(err);
