@@ -46,6 +46,20 @@ router.get("/categorias/:id_categoria", async (req, res) => {
     }
 })
 
+router.post("/buscar", async (req, res) => {
+    const { nombre } = req.body;
+    try {
+        const peliculas = await peliculaModelo.obtenerPorNombre(nombre);
+        if (!peliculas[0]) {
+            return res.status(404).json({ error: 'Pelicula no encontrada' });
+        }
+        res.status(200).json(peliculas);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 router.post("/", async (req, res) => {
     const { nombre, anio, director, sinopsis, imagen, creador_id, categoria, calificacion, estado } = req.body;
 

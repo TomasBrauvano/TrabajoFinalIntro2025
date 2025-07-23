@@ -70,6 +70,20 @@ router.post("/", async (req, res) => {
     }
 });
 
+router.post("/buscar", async (req, res) => {
+    const { nombre } = req.body;
+    try {
+        const series = await serieModelo.obtenerPorNombre(nombre);
+        if (!series[0]) {
+            return res.status(404).json({ error: 'Serie no encontrada' });
+        }
+        res.status(200).json(series);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 //PUT
 router.put("/:id", async (req, res) => {
     const { id } = req.params;

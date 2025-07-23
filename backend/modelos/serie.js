@@ -99,6 +99,11 @@ async function obtenerRecomendacionAleatoria(usuario_id) {
     }
 }
 
+async function obtenerPorNombre(nombre) {
+    const res = await pool.query('SELECT * FROM series WHERE LOWER(nombre) = $1', [nombre]);
+    return res.rows;
+}
+
 module.exports = {
     obtenerPorId,
     obtenerPorCreador,
@@ -107,5 +112,6 @@ module.exports = {
     crear,
     actualizar,
     eliminarPorId,
-    obtenerRecomendacionAleatoria
+    obtenerRecomendacionAleatoria,
+    obtenerPorNombre
 };
