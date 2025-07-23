@@ -14,4 +14,11 @@ async function agregar(usuario_id, libro_id, calificacion, estado) {
     return res.rows[0];
 }
 
-module.exports = { obtenerLibrosPorIdUsuario, agregar };
+async function actualizar(usuario_id, libro_id, calificacion, estado) {
+    const res = await pool.query(
+        'UPDATE usuario_libro SET calificacion = $3 , estado = $4 WHERE usuario_id = $1 AND libro_id = $2 RETURNING *',
+        [usuario_id, libro_id, calificacion, estado]);
+    return res.rows[0];
+}
+
+module.exports = { obtenerLibrosPorIdUsuario, agregar, actualizar };
