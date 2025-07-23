@@ -79,15 +79,35 @@ router.put("/:usuario_id/:serie_id", async (req, res) => {
         const serieActualizada = await usuarioSerieModelo.actualizar(usuario_id, serie_id, calificacion, estado);
 
         if(!serieActualizada){
-            res.status(404).json({error: 'No se encontro la serie para actualizar'})
+            res.status(404).json({error: 'No se encontro la serie para actualizar'});
         }
 
         res.status(200).json(serieActualizada);
 
     } catch(err){
         console.error(err);
-        res.status(500).json({error: 'Error al actualizar la serie'})
+        res.status(500).json({error: 'Error al actualizar la serie'});
     }
-})
+});
+
+//DELETE
+
+router.delete("/:usuario_id/:serie_id", async (req, res) => {
+    const {usuario_id, serie_id} = req.params;
+
+    try{
+        const serieEliminada = await usuarioSerieModelo.eliminar(usuario_id, serie_id);
+
+        if(!serieEliminada){
+            res.status(404).json({error: 'No se encontro la serie a eliminar'});
+        }
+
+        res.status(200).json({mesaje: 'Serie eliminada exitosamente'});
+
+    } catch(err){
+        console.error(err);
+        res.status(500).json({error: 'Error al eliminar la serie'});
+    }
+});
 
 module.exports = router;

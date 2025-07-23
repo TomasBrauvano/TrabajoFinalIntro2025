@@ -81,11 +81,26 @@ async function actualizar(usuario_id, serie_id, calificacion, estado) {
     }
 }
 
+async function  eliminar(usuario_id, serie_id) {
+    try{
+        const res = await pool.query(
+            'DELETE FROM usuario_serie WHERE usuario_id = $1 AND serie_id = $2 RETURNING *',
+            [usuario_id, serie_id]
+        );
+        
+        return res.rows[0];
+
+    } catch(err){
+        console.error('Error al eliminar la serie', err);
+        throw err;
+    }
+}
 
 module.exports = {
     obtenerPorUsuario,
     obtenerPorUsuarioYSerie,
     obtenerPorEstado,
     crear,
-    actualizar
+    actualizar,
+    eliminar
 };
