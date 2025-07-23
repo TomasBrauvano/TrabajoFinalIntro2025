@@ -63,6 +63,20 @@ router.post("/", async (req, res) => {
     }
 })
 
+router.post("/buscar", async (req, res) => {
+    const { nombre } = req.body;
+    try {
+        const libros = await libroModelo.obtenerPorNombre(nombre);
+        if (!libros[0]) {
+            return res.status(404).json({ error: 'libro no encontrado' });
+        }
+        res.status(200).json(libros);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 router.put("/:id", async (req, res) => {
     const { id } = req.params;
     const { nombre, anio, autor, sinopsis, imagen, creador_id, categoria, usuario_id } = req.body;

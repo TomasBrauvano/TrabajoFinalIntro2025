@@ -68,4 +68,9 @@ async function obtenerRecomendacionAleatoria(usuario_id) {
     }
 }
 
-module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodos, obtenerPorCreador, crear, actualizar, eliminarPorId, obtenerRecomendacionAleatoria };
+async function obtenerPorNombre(nombre) {
+    const res = await pool.query('SELECT * FROM libros WHERE LOWER(nombre) = $1', [nombre]);
+    return res.rows;
+}
+
+module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodos, obtenerPorCreador, crear, actualizar, eliminarPorId, obtenerRecomendacionAleatoria, obtenerPorNombre };

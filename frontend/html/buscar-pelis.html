@@ -30,30 +30,19 @@
 
     </header>
     <main id="main-de-busqueda">
-        <h1>Lista Completa de Juegos</h1>
-        <h2>Busca Juegos para añadirlos a tu lista:</h2>
+        <h2>Busca Peliculas para añadirlas a tu lista:</h2>
 
         <section class="lista-de-contenido">
             <div class="barra-busqueda">
-                <form action="/search" method="GET">
-                    <input type="search" id="input-busqueda" name="query" placeholder="Buscar Peliculas">
-                    <button type="submit" class="boton-busqueda">Buscar</button>
-                </form>
+                <input type="text" id="input-busqueda" placeholder="Buscar Peliculas">
+                <button class="boton-busqueda">Buscar</button>
             </div>
             <div class="mostrador-de-contenido">
-                <div class="tarjeta">
-                    Peliculas 1
-                </div>
-                <div class="tarjeta">
-                    Peliculas 2
-                </div>
-                <div class="tarjeta">
-                    Peliculas 3
-                </div>
             </div>
         </section>
 
     </main>
+    <script src="../logica/buscar-pelis.js"></script>
 </body>
 
 </html>
