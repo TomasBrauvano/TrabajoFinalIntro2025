@@ -21,4 +21,11 @@ async function actualizar(usuario_id, libro_id, calificacion, estado) {
     return res.rows[0];
 }
 
-module.exports = { obtenerLibrosPorIdUsuario, agregar, actualizar };
+async function eliminar(usuario_id, libro_id) {
+    const res = await pool.query(
+        'DELETE FROM usuario_libro WHERE usuario_id = $1 AND libro_id = $2 RETURNING *',
+        [usuario_id, libro_id]);
+    return res.rows[0];
+}
+
+module.exports = { obtenerLibrosPorIdUsuario, agregar, actualizar, eliminar };
