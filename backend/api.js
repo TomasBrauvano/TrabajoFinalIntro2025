@@ -8,7 +8,7 @@ const usuariosPeliculasRouter = require('./rutas/usuarios_peliculas')
 const usuariosLibrosRouter = require('./rutas/usuarios_libros')
 const estadosRouter = require('./rutas/estados');
 
-
+const usuarioSerieRouter = require('./rutas/usuarioSeries');
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
@@ -22,6 +22,7 @@ app.use('/api/usuarios_libros', usuariosLibrosRouter)
 app.use('/api/estados', estadosRouter);
 
 
+app.use('/api/usuarioSeries', usuarioSerieRouter);
 
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
