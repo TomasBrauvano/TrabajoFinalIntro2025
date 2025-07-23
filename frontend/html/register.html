@@ -1,68 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Registrar una nueva cuenta</title>
-        <link rel="stylesheet" href="./css/style.css">
-    </head>
-    <body>
-        <header>
-            <img id="logo" src="./imagenes/LOGO.png">
-             <nav>
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="peliculas.html">Películas</a></li>
-                    <li><a href="series.html">Series</a></li>
-                    <li><a href="libros.html">Libros</a></li>
-                    <li><a href="juegos.html">Juegos</a></li>
-                    <li><a href="micuenta.html">Mi Perfil</a></li>
-                    <li><a href="">Buscar</a>
-                        <ul>
-                            <li><a href="buscar-pelis.html">Buscar Películas</a></li>
-                            <li><a href="buscar-ser.html">Buscar Series</a></li>
-                            <li><a href="buscar-jue.html">Buscar Juegos</a></li>
-                            <li><a href="buscar-lib.html">Buscar Libros</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-            
-        </header>
-        <main>
-            <section class="cuadro-de-ingreso">
-                <h2>Registrar una cuenta nueva</h2>
-                <p>Completa los siguietes datos:</p>
-                <form action="" method="POST">
-                    <div class="formulario-inscripcion">
-                        <label for="nombreusuario">Nombre de Usuario:</label>
-                        <input type="text" id="nombreusuario" name="nombreusuario" required>
-                    </div>
-                    <div class="formulario-inscripcion">
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" required>
-                    </div>
-                    <div class="formulario-inscripcion">
-                        <label for="apellido">Apellido:</label>
-                        <input type="text" id="apellido" name="apellido" required>
-                    </div>
-                    <div class="formulario-inscripcion">
-                        <label for="contrasenia">Contraseña:</label>
-                        <input type="password" id="contrasenia" name="contrasenia" required>
-                    </div>
-                    <div class="formulario-inscripcion">
-                        <label for="confirmar_contrasenia">Confirmar Contraseña:</label>
-                        <input type="password" id="confirmar_contrasenia" name="confirmar_contrasenia" required>
-                    </div>
-                    <div class="formulario-inscripcion">
-                        <label for="categoria_preferida">Cuál es tu categoria preferida?:</label>
-                        <input type="text" id="categoria_preferida" name="categoria_preferida" required>
-                    </div>
-                    <button id="crear-cuenta">Crear Cuenta</button>
-                </form>
 
-            </section>
-        </main>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar una nueva cuenta</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
 
-    </body>
+<body>
+    <header>
+        <img id="logo" src="./imagenes/LOGO.png">
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="peliculas.html">Películas</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="libros.html">Libros</a></li>
+                <li><a href="juegos.html">Juegos</a></li>
+                <li><a href="micuenta.html">Mi Perfil</a></li>
+                <li><a href="">Buscar</a>
+                    <ul>
+                        <li><a href="buscar-pelis.html">Buscar Películas</a></li>
+                        <li><a href="buscar-ser.html">Buscar Series</a></li>
+                        <li><a href="buscar-jue.html">Buscar Juegos</a></li>
+                        <li><a href="buscar-lib.html">Buscar Libros</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
+    <main>
+        <section class="cuadro-de-ingreso">
+            <h2>Registrar una cuenta nueva</h2>
+            <p>Completa los siguietes datos:</p>
+            <form action="" method="POST">
+                <div class="formulario-inscripcion">
+                    <label for="nombreusuario">Nombre de Usuario:</label>
+                    <input type="text" id="nombreusuario" name="nombreusuario" required>
+                </div>
+                <div class="formulario-inscripcion">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="formulario-inscripcion">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+                <div class="formulario-inscripcion">
+                    <label for="contrasenia">Contraseña:</label>
+                    <input type="password" id="contrasenia" name="contrasenia" required>
+                </div>
+                <div class="formulario-inscripcion">
+                    <label for="confirmar_contrasenia">Confirmar Contraseña:</label>
+                    <input type="password" id="confirmar_contrasenia" name="confirmar_contrasenia" required>
+                </div>
+                <div class="formulario-inscripcion">
+                    <label for="categoria_preferida">¿Cuál es tu categoría preferida?:</label>
+                    <select id="categoria_preferida" name="categoria_preferida" required>
+                        <option value="">Cargando categorías...</option>
+                    </select>
+                </div>
+                <button id="crear-cuenta">Crear Cuenta</button>
+            </form>
+
+        </section>
+    </main>
+    <script src="../logica/register.js"></script>
+</body>
+
 </html>
