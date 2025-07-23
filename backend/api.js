@@ -6,6 +6,7 @@ const peliculasRouter = require('./rutas/peliculas');
 const librosRouter = require('./rutas/libros');
 const usuariosPeliculasRouter = require('./rutas/usuarios_peliculas')
 const usuariosLibrosRouter = require('./rutas/usuarios_libros')
+const estadosRouter = require('./rutas/estados');
 
 
 const PORT = process.env.PORT || 3000;
@@ -18,6 +19,7 @@ app.use('/api/peliculas', peliculasRouter);
 app.use('/api/libros', librosRouter);
 app.use('/api/usuarios_peliculas', usuariosPeliculasRouter)
 app.use('/api/usuarios_libros', usuariosLibrosRouter)
+app.use('/api/estados', estadosRouter);
 
 
 
