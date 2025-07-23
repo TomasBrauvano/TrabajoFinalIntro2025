@@ -33,4 +33,23 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.put('/', async (req, res) => {
+    const { usuario_id, libro_id, calificacion, estado } = req.body;
+
+    if (!usuario_id || !libro_id || !estado) {
+        return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    try {
+        const relacionActualizada = await usuarioLibroModelo.actualizar(usuario_id, libro_id, calificacion, estado);
+        if (!relacionActualizada) {
+            return res.status(404).json({ error: 'La relacion no existe' });
+        }
+        res.status(201).json({ message: 'Libro actualizado en el perfil del usuario' });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 module.exports = router;
