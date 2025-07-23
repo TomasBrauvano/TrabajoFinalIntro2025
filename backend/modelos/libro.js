@@ -55,4 +55,17 @@ async function eliminarPorId(id) {
     }
 }
 
-module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodos, obtenerPorCreador, crear, actualizar, eliminarPorId };
+async function obtenerRecomendacionAleatoria(usuario_id) {
+    try {
+        const resultado = await pool.query(
+            'SELECT l.* FROM libros l JOIN usuarios u ON l.categoria = u.categoria_preferida WHERE u.id = $1 AND l.id NOT IN ( SELECT libro_id FROM usuario_libro WHERE usuario_id = $1 ) ORDER BY RANDOM() LIMIT 1;',
+            [usuario_id]
+        );
+        return resultado.rows[0];
+    } catch (error) {
+        console.error("Error al obtener libro aleatorio por categoría:", error);
+        throw error;
+    }
+}
+
+module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodos, obtenerPorCreador, crear, actualizar, eliminarPorId, obtenerRecomendacionAleatoria };
