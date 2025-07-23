@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const libroModelo = require('../modelos/libro');
+const usuarioLibroModelo = require('../modelos/usuario_libro');
 
 router.get("/", async (req, res) => {
     try {
@@ -46,14 +47,15 @@ router.get("/categorias/:id_categoria", async (req, res) => {
 })
 
 router.post("/", async (req, res) => {
-    const { nombre, anio, autor, sinopsis, imagen, creador_id, categoria } = req.body;
+    const { nombre, anio, autor, sinopsis, imagen, creador_id, categoria, calificacion, estado } = req.body;
 
-    if (!nombre || !anio || !autor || !sinopsis || !imagen || !creador_id || !categoria) {
+    if (!nombre || !anio || !autor || !sinopsis || !imagen || !creador_id || !categoria || !estado) {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
     try {
-        await libroModelo.crear(creador_id, { nombre, anio, autor, sinopsis, imagen, categoria });
+        const libro = await libroModelo.crear(creador_id, { nombre, anio, autor, sinopsis, imagen, categoria });
+        await usuarioLibroModelo.agregar(creador_id, libro.id, calificacion, estado);
         res.status(201).json({ mensaje: 'Libro creado' });
     } catch (err) {
         console.error(err);
