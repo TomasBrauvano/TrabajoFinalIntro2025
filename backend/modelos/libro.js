@@ -22,10 +22,11 @@ async function obtenerTodos() {
 
 async function crear(creador_id, { nombre, anio, autor, sinopsis, imagen, categoria }) {
     try {
-        await pool.query(
-            'INSERT INTO libros (nombre, anio, autor, sinopsis, imagen, creador_id, categoria) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+        const resultado = await pool.query(
+            'INSERT INTO libros (nombre, anio, autor, sinopsis, imagen, creador_id, categoria) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
             [nombre, anio, autor, sinopsis, imagen, creador_id, categoria]
         );
+        return resultado.rows[0];
     } catch (err) {
         throw err;
     }
