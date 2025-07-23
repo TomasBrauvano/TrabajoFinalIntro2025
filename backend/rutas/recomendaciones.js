@@ -9,9 +9,6 @@ router.get("/:usuario_id", async (req, res) => {
     const { usuario_id } = req.params;
 
     try {
-        const usuario = await usuarioModelo.obtenerPorId(usuario_id);
-        const categoria = usuario.categoria_preferida;
-
         const pelicula = await peliculaModelo.obtenerRecomendacionAleatoria(usuario_id);
         const serie = await serieModelo.obtenerRecomendacionAleatoria(usuario_id);
         const libro = await libroModelo.obtenerRecomendacionAleatoria(usuario_id);
