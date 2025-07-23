@@ -5,4 +5,9 @@ async function obtenerTodas() {
     return res.rows;
 }
 
-module.exports = { obtenerTodas };
+async function obtenerPorId(id) {
+    const res = await pool.query(`SELECT * FROM categorias WHERE id = $1`, [id]);
+    return res.rows[0];
+}
+
+module.exports = { obtenerTodas, obtenerPorId };
