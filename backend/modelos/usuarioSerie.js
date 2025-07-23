@@ -12,7 +12,7 @@ async function obtenerPorUsuario(usuario_id) {
         );
         return res.rows;
     } catch(err){
-        console.error('Error al obtener las serie del usuario');
+        console.error('Error al obtener las serie del usuario',err);
         throw err;
     }
 }
@@ -30,7 +30,7 @@ async function obtenerPorUsuarioYSerie(usuario_id, serie_id) {
         );
         return res.rows[0];
     } catch(err){
-        console.error('Error al obtener la serie del usuario');
+        console.error('Error al obtener la serie del usuario',err);
         throw err;
     }
 }
@@ -47,14 +47,29 @@ async function obtenerPorEstado(usuario_id, estados) {
         );
         return res.rows;
     } catch(err){
-        console.error('Error al obtener las series del usuario por estado');
+        console.error('Error al obtener las series del usuario por estado',err);
         throw err;
     }
 }
+
+async function crear(usuario_id, serie_id, calificacion, estado) {
+    try{
+        const res = await pool.query(
+            'INSERT INTO usuario_serie (usuario_id, serie_id, calificacion, estado) VALUES ($1, $2, $3, $4)',
+            [usuario_id, serie_id, calificacion, estado]
+        );
+        
+        return res.rows[0];
+    } catch(err){
+        console.error("Error al crear al agregar la serie", err);
+        throw err;
+    }
+}   
 
 
 module.exports = {
     obtenerPorUsuario,
     obtenerPorUsuarioYSerie,
-    obtenerPorEstado
+    obtenerPorEstado,
+    crear
 };
