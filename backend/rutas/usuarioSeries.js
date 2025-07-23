@@ -63,8 +63,31 @@ router.post("/", async (req,res) => {
         console.error(err);
         res.status(500).json({error: 'Error al agregar una serie nueva'});
     }
+})
 
+//PUT
 
+router.put("/:usuario_id/:serie_id", async (req, res) => {
+    const {usuario_id, serie_id} = req.params;
+    const {calificacion, estado} = req.body;
+
+    if(!calificacion && !estado){
+        res.status(400).json({error: 'Falta agregar la calificacion o estado'});
+    }
+
+    try{
+        const serieActualizada = await usuarioSerieModelo.actualizar(usuario_id, serie_id, calificacion, estado);
+
+        if(!serieActualizada){
+            res.status(404).json({error: 'No se encontro la serie para actualizar'})
+        }
+
+        res.status(200).json(serieActualizada);
+
+    } catch(err){
+        console.error(err);
+        res.status(500).json({error: 'Error al actualizar la serie'})
+    }
 })
 
 module.exports = router;

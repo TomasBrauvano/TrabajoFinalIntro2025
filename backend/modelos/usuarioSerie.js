@@ -66,10 +66,26 @@ async function crear(usuario_id, serie_id, calificacion, estado) {
     }
 }   
 
+async function actualizar(usuario_id, serie_id, calificacion, estado) {
+    try{
+        const res = await pool.query(
+            'UPDATE usuario_serie SET calificacion = $3, estado = $4 WHERE usuario_id = $1 AND serie_id = $2 RETURNING *',
+            [usuario_id, serie_id, calificacion, estado]
+        );
+
+        return res.rows[0];
+
+    }catch(err){
+        console.error('Error al actualizar la serie', err);
+        throw err;
+    }
+}
+
 
 module.exports = {
     obtenerPorUsuario,
     obtenerPorUsuarioYSerie,
     obtenerPorEstado,
-    crear
+    crear,
+    actualizar
 };
