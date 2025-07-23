@@ -17,4 +17,20 @@ router.get('/:usuario_id', async (req, res) => {
     }
 })
 
+router.post('/', async (req, res) => {
+    const { usuario_id, libro_id, calificacion, estado } = req.body;
+
+    if (!usuario_id || !libro_id || !estado) {
+        return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    try {
+        await usuarioLibroModelo.agregar(usuario_id, libro_id, calificacion, estado);
+        res.status(201).json({ message: 'Libro agregado al perfil del usuario' });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 module.exports = router;
