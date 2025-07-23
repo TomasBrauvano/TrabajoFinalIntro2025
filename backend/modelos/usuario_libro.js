@@ -7,4 +7,11 @@ async function obtenerLibrosPorIdUsuario(usuario_id) {
     return res.rows;
 }
 
-module.exports = { obtenerLibrosPorIdUsuario };
+async function agregar(usuario_id, libro_id, calificacion, estado) {
+    const res = await pool.query(
+        'INSERT INTO usuario_libro (usuario_id, libro_id, calificacion, estado) VALUES ($1,$2,$3,$4) RETURNING *',
+        [usuario_id, libro_id, calificacion, estado]);
+    return res.rows[0];
+}
+
+module.exports = { obtenerLibrosPorIdUsuario, agregar };
