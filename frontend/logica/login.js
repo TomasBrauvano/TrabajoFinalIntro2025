@@ -20,13 +20,13 @@ document.getElementById('boton-ingreso').addEventListener('click', async () => {
             console.log(data)
             if (response.ok) {
                 localStorage.setItem('usuario_id', data.id);
-                window.location.href = '/frontend/html/index.html';
+                window.location.href = 'index.html';
             } else {
                 alert(data.error || 'Error al iniciar sesión');
             }
         } catch (err) {
             console.error('Error en la solicitud:', err);
-            alert('No se pudo conectar con el servidor');
+            alert("Error en el servidor");
         }
     } else {
         alert('Ya estas logeado');
