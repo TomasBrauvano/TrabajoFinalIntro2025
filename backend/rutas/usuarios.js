@@ -84,15 +84,15 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.post("/login", async (req, res) => {
-    const { nombre_usuario, contraseña } = req.body;
+    const { nombre_usuario, contrasenia } = req.body;
 
     try {
         const usuario = await usuarioModelo.obtenerPorNombreUsuario(nombre_usuario);
         if (!usuario) {
             return res.status(404).json({ error: 'El nombre de usuario no existe' });
         }
-        if (usuario.contrasenia === contraseña) {
-            res.status(200).json({ mensaje: 'Usuario logeado' });
+        if (usuario.contrasenia === contrasenia) {
+            res.status(200).json({ mensaje: 'Usuario logeado', id: usuario.id });
         } else {
             res.status(401).json({ mensaje: 'La contraseña no coincide' });
         }

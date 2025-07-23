@@ -11,6 +11,9 @@ const estadosRouter = require('./rutas/estados');
 const usuarioSerieRouter = require('./rutas/usuarioSeries');
 const PORT = process.env.PORT || 3000;
 
+const cors = require('cors');
+app.use(cors());
+
 app.use(express.json());
 
 app.use('/api/usuarios', usuariosRouter);
