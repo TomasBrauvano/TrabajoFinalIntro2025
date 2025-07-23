@@ -92,7 +92,7 @@ router.post("/login", async (req, res) => {
             return res.status(404).json({ error: 'El nombre de usuario no existe' });
         }
         if (usuario.contrasenia === contrasenia) {
-            res.status(200).json({ mensaje: 'Usuario logeado' });
+            res.status(200).json({ mensaje: 'Usuario logeado', id: usuario.id });
         } else {
             res.status(401).json({ mensaje: 'La contraseña no coincide' });
         }
