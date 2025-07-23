@@ -2,7 +2,6 @@ async function cargarRecomendaciones(usuario_id) {
     try {
         const res = await fetch(`http://localhost:3000/api/recomendaciones/${usuario_id}`);
         const data = await res.json();
-        console.log(data)
 
         const contenedor = document.getElementById("horizontal-1");
         contenedor.innerHTML = "";
