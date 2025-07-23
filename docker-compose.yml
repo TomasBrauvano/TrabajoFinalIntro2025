@@ -30,6 +30,7 @@ services:
     build: ./frontend
     ports:
       - "8080:80"
-
+    volumes:
+      - ./frontend/html:/usr/share/nginx/html
 volumes:
   postgres_data:
