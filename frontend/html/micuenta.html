@@ -1,79 +1,90 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Registrar una nueva cuenta</title>
-        <link rel="stylesheet" href="./css/style.css">
-    </head>
-    <body>
-        <header>
-            <img id="logo" src="./imagenes/LOGO.png">
-            <nav>
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="peliculas.html">Películas</a></li>
-                    <li><a href="series.html">Series</a></li>
-                    <li><a href="libros.html">Libros</a></li>
-                    <li><a href="juegos.html">Juegos</a></li>
-                    <li><a href="micuenta.html">Mi Perfil</a></li>
-                    <li><a href="">Buscar</a>
-                        <ul>
-                            <li><a href="buscar-pelis.html">Buscar Películas</a></li>
-                            <li><a href="buscar-ser.html">Buscar Series</a></li>
-                            <li><a href="buscar-jue.html">Buscar Juegos</a></li>
-                            <li><a href="buscar-lib.html">Buscar Libros</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <section id="usuario">
-                <h1>Nombre Apellido</h1>
-                <p>nombre_de_usuario</p>
-            </section>
-            
-            <section id="configuraciones">
-                <h2>Configuraciones:</h2>
-                <label for="toggle-nombre">Cambiar Nombre y/o Apellido</label>
-                <input type="checkbox" id="toggle-nombre">
-                <div class="conf-input">
-                    <label for="cambio-nombre">Nombre Nuevo:</label>
-                    <input type="text" id="cambio-nombre" name="cambio-nombre"> 
-                    <button id="cambiar-nombre">Cambiar</button>
-                </div>
-                <label for="toggle-apellido">Cambiar Apellido</label>
-                <input type="checkbox" id="toggle-apellido">
-                <div class="conf-input">
-                    <label for="cambio-apellido">Apellido Nuevo:</label>
-                    <input type="text" id="cambio-apellido" name="cambio-apellido">
-                    <button id="cambiar-apellido">Cambiar</button>
-                </div>
-                <label for="toggle-contrasenia">Cambiar Contraseña</label>
-                <input type="checkbox" id="toggle-contrasenia">
-                <div class="conf-input">
-                    <label for="cambio-contrasenia">Contraseña Nueva:</label>
-                    <input type="password" id="cambio-contrasenia" name="cambio-contrasenia">
-                    <label for="cambio-confirmacion-contra">Confirmar Contraseña:</label>
-                    <input type="password" id="cambio-confirmacion-contra" name="cambio-confirmacion-contra">
-                    <button id="cambiar-contrasenia">Cambiar</button>
-                </div>
-                <label for="toggle-categoria">Cambiar Categoria</label>
-                <input type="checkbox" id="toggle-categoria">
-                <div class="conf-input">
-                    <label for="cambio-categoria">Nueva Categoria:</label>
-                    <input type="text" id="cambio-categoria" name="cambio-categoria">
-                    <button id="cambiar-categoria">Cambiar</button>
-                </div>
-                <label for="toggle-eliminar">Eliminar Cuenta</label>
-                <input type="checkbox" id="toggle-eliminar">
-                <div class="conf-input">
-                    <strong>Estás Seguro/a?</strong>
-                    <button>Eliminar</button>
-                </div>
-            </section>
-        </main>
 
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil usuario</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="./imagenes/LOGO.png">
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="peliculas.html">Películas</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="libros.html">Libros</a></li>
+                <li><a href="juegos.html">Juegos</a></li>
+                <li><a href="micuenta.html">Mi Perfil</a></li>
+                <li><a href="">Buscar</a>
+                    <ul>
+                        <li><a href="buscar-pelis.html">Buscar Películas</a></li>
+                        <li><a href="buscar-ser.html">Buscar Series</a></li>
+                        <li><a href="buscar-jue.html">Buscar Juegos</a></li>
+                        <li><a href="buscar-lib.html">Buscar Libros</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="usuario">
+            <h1 id="nombre-apellido">Nombre Apellido</h1>
+            <p id="nombre-usuario">nombre_de_usuario</p>
+        </section>
+
+        <section id="configuraciones">
+            <h2>Configuraciones:</h2>
+
+            <label for="toggle-nombre">Cambiar Nombre (Actual: <span id="nombre-actual"></span>)</label>
+            <input type="checkbox" id="toggle-nombre">
+            <div class="conf-input">
+                <label for="cambio-nombre">Nombre Nuevo:</label>
+                <input type="text" id="cambio-nombre" name="cambio-nombre">
+                <button id="cambiar-nombre">Cambiar</button>
+            </div>
+
+            <label for="toggle-apellido">Cambiar Apellido (Actual: <span id="apellido-actual"></span>)</label>
+            <input type="checkbox" id="toggle-apellido">
+            <div class="conf-input">
+                <label for="cambio-apellido">Apellido Nuevo:</label>
+                <input type="text" id="cambio-apellido" name="cambio-apellido">
+                <button id="cambiar-apellido">Cambiar</button>
+            </div>
+
+            <label for="toggle-contrasenia">Cambiar Contraseña</label>
+            <input type="checkbox" id="toggle-contrasenia">
+            <div class="conf-input">
+                <label for="cambio-contrasenia">Contraseña Nueva:</label>
+                <input type="password" id="cambio-contrasenia" name="cambio-contrasenia">
+                <label for="cambio-confirmacion-contra">Confirmar Contraseña:</label>
+                <input type="password" id="cambio-confirmacion-contra" name="cambio-confirmacion-contra">
+                <button id="cambiar-contrasenia">Cambiar</button>
+            </div>
+
+            <label for="toggle-categoria">Cambiar Categoría Preferida (Actual: <span
+                    id="categoria-actual"></span>)</label>
+            <input type="checkbox" id="toggle-categoria">
+            <div class="conf-input">
+                <label for="cambio-categoria">Nueva Categoría:</label>
+                <select id="cambio-categoria" name="cambio-categoria"></select>
+                <button id="cambiar-categoria">Cambiar</button>
+            </div>
+
+            <label for="toggle-eliminar">Eliminar Cuenta</label>
+            <input type="checkbox" id="toggle-eliminar">
+            <div class="conf-input">
+                <strong>¿Estás Seguro/a?</strong>
+                <button>Eliminar</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="../logica/miCuenta.js"></script>
+</body>
+
 </html>

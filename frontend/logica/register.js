@@ -38,8 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        console.log(categoria_preferida)
-
         try {
             const respuesta = await fetch("http://localhost:3000/api/usuarios/register", {
                 method: "POST",
