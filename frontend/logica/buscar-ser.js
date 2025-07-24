@@ -24,11 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const div = document.createElement('div');
                 div.classList.add('serie-item');
                 div.innerHTML = `
+                    <img src="${s.imagen}" alt="${s.nombre}" width="200">
                     <h3>${s.nombre}</h3>
                     <p><strong>Año:</strong> ${s.anio}</p>
                     <p><strong>Director:</strong> ${s.director}</p>
                     <p>${s.sinopsis}</p>
-                    <img src="${s.imagen}" alt="${s.nombre}" width="200">
                     <hr>
                 `;
                 mostrador.appendChild(div);
