@@ -78,10 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <div class="acciones-libro">
                     <button class="boton-agregar-${l.id}">Agregar</button>
+                    <button class="boton-eliminar-${l.id}">Eliminar</button> <h3>${l.nombre}</h3>
                 </div>
                 
             </section>
             `;
+              
                 mostrador.appendChild(div);
 
                 async function actualizarLibro(cambios) {
@@ -169,6 +171,36 @@ document.addEventListener('DOMContentLoaded', () => {
                         alert("Ocurrió un error en el servidor.");
                     }
                 });
+
+                document.querySelector(`.boton-eliminar-${l.id}`).addEventListener("click", async () => {
+                    const confirmar = confirm('¿Estás seguro de que quieres eliminarlo de tu perfil de libros?');
+                    if(!confirmar) return;
+                    
+                    try{
+                        const response = await fetch('http://localhost:3000/api/usuarios_libros',{
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            usuario_id: usuario_id,
+                            libro_id: l.id
+                        })
+                    });
+
+                        if(response.ok){
+                            alert(`"${l.nombre}" se eliminó de tu perfil de libros.`);
+                            location.reload();
+                        }else{
+                            const errorData = await response.json();
+                            alert(errorData.error || `Error al eliminar el libro: ${l.nombre}`);
+                        }
+                    } catch (error){
+                        console.error("Error al enviar la solicitud para eliminar:", error);
+                        alert("Ocurrio un error en el servidor");
+                    }
+                });
+            
             });
 
         } catch (err) {
