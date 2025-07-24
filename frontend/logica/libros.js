@@ -92,7 +92,7 @@ async function cargarLibrosDelUsuario() {
             }
 
             div.querySelector(".btn-eliminar").addEventListener("click", async () => {
-                const confirmar = confirm("¿Estás seguro de que querés eliminar esta película?");
+                const confirmar = confirm("¿Estás seguro de que querés eliminar este libro?");
                 if (!confirmar) return;
 
                 try {
@@ -102,10 +102,10 @@ async function cargarLibrosDelUsuario() {
                         body: JSON.stringify({ usuario_id: usuario_id, libro_id: l.id })
                     });
                     if (res.ok) {
-                        alert("Película eliminada correctamente.");
+                        alert("Libro eliminado correctamente.");
                         cargarLibrosDelUsuario();
                     } else {
-                        alert("Error al eliminar la película.");
+                        alert("Error al eliminar la libro.");
                     }
                 } catch (err) {
                     console.error(err);
