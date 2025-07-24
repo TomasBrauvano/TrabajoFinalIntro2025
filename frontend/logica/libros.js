@@ -1,34 +1,34 @@
 const mostrador = document.querySelector(".mostrador-de-contenido");
 const usuario_id = JSON.parse(localStorage.getItem("usuario_id"));
 
-async function cargarPeliculasDelUsuario() {
+async function cargarLibrosDelUsuario() {
     try {
-        const res = await fetch(`http://localhost:3000/api/usuarios_peliculas/${usuario_id}`);
-        if (!res.ok) throw new Error("Error al obtener películas");
+        const res = await fetch(`http://localhost:3000/api/usuarios_libros/${usuario_id}`);
+        if (!res.ok) throw new Error("Error al obtener libros");
 
-        const peliculas = await res.json();
+        const libros = await res.json();
 
-        if (peliculas.length === 0) {
-            mostrador.innerHTML = '<p>Todavía no tenés películas agregadas.</p>';
+        if (libros.length === 0) {
+            mostrador.innerHTML = '<p>Todavía no tenés libros agregados.</p>';
             return;
         }
 
         mostrador.innerHTML = "";
-        for (const p of peliculas) {
-            const resEstado = await fetch(`http://localhost:3000/api/estados/${p.estado}`);
+        for (const l of libros) {
+            const resEstado = await fetch(`http://localhost:3000/api/estados/${l.estado}`);
             const estado = await resEstado.json();
             const div = document.createElement("div");
-            div.classList.add("pelicula-item");
+            div.classList.add("libro-item");
             div.innerHTML = `
             <section id="configuraciones">
-                <label for="toggle-imagen"><img src="${p.imagen}" alt="${p.nombre}" width="200"></label>
-                <label for="toggle-titulo">Título: ${p.nombre}</label>
+                <label for="toggle-imagen"><img src="${l.imagen}" alt="${l.nombre}" width="200"></label>
+                <label for="toggle-titulo">Título: ${l.nombre}</label>
 
-                <label for="toggle-anio">Año: ${p.anio}</label>
+                <label for="toggle-anio">Año: ${l.anio}</label>
 
-                <label for="toggle-sinopsis">Sinopsis: ${p.sinopsis}</label>
+                <label for="toggle-sinopsis">Sinopsis: ${l.sinopsis}</label>
                
-                <label for="toggle-calificacion">Calificación: ${p.calificacion ?? 'Sin calificación'}</label>
+                <label for="toggle-calificacion">Calificación: ${l.calificacion ?? 'Sin calificación'}</label>
                 <input type="checkbox" id="toggle-calificacion">
                 <div class="conf-input">
                     <label for="cambio-calificacion">Nueva Calificación:</label>
@@ -55,24 +55,24 @@ async function cargarPeliculasDelUsuario() {
                     <button id="cambiar-estado">Cambiar</button>
                 </div>
 
-                <div class="acciones-pelicula">
-                    <button class="btn-eliminar" data-id="${p.id}">Eliminar</button>
+                <div class="acciones-libro">
+                    <button class="btn-eliminar" data-id="${l.id}">Eliminar</button>
                 </div>
                 
             </section>
             `;
 
-            async function actualizarUsuarioPelicula(cambios) {
+            async function actualizarUsuarioLibro(cambios) {
                 const body = {
                     usuario_id: usuario_id,
-                    pelicula_id: p.id,
-                    calificacion: p.calificacion,
-                    estado: p.estado,
+                    libro_id: l.id,
+                    calificacion: l.calificacion,
+                    estado: l.estado,
                     ...cambios
                 };
 
                 try {
-                    const res = await fetch(`http://localhost:3000/api/usuarios_peliculas`, {
+                    const res = await fetch(`http://localhost:3000/api/usuarios_libros`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(body)
@@ -96,14 +96,14 @@ async function cargarPeliculasDelUsuario() {
                 if (!confirmar) return;
 
                 try {
-                    const res = await fetch(`http://localhost:3000/api/usuarios_peliculas`, {
+                    const res = await fetch(`http://localhost:3000/api/usuarios_libros`, {
                         method: "DELETE",
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ usuario_id: usuario_id, pelicula_id: p.id })
+                        body: JSON.stringify({ usuario_id: usuario_id, libro_id: l.id })
                     });
                     if (res.ok) {
                         alert("Película eliminada correctamente.");
-                        cargarPeliculasDelUsuario();
+                        cargarLibrosDelUsuario();
                     } else {
                         alert("Error al eliminar la película.");
                     }
@@ -117,19 +117,19 @@ async function cargarPeliculasDelUsuario() {
 
             document.getElementById('cambiar-calificacion').addEventListener('click', () => {
                 const nuevo = document.getElementById('cambio-calificacion').value;
-                actualizarUsuarioPelicula({ calificacion: nuevo });
+                actualizarUsuarioLibro({ calificacion: nuevo });
             });
 
             document.getElementById('cambiar-estado').addEventListener('click', () => {
                 const nuevo = document.getElementById('cambio-estado').value;
-                actualizarUsuarioPelicula({ estado: nuevo });
+                actualizarUsuarioLibro({ estado: nuevo });
             });
 
         }
     } catch (err) {
         console.error(err);
-        mostrador.innerHTML = '<p>Error al cargar tus películas</p>';
+        mostrador.innerHTML = '<p>Error al cargar tus libros</p>';
     }
 }
 
-cargarPeliculasDelUsuario();
+cargarLibrosDelUsuario();
