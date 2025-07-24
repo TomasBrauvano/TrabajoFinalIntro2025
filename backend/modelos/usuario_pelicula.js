@@ -15,9 +15,16 @@ async function agregar(usuario_id, pelicula_id, calificacion, estado) {
 }
 
 async function actualizar(usuario_id, pelicula_id, calificacion, estado) {
-    const res = await pool.query(
-        'UPDATE usuario_pelicula SET calificacion = $3 , estado = $4 WHERE usuario_id = $1 AND pelicula_id = $2 RETURNING *',
-        [usuario_id, pelicula_id, calificacion, estado]);
+    let res;
+    if (calificacion) {
+        res = await pool.query(
+            'UPDATE usuario_pelicula SET calificacion = $3 , estado = $4 WHERE usuario_id = $1 AND pelicula_id = $2 RETURNING *',
+            [usuario_id, pelicula_id, calificacion, estado]);
+    } else {
+        res = await pool.query(
+            'UPDATE usuario_pelicula SET calificacion = NULL , estado = $3 WHERE usuario_id = $1 AND pelicula_id = $2 RETURNING *',
+            [usuario_id, pelicula_id, estado]);
+    }
     return res.rows[0];
 }
 
