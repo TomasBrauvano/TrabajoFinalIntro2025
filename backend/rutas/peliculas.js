@@ -79,7 +79,7 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     const { id } = req.params;
-    const { nombre, anio, director, sinopsis, imagen, creador_id, categoria, usuario_id } = req.body;
+    const { nombre, anio, director, sinopsis, imagen, creador_id, categoria } = req.body;
 
     if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria) {
         return res.status(400).json({ error: 'Faltan campos' });
@@ -89,9 +89,6 @@ router.put("/:id", async (req, res) => {
         const pelicula = await peliculaModelo.obtenerPorId(id);
         if (!pelicula) {
             return res.status(404).json({ error: 'Pelicula no encontrada' });
-        }
-        if (creador_id != usuario_id) {
-            return res.status(403).json({ error: 'No tenes permisos para actualizar esta pelicula' });
         }
         await peliculaModelo.actualizar(id, { nombre, anio, director, sinopsis, imagen, creador_id, categoria });
         res.status(201).json({ mensaje: 'Pelicula actualizada' });

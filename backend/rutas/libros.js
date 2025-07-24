@@ -79,7 +79,7 @@ router.post("/buscar", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     const { id } = req.params;
-    const { nombre, anio, autor, sinopsis, imagen, creador_id, categoria, usuario_id } = req.body;
+    const { nombre, anio, autor, sinopsis, imagen, creador_id, categoria } = req.body;
 
     if (!nombre || !anio || !autor || !sinopsis || !imagen || !creador_id || !categoria) {
         return res.status(400).json({ error: 'Faltan campos' });
@@ -89,9 +89,6 @@ router.put("/:id", async (req, res) => {
         const libro = await libroModelo.obtenerPorId(id);
         if (!libro) {
             return res.status(404).json({ error: 'Libro no encontrado' });
-        }
-        if (creador_id != usuario_id) {
-            return res.status(403).json({ error: 'No tenes permisos para actualizar este libro' });
         }
         await libroModelo.actualizar(id, { nombre, anio, autor, sinopsis, imagen, creador_id, categoria });
         res.status(201).json({ mensaje: 'Libro actualizado' });
