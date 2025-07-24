@@ -116,7 +116,7 @@ p {
 
 input:focus {
     border-color: #1F2033;
-    outline: none; /* Elimina el contorno azul por defecto en algunos navegadores */
+    outline: none;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 .horizontal {
@@ -155,7 +155,8 @@ input:focus {
     background: linear-gradient(180deg,#2E3478,70%,#1e1e1e);
 }
 .cuadro-de-ingreso {
-    max-width: 500px;
+    max-width: 600px;
+    max-height: fit-content;
     background-color: #1F2033;
     border-radius: 10px;
     padding: 30px;
@@ -175,17 +176,11 @@ input:focus {
 }
 
 label {
+    display: inline-block;
+    width: 160px;
     color: #A5AFE6;
     font-size: 18px;
     font-weight: bold;
-}
-input {
-    padding: 10px;
-    border: 2px solid #2E3478;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 1rem;
-    color: #2E3478;
 }
 main {
     border-radius: 5px;
@@ -200,7 +195,7 @@ form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap:10px;
 }
 #main-de-busqueda {
     display: block;
@@ -274,4 +269,34 @@ input[type="checkbox"] {
 }
 .tarjeta:hover{
     transform: scale(1.05);
+}
+input, select {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #2E3478;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: #1F2033;
+    background-color: #EEE6FF;
+    width: 200px;
+}
+.cuadro-de-ingreso > form > * {
+    display: flex;
+    align-items: center;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+textarea {
+    width: 200px;
+    height: 100px;
+    resize: vertical;
+    background-color: #EEE6FF;
+    color: #1F2033;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+textarea:focus {
+    outline: #1e1e1e;
+
 }
