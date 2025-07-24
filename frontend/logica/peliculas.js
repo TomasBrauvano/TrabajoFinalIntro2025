@@ -31,8 +31,8 @@ async function cargarPeliculasDelUsuario() {
                 <label for="toggle-calificacion">Calificación: ${p.calificacion ?? 'Sin calificación'}</label>
                 <input type="checkbox" id="toggle-calificacion">
                 <div class="conf-input">
-                    <label for="cambio-calificacion">Nueva Calificación:</label>
-                    <select id="cambio-calificacion" name="cambio-calificacion">
+                    <label for="cambio-calificacion-${p.id}">Nueva Calificación:</label>
+                    <select id="cambio-calificacion-${p.id}" name="cambio-calificacion-${p.id}">
                         <option value="">Todavía no tengo una calificación</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -40,19 +40,19 @@ async function cargarPeliculasDelUsuario() {
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                    <button id="cambiar-calificacion">Cambiar</button>
+                    <button id="cambiar-calificacion-${p.id}">Cambiar</button>
                 </div>
 
                 <label for="toggle-estado">Estado: ${estado.nombre}</label>
                 <input type="checkbox" id="toggle-estado">
                 <div class="conf-input">
-                    <label for="cambio-estado">Nuevo Estado:</label>
-                    <select id="cambio-estado" name="cambio-estado">
+                    <label for="cambio-estado-${p.id}">Nuevo Estado:</label>
+                    <select id="cambio-estado-${p.id}" name="cambio-estado-${p.id}">
                         <option value="1">Pendiente</option>
                         <option value="2">Viendo</option>
                         <option value="3">Vista</option>
                     </select>
-                    <button id="cambiar-estado">Cambiar</button>
+                    <button id="cambiar-estado-${p.id}">Cambiar</button>
                 </div>
 
                 <div class="acciones-pelicula">
@@ -115,13 +115,13 @@ async function cargarPeliculasDelUsuario() {
 
             mostrador.appendChild(div);
 
-            document.getElementById('cambiar-calificacion').addEventListener('click', () => {
-                const nuevo = document.getElementById('cambio-calificacion').value;
+            document.getElementById(`cambiar-calificacion-${p.id}`).addEventListener('click', () => {
+                const nuevo = document.getElementById(`cambio-calificacion-${p.id}`).value;
                 actualizarUsuarioPelicula({ calificacion: nuevo });
             });
 
-            document.getElementById('cambiar-estado').addEventListener('click', () => {
-                const nuevo = document.getElementById('cambio-estado').value;
+            document.getElementById(`cambiar-estado-${p.id}`).addEventListener('click', () => {
+                const nuevo = document.getElementById(`cambio-estado-${p.id}`).value;
                 actualizarUsuarioPelicula({ estado: nuevo });
             });
 

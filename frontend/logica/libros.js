@@ -31,8 +31,8 @@ async function cargarLibrosDelUsuario() {
                 <label for="toggle-calificacion">Calificación: ${l.calificacion ?? 'Sin calificación'}</label>
                 <input type="checkbox" id="toggle-calificacion">
                 <div class="conf-input">
-                    <label for="cambio-calificacion">Nueva Calificación:</label>
-                    <select id="cambio-calificacion" name="cambio-calificacion">
+                    <label for="cambio-calificacion-${l.id}">Nueva Calificación:</label>
+                    <select id="cambio-calificacion-${l.id}" name="cambio-calificacion-${l.id}">
                         <option value="">Todavía no tengo una calificación</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -40,19 +40,19 @@ async function cargarLibrosDelUsuario() {
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                    <button id="cambiar-calificacion">Cambiar</button>
+                    <button id="cambiar-calificacion-${l.id}">Cambiar</button>
                 </div>
 
                 <label for="toggle-estado">Estado: ${estado.nombre}</label>
                 <input type="checkbox" id="toggle-estado">
                 <div class="conf-input">
-                    <label for="cambio-estado">Nuevo Estado:</label>
-                    <select id="cambio-estado" name="cambio-estado">
+                    <label for="cambio-estado-${l.id}">Nuevo Estado:</label>
+                    <select id="cambio-estado-${l.id}" name="cambio-estado-${l.id}">
                         <option value="1">Pendiente</option>
                         <option value="2">Viendo</option>
                         <option value="3">Vista</option>
                     </select>
-                    <button id="cambiar-estado">Cambiar</button>
+                    <button id="cambiar-estado-${l.id}">Cambiar</button>
                 </div>
 
                 <div class="acciones-libro">
@@ -115,13 +115,13 @@ async function cargarLibrosDelUsuario() {
 
             mostrador.appendChild(div);
 
-            document.getElementById('cambiar-calificacion').addEventListener('click', () => {
-                const nuevo = document.getElementById('cambio-calificacion').value;
+            document.getElementById(`cambiar-calificacion-${l.id}`).addEventListener('click', () => {
+                const nuevo = document.getElementById(`cambio-calificacion-${l.id}`).value;
                 actualizarUsuarioLibro({ calificacion: nuevo });
             });
 
-            document.getElementById('cambiar-estado').addEventListener('click', () => {
-                const nuevo = document.getElementById('cambio-estado').value;
+            document.getElementById(`cambiar-estado-${l.id}`).addEventListener('click', () => {
+                const nuevo = document.getElementById(`cambio-estado-${l.id}`).value;
                 actualizarUsuarioLibro({ estado: nuevo });
             });
 
