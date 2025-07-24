@@ -4,8 +4,22 @@ Una página web en la que se puede crear una lista de películas, series o libro
 1. Docker
 2. Node.js
 ## Cómo levantar la página web
+
+##Si todavia no estan construidos los contenedores, se puede usar
 ```
-docker-compose up --build
+docker-compose up -d --build
+```
+##Si ya estan construidos, simplemente
+```
+docker-compose up -d
+```
+Para levantar solo el **frontend**
+```
+docker-compose up -d frontend
+```
+Para levantar solo el **backend**
+```
+docker-compose up -d backend
 ```
 ## Cómo levantar el backend
 ```
