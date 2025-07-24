@@ -34,7 +34,7 @@ async function cargarPeliculasDelUsuario() {
                 <div class="conf-input">
                     <label for="cambio-calificacion">Nueva Calificación:</label>
                     <select id="cambio-calificacion" name="cambio-calificacion">
-                        <option value="NULL">Todavía no tengo una calificación</option>
+                        <option value="">Todavía no tengo una calificación</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
