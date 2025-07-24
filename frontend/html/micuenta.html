@@ -38,8 +38,8 @@
         <section id="configuraciones">
             <h3>Datos de la Cuenta:</h3>
                 <div class="datos-linea">
-                    <label for="nombre-actual">Nombre Actual:</label>
-                    <span id="nombre-actual"></span>
+                    <label for="toggle-nombre">Nombre Actual:</label>
+                    <p><span id="nombre-actual"></span></p>
                     <button class="desplegar-cambio" data-target="div1">Cambiar nombre</button>
                     <div id="div1">
                         <label for="cambio-nombre">Nombre nuevo:</label>
@@ -48,8 +48,8 @@
                     </div>
                 </div>
                 <div class="datos-linea">
-                    <label for="apellido-actual">Apellido Actual:</label>
-                    <span id="apellido-actual"></span>
+                    <label for="toggle-apellido">Apellido Actual:</label>
+                    <p><span id="apellido-actual"></span></p>
                     <button class="desplegar-cambio" data-target="div2">Cambiar apellido</button>
                     <div id="div2">
                         <label for="cambio-apellido">Apellido nuevo:</label>
@@ -58,8 +58,8 @@
                     </div>
                 </div>
                 <div class="datos-linea">
-                    <label for="categoria-actual">Categoria preferida Actual:</label>
-                    <span id="categoria-actual"></span>
+                    <label for="toggle-categoria">Categoria preferida Actual:</label>
+                    <p><span id="categoria-actual"></span></p>
                     <button class="desplegar-cambio" data-target="div3">Cambiar categoria preferida</button>
                     <div id="div3">
                         <label for="cambio-categoria">Categoria nueva:</label>
@@ -75,6 +75,13 @@
                         <label for="cambio-confirmacion-contra">Confirmar contraseña nueva:</label>
                         <input type="password" id="cambio-confirmacion-contra" name="cambio-confirmacion-contra">
                         <button id="cambiar-contrasenia">Confirmar</button>
+                    </div>
+                </div>
+                <div class="datos-linea">
+                    <button class="desplegar-cambio" data-target="div5">Eliminar cuenta</button>
+                    <div id="div5">
+                        <p>Estás seguro?</p>
+                        <button id="eliminar-cuenta">Confirmar</button>
                     </div>
                 </div>
         </section>
