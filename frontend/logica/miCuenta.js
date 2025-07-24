@@ -71,7 +71,7 @@ async function actualizarUsuario(cambios) {
 }
 
 document.getElementById("titulo-config").addEventListener("click", function() {
-  let section = document.getElementById("configuraciones");
+  let section = document.getElementById("configuraciones1");
   if (section.style.display === "none") {
     section.style.display = "flex";
   } else {
