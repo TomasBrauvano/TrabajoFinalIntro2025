@@ -6,23 +6,38 @@ async function cargarRecomendaciones(usuario_id) {
         const contenedor = document.getElementById("horizontal-1");
         contenedor.innerHTML = "";
 
-        const tarjetaPeli = document.createElement("div");
-        tarjetaPeli.classList.add("tarjeta");
-        tarjetaPeli.textContent = `Película: ${data.pelicula?.nombre ?? "No disponible"}`;
+        const recomendaciones = [];
 
-        const tarjetaSerie = document.createElement("div");
-        tarjetaSerie.classList.add("tarjeta");
-        tarjetaSerie.textContent = `Serie: ${data.serie?.nombre ?? "No disponible"}`;
+        if(data.pelicula) recomendaciones.push({...data.pelicula, tipo: 'Pelicula'});
+        if(data.serie) recomendaciones.push({...data.serie, tipo: 'Serie'});
+        if(data.libro) recomendaciones.push({...data.libro, tipo: 'Libro'});
 
-        const tarjetaLibro = document.createElement("div");
-        tarjetaLibro.classList.add("tarjeta");
-        tarjetaLibro.textContent = `Libro: ${data.libro?.nombre ?? "No disponible"}`;
+        if(recomendaciones.length > 0){
+            recomendaciones.forEach(item => {
+                const tarjeta = document.createElement("div");
+                tarjeta.classList.add("tarjeta");
 
-        contenedor.appendChild(tarjetaPeli);
-        contenedor.appendChild(tarjetaSerie);
-        contenedor.appendChild(tarjetaLibro);
-    } catch (error) {
-        console.error("Error al cargar recomendaciones:", error);
+                const imagen = document.createElement("img");
+                imagen.src = item.imagen;
+                imagen.alt = item.nombre;
+                imagen.classList.add("recomendacion-imagen");
+
+                const titulo = document.createElement("p");
+                titulo.classList.add("recomendacion-titulo");
+                titulo.textContent = item.nombre;
+
+                tarjeta.appendChild(imagen);
+                tarjeta.appendChild(titulo);
+                contenedor.appendChild(tarjeta);
+            });
+    
+        }else{
+            contenedor.innerHTML = "<p>No hay recomendaciones para tu categoria preferida.<p>";
+        }
+    } catch(err){
+        console.error("Error al cargar las recomendaciones", err);
+        const contenedor = document.getElementById("horizontal-1");
+        contenedor.innerHTML = "<p>Ha ocurrido un error al cargar las recomendaciones.</p>";
     }
 }
 
