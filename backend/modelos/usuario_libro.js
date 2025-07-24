@@ -8,9 +8,16 @@ async function obtenerLibrosPorIdUsuario(usuario_id) {
 }
 
 async function agregar(usuario_id, libro_id, calificacion, estado) {
-    const res = await pool.query(
-        'INSERT INTO usuario_libro (usuario_id, libro_id, calificacion, estado) VALUES ($1,$2,$3,$4) RETURNING *',
-        [usuario_id, libro_id, calificacion, estado]);
+    let res;
+    if (calificacion) {
+        res = await pool.query(
+            'INSERT INTO usuario_libro (usuario_id, libro_id, calificacion, estado) VALUES ($1,$2,$3,$4) RETURNING *',
+            [usuario_id, libro_id, calificacion, estado]);
+    } else {
+        res = await pool.query(
+            'INSERT INTO usuario_libro (usuario_id, libro_id, estado) VALUES ($1,$2,$3) RETURNING *',
+            [usuario_id, libro_id, estado]);
+    }
     return res.rows[0];
 }
 
