@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.classList.add('pelicula-item');
                 div.innerHTML = `
                     <img src="${p.imagen}" alt="${p.nombre}" width="200">
+                    <button class="boton-agregar">Agregar</button>
                     <h3>${p.nombre}</h3>
                     <p><strong>Año:</strong> ${p.anio}</p>
                     <p><strong>Director:</strong> ${p.director}</p>

@@ -135,6 +135,7 @@ input:focus {
     color:white;
     border-radius: 8px;
     flex-shrink: 0;
+    position:relative;
 
     display: flex;
     flex-direction: column;
@@ -258,8 +259,30 @@ form {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.boton-agregar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #838383;
+    color: #1F2033;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.tarjeta:hover .boton-agregar {
+    opacity: 1;
+}
 .tarjeta:hover{
     transform: scale(1.05);
+}
+.serie-item , .pelicula-item , .libro-item {
+    position: relative;
+}
+.serie-item:hover .boton-agregar, .pelicula-item:hover .boton-agregar, .libro-item:hover .boton-agregar {
+    opacity: 1;
 }
 input, select {
     flex: 1;
