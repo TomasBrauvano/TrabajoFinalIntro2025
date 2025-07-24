@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnLogin = document.getElementById("btn-login");
     const btnRegister = document.getElementById("btn-register");
     const elementosLogueado = document.querySelectorAll(".logeado");
+    const logoutLink = document.getElementById("logoutLink");
 
     if (usuario_id) {
         btnLogin.style.display = "none";
@@ -111,5 +112,15 @@ document.addEventListener("DOMContentLoaded", () => {
         cargarRecomendaciones(usuario_id);
     } else {
         elementosLogueado.forEach(el => el.style.display = "none");
+    }
+    if (logoutLink) {
+        logoutLink.addEventListener("click", (event) => {
+            console.log("a")
+            event.preventDefault();
+
+            localStorage.clear();
+
+            location.reload();
+        });
     }
 });
