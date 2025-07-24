@@ -17,7 +17,6 @@ async function cargarPeliculasDelUsuario() {
         for (const p of peliculas) {
             const resEstado = await fetch(`http://localhost:3000/api/estados/${p.estado}`);
             const estado = await resEstado.json();
-            const esCreador = p.creador_id === usuario_id;
             const div = document.createElement("div");
             div.classList.add("pelicula-item");
             div.innerHTML = `
