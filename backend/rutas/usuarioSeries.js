@@ -45,20 +45,13 @@ router.get("/:usuario_id", async (req, res) => {
 router.post("/", async (req, res) => {
     const { usuario_id, serie_id, calificacion, estado } = req.body;
 
-    if (!usuario_id || !serie_id || !calificacion || !estado) {
+    if (!usuario_id || !serie_id || !estado) {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
     try {
-        const serieExistente = await usuarioSerieModelo.obtenerPorUsuarioYSerie(usuario_id, serie_id);
-
-        if (serieExistente) {
-            return res.status(409).json({ error: 'Esta serie ya esta agregada' });
-        }
-
         const serieUsuarioNueva = await usuarioSerieModelo.crear(usuario_id, serie_id, calificacion, estado);
-        res.status(201).json(serieUsuarioNueva);
-
+        res.status(201).json({ message: 'Pelicula agregada al perfil del usuario' });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Error al agregar una serie nueva' });
