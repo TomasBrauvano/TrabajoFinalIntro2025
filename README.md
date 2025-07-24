@@ -1,5 +1,8 @@
 # StoryStack
 Una página web en la que se puede crear una lista de películas, series o libros, y mostrar su estado de avance.
+## Requisitos para levantar la página web
+1. Docker
+2. Node.js
 ## Cómo levantar la página web
 ```
 docker-compose up --build
