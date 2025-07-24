@@ -59,6 +59,7 @@ router.post("/", async (req, res) => {
         const serieUsuarioNueva = await usuarioSerieModelo.crear(usuario_id, serie_id, calificacion, estado);
         res.status(201).json(serieUsuarioNueva);
 
+        res.status(201).json({ message: 'serie agregada al perfil del usuario' });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Error al agregar una serie nueva' });
