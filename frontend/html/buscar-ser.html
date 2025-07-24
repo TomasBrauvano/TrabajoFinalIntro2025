@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar una nueva cuenta</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="./imagenes/LOGO.png">
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="peliculas.html">Películas</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="libros.html">Libros</a></li>
+                <li><a href="micuenta.html">Mi Perfil</a></li>
+                <li><a href="">Buscar</a>
+                    <ul>
+                        <li><a href="buscar-pelis.html">Buscar Películas</a></li>
+                        <li><a href="buscar-ser.html">Buscar Series</a></li>
+                        <li><a href="buscar-lib.html">Buscar Libros</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
+    <main id="main-de-busqueda">
+        <h2>Busca Series para añadirlas a tu lista:</h2>
+
+        <section class="lista-de-contenido">
+            <div class="barra-busqueda">
+                <input type="text" id="input-busqueda" placeholder="Buscar Series">
+                <button class="boton-busqueda">Buscar</button>
+            </div>
+            <div class="mostrador-de-contenido">
+            </div>
+        </section>
+
+    </main>
+    <script src="/logica/buscar-ser.js"></script>
+</body>
+
+</html>
