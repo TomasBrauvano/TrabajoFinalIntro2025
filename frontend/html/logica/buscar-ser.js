@@ -78,7 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <div class="acciones-libro">
                     <button class="boton-agregar-${s.id}">Agregar</button>
+                    ${esCreador ? `
                     <button class="boton-eliminar-${s.id}">Eliminar</button>
+                    `: ''}
                 </div>
                 
             </section>
@@ -117,30 +119,59 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
-                document.getElementById(`cambiar-imagen-${s.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-imagen-${s.id}`).value;
-                    actualizarSerie({ imagen: nuevo });
-                });
+                if (esCreador) {
+                    document.getElementById(`cambiar-imagen-${s.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-imagen-${s.id}`).value;
+                        actualizarSerie({ imagen: nuevo });
+                    });
 
-                document.getElementById(`cambiar-titulo-${s.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-titulo-${s.id}`).value;
-                    actualizarSerie({ nombre: nuevo });
-                });
+                    document.getElementById(`cambiar-titulo-${s.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-titulo-${s.id}`).value;
+                        actualizarSerie({ nombre: nuevo });
+                    });
 
-                document.getElementById(`cambiar-anio-${s.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-anio-${s.id}`).value;
-                    actualizarSerie({ anio: nuevo });
-                });
+                    document.getElementById(`cambiar-anio-${s.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-anio-${s.id}`).value;
+                        actualizarSerie({ anio: nuevo });
+                    });
 
-                document.getElementById(`cambiar-director-${s.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-director-${s.id}`).value;
-                    actualizarSerie({ director: nuevo });
-                });
+                    document.getElementById(`cambiar-director-${s.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-director-${s.id}`).value;
+                        actualizarSerie({ director: nuevo });
+                    });
 
-                document.getElementById(`cambiar-sinopsis-${s.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-sinopsis-${s.id}`).value;
-                    actualizarSerie({ sinopsis: nuevo });
-                });
+                    document.getElementById(`cambiar-sinopsis-${s.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-sinopsis-${s.id}`).value;
+                        actualizarSerie({ sinopsis: nuevo });
+                    });
+
+                    document.querySelector(`.boton-eliminar-${s.id}`).addEventListener("click", async () => {
+                        const confirmar = confirm('¿Estás seguro de que quieres eliminar esta serie?');
+                        if (!confirmar) return;
+
+                        try {
+                            const response = await fetch(`http://localhost:3000/api/series/${s.id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+
+                            if (response.ok) {
+                                alert(`"${s.nombre}" se eliminó.`);
+                                location.reload();
+                            } else {
+                                const errorData = await response.json();
+                                alert(errorData.error || `Error al eliminar la serie: ${s.nombre}`);
+                            }
+                        } catch (error) {
+                            console.error("Error al enviar la solicitud para eliminar:", error);
+                            alert("Ocurrio un error en el servidor");
+                        }
+                    });
+                }
+
+
 
                 document.querySelector(`.boton-agregar-${s.id}`).addEventListener("click", async () => {
 
@@ -168,35 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     } catch (error) {
                         console.error("Error al enviar la solicitud para agregar:", error);
                         alert("Ocurrió un error en el servidor.");
-                    }
-                });
-
-                document.querySelector(`.boton-eliminar-${s.id}`).addEventListener("click", async () => {
-                    const confirmar = confirm('¿Estás seguro de que quieres eliminarlo de tu perfil de series?');
-                    if(!confirmar) return;
-                    
-                    try{
-                        const response = await fetch(`http://localhost:3000/api/usuarioSeries/${usuario_id}/${s.id}`,{
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                        /*body: JSON.stringify({
-                            usuario_id: usuario_id,
-                            serie_id: s.id
-                        })*/
-                    });
-
-                        if(response.ok){
-                            alert(`"${s.nombre}" se eliminó de tu perfil de series.`);
-                            location.reload();
-                        }else{
-                            const errorData = await response.json();
-                            alert(errorData.error || `Error al eliminar la serie: ${s.nombre}`);
-                        }
-                    } catch (error){
-                        console.error("Error al enviar la solicitud para eliminar:", error);
-                        alert("Ocurrio un error en el servidor");
                     }
                 });
 

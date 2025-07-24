@@ -78,12 +78,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <div class="acciones-libro">
                     <button class="boton-agregar-${l.id}">Agregar</button>
-                    <button class="boton-eliminar-${l.id}">Eliminar</button> <h3>${l.nombre}</h3>
+                    ${esCreador ? `
+                    <button class="boton-eliminar-${l.id}">Eliminar</button>
+                    `: ''}
                 </div>
                 
             </section>
             `;
-              
+
                 mostrador.appendChild(div);
 
                 async function actualizarLibro(cambios) {
@@ -118,30 +120,59 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
-                document.getElementById(`cambiar-imagen-${l.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-imagen-${l.id}`).value;
-                    actualizarLibro({ imagen: nuevo });
-                });
+                if (esCreador) {
+                    document.getElementById(`cambiar-imagen-${l.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-imagen-${l.id}`).value;
+                        actualizarLibro({ imagen: nuevo });
+                    });
 
-                document.getElementById(`cambiar-titulo-${l.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-titulo-${l.id}`).value;
-                    actualizarLibro({ nombre: nuevo });
-                });
+                    document.getElementById(`cambiar-titulo-${l.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-titulo-${l.id}`).value;
+                        actualizarLibro({ nombre: nuevo });
+                    });
 
-                document.getElementById(`cambiar-anio-${l.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-anio-${l.id}`).value;
-                    actualizarLibro({ anio: nuevo });
-                });
+                    document.getElementById(`cambiar-anio-${l.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-anio-${l.id}`).value;
+                        actualizarLibro({ anio: nuevo });
+                    });
 
-                document.getElementById(`cambiar-autor-${l.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-autor-${l.id}`).value;
-                    actualizarLibro({ autor: nuevo });
-                });
+                    document.getElementById(`cambiar-autor-${l.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-autor-${l.id}`).value;
+                        actualizarLibro({ autor: nuevo });
+                    });
 
-                document.getElementById(`cambiar-sinopsis-${l.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-sinopsis-${l.id}`).value;
-                    actualizarLibro({ sinopsis: nuevo });
-                });
+                    document.getElementById(`cambiar-sinopsis-${l.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-sinopsis-${l.id}`).value;
+                        actualizarLibro({ sinopsis: nuevo });
+                    });
+
+                    document.querySelector(`.boton-eliminar-${l.id}`).addEventListener("click", async () => {
+                        const confirmar = confirm('¿Estás seguro de que quieres eliminar este libro?');
+                        if (!confirmar) return;
+
+                        try {
+                            const response = await fetch(`http://localhost:3000/api/libros/${l.id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+
+                            if (response.ok) {
+                                alert(`"${l.nombre}" se eliminó.`);
+                                location.reload();
+                            } else {
+                                const errorData = await response.json();
+                                alert(errorData.error || `Error al eliminar el libro: ${l.nombre}`);
+                            }
+                        } catch (error) {
+                            console.error("Error al enviar la solicitud para eliminar:", error);
+                            alert("Ocurrio un error en el servidor");
+                        }
+                    });
+                }
+
+
 
                 document.querySelector(`.boton-agregar-${l.id}`).addEventListener("click", async () => {
 
@@ -172,35 +203,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                document.querySelector(`.boton-eliminar-${l.id}`).addEventListener("click", async () => {
-                    const confirmar = confirm('¿Estás seguro de que quieres eliminarlo de tu perfil de libros?');
-                    if(!confirmar) return;
-                    
-                    try{
-                        const response = await fetch('http://localhost:3000/api/usuarios_libros',{
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            usuario_id: usuario_id,
-                            libro_id: l.id
-                        })
-                    });
 
-                        if(response.ok){
-                            alert(`"${l.nombre}" se eliminó de tu perfil de libros.`);
-                            location.reload();
-                        }else{
-                            const errorData = await response.json();
-                            alert(errorData.error || `Error al eliminar el libro: ${l.nombre}`);
-                        }
-                    } catch (error){
-                        console.error("Error al enviar la solicitud para eliminar:", error);
-                        alert("Ocurrio un error en el servidor");
-                    }
-                });
-            
+
             });
 
         } catch (err) {

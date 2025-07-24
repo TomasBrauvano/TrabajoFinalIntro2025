@@ -78,12 +78,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <div class="acciones-libro">
                     <button class="boton-agregar-${p.id}">Agregar</button>
-                    <button class="boton-eliminar-${p.id}">Eliminar</button> <h3>${p.nombre}</h3>
+                    ${esCreador ? `
+                    <button class="boton-eliminar-${p.id}">Eliminar</button>
+                    `: ''}
                 </div>
                 
             </section>
             `;
-                    
+
                 mostrador.appendChild(div);
 
                 async function actualizarPelicula(cambios) {
@@ -118,30 +120,58 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
-                document.getElementById(`cambiar-imagen-${p.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-imagen-${p.id}`).value;
-                    actualizarPelicula({ imagen: nuevo });
-                });
+                if (esCreador) {
+                    document.getElementById(`cambiar-imagen-${p.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-imagen-${p.id}`).value;
+                        actualizarPelicula({ imagen: nuevo });
+                    });
 
-                document.getElementById(`cambiar-titulo-${p.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-titulo-${p.id}`).value;
-                    actualizarPelicula({ nombre: nuevo });
-                });
+                    document.getElementById(`cambiar-titulo-${p.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-titulo-${p.id}`).value;
+                        actualizarPelicula({ nombre: nuevo });
+                    });
 
-                document.getElementById(`cambiar-anio-${p.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-anio-${p.id}`).value;
-                    actualizarPelicula({ anio: nuevo });
-                });
+                    document.getElementById(`cambiar-anio-${p.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-anio-${p.id}`).value;
+                        actualizarPelicula({ anio: nuevo });
+                    });
 
-                document.getElementById(`cambiar-director-${p.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-director-${p.id}`).value;
-                    actualizarPelicula({ director: nuevo });
-                });
+                    document.getElementById(`cambiar-director-${p.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-director-${p.id}`).value;
+                        actualizarPelicula({ director: nuevo });
+                    });
 
-                document.getElementById(`cambiar-sinopsis-${p.id}`).addEventListener('click', () => {
-                    const nuevo = document.getElementById(`cambio-sinopsis-${p.id}`).value;
-                    actualizarPelicula({ sinopsis: nuevo });
-                });
+                    document.getElementById(`cambiar-sinopsis-${p.id}`).addEventListener('click', () => {
+                        const nuevo = document.getElementById(`cambio-sinopsis-${p.id}`).value;
+                        actualizarPelicula({ sinopsis: nuevo });
+                    });
+
+                    document.querySelector(`.boton-eliminar-${p.id}`).addEventListener("click", async () => {
+                        const confirmar = confirm('¿Estás seguro de que quieres eliminar esta pelicula?');
+                        if (!confirmar) return;
+
+                        try {
+                            const response = await fetch(`http://localhost:3000/api/peliculas/${p.id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+
+                            if (response.ok) {
+                                alert(`"${p.nombre}" se eliminó.`);
+                                location.reload();
+                            } else {
+                                const errorData = await response.json();
+                                alert(errorData.error || `Error al eliminar la pelicula: ${p.nombre}`);
+                            }
+                        } catch (error) {
+                            console.error("Error al enviar la solicitud para eliminar:", error);
+                            alert("Ocurrio un error en el servidor");
+                        }
+                    });
+                }
+
 
                 document.querySelector(`.boton-agregar-${p.id}`).addEventListener("click", async () => {
 
@@ -172,34 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                document.querySelector(`.boton-eliminar-${p.id}`).addEventListener("click", async () => {
-                    const confirmar = confirm('¿Estás seguro de que quieres eliminarlo de tu perfil de peliculas?');
-                    if(!confirmar) return;
-                    
-                    try{
-                        const response = await fetch('http://localhost:3000/api/usuarios_peliculas',{
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            usuario_id: usuario_id,
-                            pelicula_id: p.id
-                        })
-                    });
 
-                        if(response.ok){
-                            alert(`"${p.nombre}" se eliminó de tu perfil de peliculas.`);
-                            location.reload();
-                        }else{
-                            const errorData = await response.json();
-                            alert(errorData.error || `Error al eliminar la pelicula: ${p.nombre}`);
-                        }
-                    } catch (error){
-                        console.error("Error al enviar la solicitud para eliminar:", error);
-                        alert("Ocurrio un error en el servidor");
-                    }
-                });
             });
 
         } catch (err) {
