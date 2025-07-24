@@ -300,9 +300,7 @@ textarea:focus {
 #titulo-config:hover {
     color: #EEE6FF;
 }
-.conf-input {
-    display: none;
-}
+
 #div1 , #div2 , #div3 , #div4, #div5 {
     display: none;
 }
@@ -314,4 +312,19 @@ textarea:focus {
     width: 1000px;
     margin-top: 5px;
     margin-left: 20px;
+}
+input[type="checkbox"] {
+    height: 20px;
+    width: 20px;
+    background-color: #EEE6FF;
+    color: #1F2033;
+    cursor:pointer;
+}
+
+.conf-input {
+    display: none;
+}
+
+input[type="checkbox"]:checked + .conf-input {
+    display: block;
 }
