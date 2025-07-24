@@ -1,71 +1,95 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Registrar una nueva cuenta</title>
-        <link rel="stylesheet" href="./css/style.css">
-    </head>
-    <body>
-        <header>
-            <img id="logo" src="./imagenes/LOGO.png">
-            <nav>
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="peliculas.html">Películas</a></li>
-                    <li><a href="series.html">Series</a></li>
-                    <li><a href="libros.html">Libros</a></li>
-                    <li><a href="micuenta.html">Mi Perfil</a></li>
-                    <li><a href="">Buscar</a>
-                        <ul>
-                            <li><a href="buscar-pelis.html">Buscar Películas</a></li>
-                            <li><a href="buscar-ser.html">Buscar Series</a></li>
-                            <li><a href="buscar-lib.html">Buscar Libros</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <section class="cuadro-de-ingreso">
-                <h2>Acá podés crear tus películas/series/libros para agregarlos a tu lista</h2>
-                <form action="" method="POST">
-                    <div class="creacion-div">
-                        <label for="tipo-de-contenido">Qué querés crear?</label>
-                        <select id="tipo-de-contenido" name="tipo-de-contenido">
-                            <option value="una-pelicula">Película</option>
-                            <option value="una-serie">Serie</option>
-                            <option value="un-libro">Libro</option>
-                        </select>
-                    </div>
-                    <div class="creacion-div">
-                        <label for="titulo">Título de la obra:</label>
-                        <input type="text" id="titulo" name="titulo" required>
-                    </div>
-                    <div class="creacion-div">
-                        <label for="anio">Año de creación:</label>
-                        <input type="number" id="anio" name="anio" required>
-                    </div>
-                    <div class="creacion-div">
-                        <label for="director-autor">Director/Autor:</label>
-                        <input type="text" id="director-autor" name="director-autor" required>
-                    </div>
-                    <div class="creacion-div">
-                        <label for="sinopsis">Sinopsis:</label>
-                        <textarea></textarea>
-                    </div>
-                    <div class="creacion-div">
-                        <label for="url-imagen">Url de la portada:</label>
-                        <input type="url" id="url-imagen" name="url-imagen" required>
-                    </div>
-                    <div class="creacion-div">
-                        <label for="categorias">Categoria:</label>
-                        <select id="categorias" name="categorias">
-                            <option value="">Cargando categorias...</option>
-                        </select> 
-                    </div>
-                </form>
-            </section>
-        </main>
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar una nueva cuenta</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="./imagenes/LOGO.png">
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="peliculas.html">Películas</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="libros.html">Libros</a></li>
+                <li><a href="micuenta.html">Mi Perfil</a></li>
+                <li><a href="">Buscar</a>
+                    <ul>
+                        <li><a href="buscar-pelis.html">Buscar Películas</a></li>
+                        <li><a href="buscar-ser.html">Buscar Series</a></li>
+                        <li><a href="buscar-lib.html">Buscar Libros</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="cuadro-de-ingreso">
+            <h2>Acá podés crear tus películas/series/libros para agregarlos a tu lista</h2>
+            <form action="" method="POST">
+                <div class="creacion-div">
+                    <label for="tipo-de-contenido">Qué querés crear?</label>
+                    <select id="tipo-de-contenido" name="tipo-de-contenido">
+                        <option value="pelicula">Película</option>
+                        <option value="serie">Serie</option>
+                        <option value="libro">Libro</option>
+                    </select>
+                </div>
+                <div class="creacion-div">
+                    <label for="titulo">Título de la obra:</label>
+                    <input type="text" id="titulo" name="titulo" required>
+                </div>
+                <div class="creacion-div">
+                    <label for="anio">Año de creación:</label>
+                    <input type="number" id="anio" name="anio" required>
+                </div>
+                <div class="creacion-div">
+                    <label for="director-autor">Director/Autor:</label>
+                    <input type="text" id="director-autor" name="director-autor" required>
+                </div>
+                <div class="creacion-div">
+                    <label for="sinopsis">Sinopsis:</label>
+                    <textarea id="sinopsis"></textarea>
+                </div>
+                <div class="creacion-div">
+                    <label for="url-imagen">Url de la portada:</label>
+                    <input type="url" id="url-imagen" name="url-imagen" required>
+                </div>
+                <div class="creacion-div">
+                    <label for="categorias">Categoria:</label>
+                    <select id="categorias" name="categorias">
+                        <option value="">Cargando categorias...</option>
+                    </select>
+                </div>
+                <div class="creacion-div">
+                    <label for="calificacion">Calificacion:</label>
+                    <select id="calificacion" name="calificacion">
+                        <option value="">Todavia no tengo una calificacion</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="creacion-div">
+                    <label for="estado">Estado:</label>
+                    <select id="estado" name="estado">
+                        <option value="1">Pendiente</option>
+                        <option value="2">Viendo</option>
+                        <option value="3">Vista</option>
+                    </select>
+                </div>
+                <button id="crear">Crear</button>
+            </form>
+        </section>
+    </main>
+    <script src="../logica/crear.js"></script>
+</body>
+
 </html>

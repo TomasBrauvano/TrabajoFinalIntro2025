@@ -53,17 +53,19 @@ async function obtenerPorEstado(usuario_id, estados) {
 }
 
 async function crear(usuario_id, serie_id, calificacion, estado) {
-    try {
-        const res = await pool.query(
+    let res;
+    if (calificacion) {
+        res = await pool.query(
             'INSERT INTO usuario_serie (usuario_id, serie_id, calificacion, estado) VALUES ($1, $2, $3, $4)',
             [usuario_id, serie_id, calificacion, estado]
         );
-
-        return res.rows[0];
-    } catch (err) {
-        console.error("Error al crear al agregar la serie", err);
-        throw err;
+    } else {
+        res = await pool.query(
+            'INSERT INTO usuario_serie (usuario_id, serie_id, estado) VALUES ($1, $2, $3)',
+            [usuario_id, serie_id, estado]
+        );
     }
+    return res.rows[0];
 }
 
 async function actualizar(usuario_id, serie_id, calificacion, estado) {
