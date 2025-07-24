@@ -26,7 +26,6 @@ services:
       - DB_NAME=StoryStack
     volumes:
       - ./backend:/app
-      - /app/node_modules
   frontend:
     build: ./frontend
     ports:
