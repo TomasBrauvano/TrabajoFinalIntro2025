@@ -70,15 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     if(!confirmar) return;
                     
                     try{
-                        const response = await fetch('http://localhost:3000/api/usuarioSeries',{
+                        const response = await fetch(`http://localhost:3000/api/usuarioSeries/${usuario_id}/${s.id}`,{
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
+                        }
+                        /*body: JSON.stringify({
                             usuario_id: usuario_id,
                             serie_id: s.id
-                        })
+                        })*/
                     });
 
                         if(response.ok){
