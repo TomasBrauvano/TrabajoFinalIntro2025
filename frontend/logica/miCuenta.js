@@ -70,6 +70,27 @@ async function actualizarUsuario(cambios) {
     }
 }
 
+document.getElementById("titulo-config").addEventListener("click", function() {
+  let section = document.getElementById("configuraciones");
+  if (section.style.display === "none") {
+    section.style.display = "flex";
+  } else {
+    section.style.display = "none";
+  }
+});
+
+document.querySelectorAll(".desplegar-cambio").forEach(button => {
+    button.addEventListener("click", function(){
+        let targetId = this.getAttribute("data-target");
+        let div = document.getElementById(targetId);
+        if (div.style.display === "none") {
+            div.style.display = "block";
+        } else {
+            div.style.display = "none";
+        }
+    });
+});
+
 document.getElementById('cambiar-nombre').addEventListener('click', () => {
     const nuevo = document.getElementById('cambio-nombre').value;
     actualizarUsuario({ nombre: nuevo });
