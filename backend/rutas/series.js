@@ -87,9 +87,9 @@ router.post("/buscar", async (req, res) => {
 //PUT
 router.put("/:id", async (req, res) => {
     const { id } = req.params;
-    const { nombre, anio, director, sinopsis, imagen, creador_id, categoria, usuario_id } = req.body;
+    const { nombre, anio, director, sinopsis, imagen, creador_id, categoria } = req.body;
 
-    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria || !usuario_id) {
+    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria) {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
@@ -98,11 +98,7 @@ router.put("/:id", async (req, res) => {
         if (!serieExistente) {
             return res.status(404).json({ error: 'Serie no encontrada' });
         }
-        if (serieExistente.creador_id != usuario_id) {
-            return res.status(403).json({ error: 'No tienes permisos para actualizar esta serie.' });
-        }
-
-        const serieActualizada = await serieModelo.actualizar(id, { nombre, anio, director, sinopsis, imagen, creador_id: serieExistente.creador_id, categoria });
+        const serieActualizada = await serieModelo.actualizar(id, { nombre, anio, director, sinopsis, imagen, creador_id, categoria });
         res.status(200).json(serieActualizada);
 
     } catch (err) {
