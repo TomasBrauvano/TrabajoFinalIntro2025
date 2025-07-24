@@ -5,29 +5,21 @@ Una página web en la que se puede crear una lista de películas, series o libro
 2. Node.js
 ## Cómo levantar la página web
 
-##Si todavia no estan construidos los contenedores, se puede usar
+## Si todavia no estan construidos los contenedores, se puede usar
 ```
 docker-compose up -d --build
 ```
-##Si ya estan construidos, simplemente
+## Si ya estan construidos, simplemente
 ```
 docker-compose up -d
 ```
-Para levantar solo el **frontend**
-```
-docker-compose up -d frontend
-```
-Para levantar solo el **backend**
+## Cómo levantar el backend
 ```
 docker-compose up -d backend
 ```
-## Cómo levantar el backend
-```
-docker-compose up backend
-```
 ## Cómo levantar el frontend
 ```
-docker-compose up frontend
+docker-compose up -d frontend
 ```
 ## Frontend
 El frontend incluye las paginas Login, Register, Inicio, MiPerfil, Peliculas, Series, Libros, Buscar peliculas, Buscar Libros, Buscar series y Crear.
