@@ -110,7 +110,6 @@ router.put("/:id", async (req, res) => {
 //DELETE
 router.delete("/:id", async (req, res) => {
     const { id } = req.params;
-    const usuario_id = req.body.usuario_id;
 
     try {
         const serieExistente = await serieModelo.obtenerPorId(id);
@@ -118,11 +117,6 @@ router.delete("/:id", async (req, res) => {
         if (!serieExistente) {
             return res.status(404).json({ error: "Serie no encontrada" });
         }
-
-        if (serieExistente.creador_id !== usuario_id) {
-            return res.status(403).json({ error: 'No tienes permisos para eliminar esta serie.' });
-        }
-
         await serieModelo.eliminarPorId(id);
         res.status(200).json({ mensaje: 'Serie eliminada' });
     } catch (err) {

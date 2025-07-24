@@ -100,15 +100,11 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     const { id } = req.params;
-    const usuario_id = req.body.usuario_id
 
     try {
         const libro = await libroModelo.obtenerPorId(id);
         if (!libro) {
             return res.status(404).json({ error: 'Libro no encontrado' });
-        }
-        if (libro.creador_id !== usuario_id) {
-            return res.status(403).json({ error: 'No tenes permisos para eliminar este libro' });
         }
         await libroModelo.eliminarPorId(id);
         res.status(200).json({ mensaje: 'Libro eliminado' });

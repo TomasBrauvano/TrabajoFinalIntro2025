@@ -100,15 +100,11 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     const { id } = req.params;
-    const usuario_id = req.body.usuario_id
 
     try {
         const pelicula = await peliculaModelo.obtenerPorId(id);
         if (!pelicula) {
             return res.status(404).json({ error: 'Pelicula no encontrada' });
-        }
-        if (pelicula.creador_id !== usuario_id) {
-            return res.status(403).json({ error: 'No tenes permisos para eliminar esta pelicula' });
         }
         await peliculaModelo.eliminarPorId(id);
         res.status(200).json({ mensaje: 'Pelicula eliminada' });
