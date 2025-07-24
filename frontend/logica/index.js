@@ -26,7 +26,12 @@ async function cargarRecomendaciones(usuario_id) {
                 titulo.classList.add("recomendacion-titulo");
                 titulo.textContent = item.nombre;
 
+                const botonAgregar = document.createElement("button");
+                botonAgregar.textContent = "Agregar";
+                botonAgregar.classList.add("boton-agregar");
+
                 tarjeta.appendChild(imagen);
+                tarjeta.appendChild(botonAgregar);
                 tarjeta.appendChild(titulo);
                 contenedor.appendChild(tarjeta);
             });
