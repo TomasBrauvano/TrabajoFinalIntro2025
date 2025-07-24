@@ -303,6 +303,6 @@ textarea:focus {
 .conf-input {
     display: none;
 }
-#div1 , #div2 , #div3 , #div4 {
+#div1 , #div2 , #div3 , #div4, #div5 {
     display: none;
 }

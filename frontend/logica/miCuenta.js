@@ -117,7 +117,7 @@ document.getElementById('cambiar-contrasenia').addEventListener('click', () => {
     actualizarUsuario({ contrasenia: nueva });
 });
 
-document.querySelector('#toggle-eliminar + .conf-input button').addEventListener('click', async () => {
+document.querySelector('#eliminar-cuenta').addEventListener('click', async () => {
     try {
         const res = await fetch(`http://localhost:3000/api/usuarios/${usuario_id}`, {
             method: 'DELETE',
