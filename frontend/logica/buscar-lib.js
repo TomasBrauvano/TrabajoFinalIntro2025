@@ -1,3 +1,4 @@
+const usuario_id = localStorage.getItem("usuario_id");
 document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('input-busqueda');
     const boton = document.querySelector('.boton-busqueda');
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.classList.add('libro-item');
                 div.innerHTML = `
                     <img src="${l.imagen}" alt="${l.nombre}" width="200">
-                    <button class="boton-agregar">Agregar</button>
+                    <button class="boton-agregar-${l.id}">Agregar</button>
                     <h3>${l.nombre}</h3>
                     <p><strong>Año:</strong> ${l.anio}</p>
                     <p><strong>Autor:</strong> ${l.autor}</p>
@@ -33,6 +34,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     <hr>
                 `;
                 mostrador.appendChild(div);
+
+                document.querySelector(`.boton-agregar-${l.id}`).addEventListener("click", async () => {
+
+                    try {
+                        const response = await fetch(`http://localhost:3000/api/usuarios_libros`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                usuario_id: usuario_id,
+                                libro_id: l.id,
+                                calificacion: "",
+                                estado: "1"
+                            })
+                        });
+
+                        if (response.ok) {
+                            alert(`"${l.nombre}" se agrego a tu perfil de libros.`);
+                            location.reload();
+                        } else {
+                            const errorData = await response.json();
+                            alert(`Ya tenes agregado el libro: ${l.nombre}`);
+                        }
+                    } catch (error) {
+                        console.error("Error al enviar la solicitud para agregar:", error);
+                        alert("Ocurrió un error en el servidor.");
+                    }
+                });
             });
 
         } catch (err) {
