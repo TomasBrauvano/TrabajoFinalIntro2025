@@ -1,35 +1,34 @@
 const mostrador = document.querySelector(".mostrador-de-contenido");
 const usuario_id = JSON.parse(localStorage.getItem("usuario_id"));
 
-async function cargarPeliculasDelUsuario() {
+async function cargarSeriesDelUsuario() {
     try {
-        const res = await fetch(`http://localhost:3000/api/usuarios_peliculas/${usuario_id}`);
-        if (!res.ok) throw new Error("Error al obtener películas");
+        const res = await fetch(`http://localhost:3000/api/usuarioSeries/${usuario_id}`);
+        if (!res.ok) throw new Error("Error al obtener series");
 
-        const peliculas = await res.json();
+        const series = await res.json();
 
-        if (peliculas.length === 0) {
+        if (series.length === 0) {
             mostrador.innerHTML = '<p>Todavía no tenés películas agregadas.</p>';
             return;
         }
 
         mostrador.innerHTML = "";
-        for (const p of peliculas) {
-            const resEstado = await fetch(`http://localhost:3000/api/estados/${p.estado}`);
+        for (const s of series) {
+            const resEstado = await fetch(`http://localhost:3000/api/estados/${s.estado}`);
             const estado = await resEstado.json();
-            const esCreador = p.creador_id === usuario_id;
             const div = document.createElement("div");
-            div.classList.add("pelicula-item");
+            div.classList.add("serie-item");
             div.innerHTML = `
             <section id="configuraciones">
-                <label for="toggle-imagen"><img src="${p.imagen}" alt="${p.nombre}" width="200"></label>
-                <label for="toggle-titulo">Título: ${p.nombre}</label>
+                <label for="toggle-imagen"><img src="${s.imagen}" alt="${s.nombre_serie}" width="200"></label>
+                <label for="toggle-titulo">Título: ${s.nombre_serie}</label>
 
-                <label for="toggle-anio">Año: ${p.anio}</label>
+                <label for="toggle-anio">Año: ${s.anio}</label>
 
-                <label for="toggle-sinopsis">Sinopsis: ${p.sinopsis}</label>
+                <label for="toggle-sinopsis">Sinopsis: ${s.sinopsis}</label>
                
-                <label for="toggle-calificacion">Calificación: ${p.calificacion ?? 'Sin calificación'}</label>
+                <label for="toggle-calificacion">Calificación: ${s.calificacion ?? 'Sin calificación'}</label>
                 <input type="checkbox" id="toggle-calificacion">
                 <div class="conf-input">
                     <label for="cambio-calificacion">Nueva Calificación:</label>
@@ -57,23 +56,23 @@ async function cargarPeliculasDelUsuario() {
                 </div>
 
                 <div class="acciones-pelicula">
-                    <button class="btn-eliminar" data-id="${p.id}">Eliminar</button>
+                    <button class="btn-eliminar" data-id="${s.id}">Eliminar</button>
                 </div>
                 
             </section>
             `;
 
-            async function actualizarUsuarioPelicula(cambios) {
+            async function actualizarUsuarioSerie(cambios) {
                 const body = {
                     usuario_id: usuario_id,
-                    pelicula_id: p.id,
-                    calificacion: p.calificacion,
-                    estado: p.estado,
+                    serie_id: s.serie_id,
+                    calificacion: s.calificacion,
+                    estado: s.estado,
                     ...cambios
                 };
 
                 try {
-                    const res = await fetch(`http://localhost:3000/api/usuarios_peliculas`, {
+                    const res = await fetch(`http://localhost:3000/api/usuarioSeries`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(body)
@@ -93,20 +92,20 @@ async function cargarPeliculasDelUsuario() {
             }
 
             div.querySelector(".btn-eliminar").addEventListener("click", async () => {
-                const confirmar = confirm("¿Estás seguro de que querés eliminar esta película?");
+                const confirmar = confirm("¿Estás seguro de que querés eliminar esta serie?");
                 if (!confirmar) return;
 
                 try {
-                    const res = await fetch(`http://localhost:3000/api/usuarios_peliculas`, {
+                    const res = await fetch(`http://localhost:3000/api/usuarioSeries`, {
                         method: "DELETE",
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ usuario_id: usuario_id, pelicula_id: p.id })
+                        body: JSON.stringify({ usuario_id: usuario_id, serie_id: s.id })
                     });
                     if (res.ok) {
-                        alert("Película eliminada correctamente.");
+                        alert("Serie eliminada correctamente.");
                         cargarPeliculasDelUsuario();
                     } else {
-                        alert("Error al eliminar la película.");
+                        alert("Error al eliminar la serie.");
                     }
                 } catch (err) {
                     console.error(err);
@@ -118,19 +117,19 @@ async function cargarPeliculasDelUsuario() {
 
             document.getElementById('cambiar-calificacion').addEventListener('click', () => {
                 const nuevo = document.getElementById('cambio-calificacion').value;
-                actualizarUsuarioPelicula({ calificacion: nuevo });
+                actualizarUsuarioSerie({ calificacion: nuevo });
             });
 
             document.getElementById('cambiar-estado').addEventListener('click', () => {
                 const nuevo = document.getElementById('cambio-estado').value;
-                actualizarUsuarioPelicula({ estado: nuevo });
+                actualizarUsuarioSerie({ estado: nuevo });
             });
 
         }
     } catch (err) {
         console.error(err);
-        mostrador.innerHTML = '<p>Error al cargar tus películas</p>';
+        mostrador.innerHTML = '<p>Error al cargar tus series</p>';
     }
 }
 
-cargarPeliculasDelUsuario();
+cargarSeriesDelUsuario();
