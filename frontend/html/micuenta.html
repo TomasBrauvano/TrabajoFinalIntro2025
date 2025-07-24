@@ -30,55 +30,53 @@
     </header>
 
     <main>
-        <section id="usuario">
-            <h1 id="nombre-apellido">Nombre Apellido</h1>
-            <p id="nombre-usuario">nombre_de_usuario</p>
+        <section id="card-nombre">
+            <h1>¡Hola, <span id="nombre-apellido"></span>!</h1>
+            <p>user: <span id="nombre-de-usuario"></span></p>
         </section>
-
+        <h2 id="titulo-config">Configuraciones:</h2>
         <section id="configuraciones">
-            <h2>Configuraciones:</h2>
-
-            <label for="toggle-nombre">Cambiar Nombre (Actual: <span id="nombre-actual"></span>)</label>
-            <input type="checkbox" id="toggle-nombre">
-            <div class="conf-input">
-                <label for="cambio-nombre">Nombre Nuevo:</label>
-                <input type="text" id="cambio-nombre" name="cambio-nombre">
-                <button id="cambiar-nombre">Cambiar</button>
-            </div>
-
-            <label for="toggle-apellido">Cambiar Apellido (Actual: <span id="apellido-actual"></span>)</label>
-            <input type="checkbox" id="toggle-apellido">
-            <div class="conf-input">
-                <label for="cambio-apellido">Apellido Nuevo:</label>
-                <input type="text" id="cambio-apellido" name="cambio-apellido">
-                <button id="cambiar-apellido">Cambiar</button>
-            </div>
-
-            <label for="toggle-contrasenia">Cambiar Contraseña</label>
-            <input type="checkbox" id="toggle-contrasenia">
-            <div class="conf-input">
-                <label for="cambio-contrasenia">Contraseña Nueva:</label>
-                <input type="password" id="cambio-contrasenia" name="cambio-contrasenia">
-                <label for="cambio-confirmacion-contra">Confirmar Contraseña:</label>
-                <input type="password" id="cambio-confirmacion-contra" name="cambio-confirmacion-contra">
-                <button id="cambiar-contrasenia">Cambiar</button>
-            </div>
-
-            <label for="toggle-categoria">Cambiar Categoría Preferida (Actual: <span
-                    id="categoria-actual"></span>)</label>
-            <input type="checkbox" id="toggle-categoria">
-            <div class="conf-input">
-                <label for="cambio-categoria">Nueva Categoría:</label>
-                <select id="cambio-categoria" name="cambio-categoria"></select>
-                <button id="cambiar-categoria">Cambiar</button>
-            </div>
-
-            <label for="toggle-eliminar">Eliminar Cuenta</label>
-            <input type="checkbox" id="toggle-eliminar">
-            <div class="conf-input">
-                <strong>¿Estás Seguro/a?</strong>
-                <button>Eliminar</button>
-            </div>
+            <h3>Datos de la Cuenta:</h3>
+                <div class="datos-linea">
+                    <label for="nombre-actual">Nombre Actual:</label>
+                    <span id="nombre-actual"></span>
+                    <button class="desplegar-cambio" data-target="div1">Cambiar nombre</button>
+                    <div id="div1">
+                        <label for="cambio-nombre">Nombre nuevo:</label>
+                        <input type="text" id="cambio-nombre" name="cambio-nombre">
+                        <button id="cambiar-nombre">Confirmar</button>
+                    </div>
+                </div>
+                <div class="datos-linea">
+                    <label for="apellido-actual">Apellido Actual:</label>
+                    <span id="apellido-actual"></span>
+                    <button class="desplegar-cambio" data-target="div2">Cambiar apellido</button>
+                    <div id="div2">
+                        <label for="cambio-apellido">Apellido nuevo:</label>
+                        <input type="text" id="cambio-apellido" name="cambio-apellido">
+                        <button id="cambiar-apellido">Confirmar</button>
+                    </div>
+                </div>
+                <div class="datos-linea">
+                    <label for="categoria-actual">Categoria preferida Actual:</label>
+                    <span id="categoria-actual"></span>
+                    <button class="desplegar-cambio" data-target="div3">Cambiar categoria preferida</button>
+                    <div id="div3">
+                        <label for="cambio-categoria">Categoria nueva:</label>
+                        <select id="cambio-categoria" name="cambio-categoria"></select>
+                        <button id="cambiar-categoria">Confirmar</button>
+                    </div>
+                </div>
+                <div class="datos-linea">
+                    <button class="desplegar-cambio" data-target="div4">Cambiar Contraseña</button>
+                    <div id="div4">
+                        <label for="cambio-contrasenia">Contraseña nueva:</label>
+                        <input type="password" id="cambio-contrasenia" name="cambio-contrasenia">
+                        <label for="cambio-confirmacion-contra">Confirmar contraseña nueva:</label>
+                        <input type="password" id="cambio-confirmacion-contra" name="cambio-confirmacion-contra">
+                        <button id="cambiar-contrasenia">Confirmar</button>
+                    </div>
+                </div>
         </section>
     </main>
 
