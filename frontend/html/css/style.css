@@ -26,12 +26,15 @@ nav ul li a {
     font-weight: bold;
     display: block;
 }
-nav ul > li {
+
+nav ul>li {
     float: left;
 }
+
 nav li a:hover {
     background-color: #2E3478;
 }
+
 nav ul li ul {
     display: none;
     position: absolute;
@@ -39,36 +42,33 @@ nav ul li ul {
     background-color: #1F203380;
     outline: 2px solid #1e1e1e;
 }
-nav ul li:hover > ul {
+
+nav ul li:hover>ul {
     display: flex;
     flex-direction: column;
     margin: 0;
     padding: 0;
 }
+
 /* Cuerpo */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    width: 100%;
-    height: 100%;
     background-color: #1e1e1e;
     color: #EEE6FF;
 }
+
 #inicio {
-    display:contents;
+    display: contents;
 }
 
-section {
-    margin-bottom: 20px;
-    border-radius: 10px;
-    margin: 0 auto;
-}
-
-h2, h3 {
+h2,
+h3 {
     color: #EEE6FF;
 }
+
 #titulo-principal {
     font-size: 48px;
 }
@@ -90,14 +90,16 @@ button:hover {
     outline-offset: 2px;
 }
 
-section ul li{
+section ul li {
     color: #EEE6FF
 }
+
 p {
-    color:#EEE6FF;
+    color: #EEE6FF;
     font-size: 20px;
-    font-weight:bold;
+    font-weight: bold;
 }
+
 #bienvenido {
     text-align: center;
     background:
@@ -105,7 +107,6 @@ p {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    width: 100%;
     height: 780px;
     display: flex;
     flex-direction: column;
@@ -119,23 +120,23 @@ input:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
+
 .horizontal {
     display: flex;
     gap: 16px;
-    overflow-x: auto;
-    padding: 20px;
-    scroll-snap-type: x mandatory;
-    background: linear-gradient(to right,#40489c,90%,#1e1e1e);
-    width: 100%
+    flex-wrap: wrap;
+    background: linear-gradient(to right, #40489c, 90%, #1e1e1e);
+    padding: 30px;
 }
+
 .tarjeta {
     min-width: 300px;
     height: auto;
     background-color: #2E3478;
-    color:white;
+    color: white;
     border-radius: 8px;
     flex-shrink: 0;
-    position:relative;
+    position: relative;
 
     display: flex;
     flex-direction: column;
@@ -145,35 +146,41 @@ input:focus {
     transition: transform 0.2s;
     cursor: pointer;
 }
+
 #logo {
     max-width: 250px;
     height: auto;
 }
+
 .mostrador-de-contenido {
     display: flex;
-    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
     max-width: 80%;
-    background: linear-gradient(180deg,#2E3478,70%,#1e1e1e);
+    padding: 20px;
 }
+
 .cuadro-de-ingreso {
     max-width: 600px;
     max-height: fit-content;
     background-color: #1F2033;
     border-radius: 10px;
-    padding: 30px;
-    margin-top: 100px;
+    padding: 20px;
+    margin: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow:#000;
+    box-shadow: #000;
 }
+
 .formulario-ingreso {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
     max-width: 350px;
-    gap:15px;
+    gap: 15px;
 }
 
 label {
@@ -183,35 +190,39 @@ label {
     font-size: 18px;
     font-weight: bold;
 }
+
 main {
     border-radius: 5px;
     padding: 0;
-    margin-left: 20px;
-    display: flex;
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
 }
+
 form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap:10px;
+    gap: 10px;
 }
+
 #main-de-busqueda {
     display: block;
 }
+
 .barra-busqueda form {
     padding: 20px;
     display: flex;
     flex-direction: row;
 }
+
 .barra-busqueda form button {
     margin-left: 10px;
     margin-bottom: 3px;
 }
+
 #configuraciones {
-    background: linear-gradient(180deg,#2E3478,#1e1e1e);
+    background: linear-gradient(180deg, #2E3478, #1e1e1e);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -219,37 +230,45 @@ form {
     margin-top: 5px;
     margin-left: 20px;
 }
-#configuraciones > * , #configuraciones1 > *{
+
+#configuraciones>*,
+#configuraciones1>* {
     margin-left: 20px;
     margin-bottom: 10px;
 }
-#configuraciones > * > * , #configuraciones1 > * > * {
+
+#configuraciones>*>*,
+#configuraciones1>*>* {
     margin-right: 10px;
 }
-#configuraciones > * > button, #configuraciones1 > * > button {
+
+#configuraciones>*>button,
+#configuraciones1>*>button {
     border: 4px solid #1e1e1e;
 }
+
 #usuario {
     background-color: #2E3478;
     border-radius: 100px;
     padding: 20px;
     margin: 20px auto;
 }
-#horizontal-1{
+
+#horizontal-1 {
     display: flex;
     justify-content: center;
     gap: 20px;
-    flex-wrap: wrap;
-    padding: 20px 0;
 }
-.tarjeta .recomendacion-imagen{
+
+.tarjeta .recomendacion-imagen {
     width: 100%;
-    height: 320px;
+    height: 430px;
     object-fit: cover;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
-.tarjeta .recomendacion-titulo{
+
+.tarjeta .recomendacion-titulo {
     text-align: center;
     font-size: 1rem;
     margin: 10px 0;
@@ -259,6 +278,7 @@ form {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .boton-agregar {
     position: absolute;
     top: 10px;
@@ -272,19 +292,29 @@ form {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
+
 .tarjeta:hover .boton-agregar {
     opacity: 1;
 }
-.tarjeta:hover{
+
+.tarjeta:hover {
     transform: scale(1.05);
 }
-.serie-item , .pelicula-item , .libro-item {
+
+.serie-item,
+.pelicula-item,
+.libro-item {
     position: relative;
 }
-.serie-item:hover .boton-agregar, .pelicula-item:hover .boton-agregar, .libro-item:hover .boton-agregar {
+
+.serie-item:hover .boton-agregar,
+.pelicula-item:hover .boton-agregar,
+.libro-item:hover .boton-agregar {
     opacity: 1;
 }
-input, select {
+
+input,
+select {
     flex: 1;
     padding: 10px;
     border: 2px solid #2E3478;
@@ -295,12 +325,14 @@ input, select {
     background-color: #EEE6FF;
     width: 200px;
 }
-.cuadro-de-ingreso > form > * {
+
+.cuadro-de-ingreso>form>* {
     display: flex;
     align-items: center;
     margin-right: 100px;
     margin-left: 100px;
 }
+
 textarea {
     width: 200px;
     height: 100px;
@@ -310,9 +342,11 @@ textarea {
     font-size: 1rem;
     border-radius: 5px;
 }
+
 textarea:focus {
     outline: #1e1e1e;
 }
+
 #titulo-config {
     cursor: pointer;
     background-color: #2E3478;
@@ -320,34 +354,123 @@ textarea:focus {
     border-radius: 5px;
     margin-left: 20px;
 }
+
 #titulo-config:hover {
     color: #EEE6FF;
 }
 
-#div1 , #div2 , #div3 , #div4, #div5 {
+#div1,
+#div2,
+#div3,
+#div4,
+#div5 {
     display: none;
 }
+
 #configuraciones1 {
     display: none;
-    background: linear-gradient(180deg,#2E3478,#1e1e1e);
+    background: linear-gradient(180deg, #2E3478, #1e1e1e);
     flex-direction: column;
     align-items: flex-start;
     width: 1000px;
     margin-top: 5px;
     margin-left: 20px;
 }
+
 input[type="checkbox"] {
     height: 20px;
     width: 20px;
     background-color: #EEE6FF;
     color: #1F2033;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .conf-input {
     display: none;
 }
 
-input[type="checkbox"]:checked + .conf-input {
+input[type="checkbox"]:checked+.conf-input {
     display: block;
+}
+
+.lista-de-contenido {
+    justify-items: center;
+}
+
+.pelicula-item {
+    min-width: 300px;
+    height: auto;
+    background-color: #2E3478;
+    color: white;
+    border-radius: 8px;
+    flex-shrink: 0;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.btn-desagregar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #838383;
+    color: #1F2033;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.pelicula-item:hover .btn-desagregar {
+    opacity: 1;
+}
+
+
+.pelicula-item:hover .boton-agregar {
+    opacity: 1;
+}
+
+.pelicula-item img {
+    width: 300px;
+    height: 430px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.pelicula-item h3 {
+    text-align: center;
+    font-size: 1rem;
+    margin: 10px 0;
+    padding: 0 5px;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pelicula-item:hover {
+    transform: scale(1.05);
+}
+
+.contenedor-cuadro-de-ingreso {
+    display: flex;
+    align-items: center;
+}
+
+.ingreso-cuenta {
+    display: flex;
+    align-items: center;
+}
+
+.cuadro-de-ingreso form {
+    align-items: center;
 }
