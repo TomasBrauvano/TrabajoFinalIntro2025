@@ -7,19 +7,19 @@ Una página web en la que se puede crear una lista de películas, series o libro
 
 ## Si todavia no estan construidos los contenedores, se puede usar
 ```
-docker-compose up -d --build
+docker-compose up --build
 ```
 ## Si ya estan construidos, simplemente
 ```
-docker-compose up -d
+docker-compose up
 ```
 ## Cómo levantar el backend
 ```
-docker-compose up -d backend
+docker-compose up backend
 ```
 ## Cómo levantar el frontend
 ```
-docker-compose up -d frontend
+docker-compose up frontend
 ```
 ## Frontend
 El frontend incluye las paginas Login, Register, Inicio, MiPerfil, Peliculas, Series, Libros, Buscar peliculas, Buscar Libros, Buscar series y Crear.
