@@ -28,18 +28,6 @@ CREATE TABLE IF NOT EXISTS peliculas (
     categoria INT REFERENCES categorias(id) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS resenias (
-    titulo VARCHAR(50) NOT NULL,
-    texto TEXT NOT NULL,
-    fecha DATE NOT NULL DEFAULT CURRENT_DATE,
-    calificacion INT NOT NULL,
-    likes INT NOT NULL DEFAULT 0,
-    dislikes INT NOT NULL DEFAULT 0,
-    usuario_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
-    pelicula_id INT NOT NULL REFERENCES peliculas(id) ON DELETE CASCADE,
-    PRIMARY KEY (usuario_id, pelicula_id)
-);
-
 CREATE TABLE IF NOT EXISTS usuario_pelicula (
     usuario_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
     pelicula_id INT NOT NULL REFERENCES peliculas(id) ON DELETE CASCADE,
