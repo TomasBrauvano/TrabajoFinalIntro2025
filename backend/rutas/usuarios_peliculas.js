@@ -17,6 +17,25 @@ router.get('/:usuario_id', async (req, res) => {
     }
 })
 
+router.get('/:usuario_id/:pelicula_id', async (req, res) => {
+    const { usuario_id, pelicula_id } = req.params;
+
+    if (!usuario_id || !pelicula_id) {
+        return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    try {
+        const pelicula = await usuarioPeliculaModelo.obtenerPorIds(usuario_id, pelicula_id);
+        if (!pelicula) {
+            return res.status(404).json({ error: 'No existe la relacion' })
+        }
+        res.status(200).json(pelicula);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 router.post('/', async (req, res) => {
     const { usuario_id, pelicula_id, calificacion, estado } = req.body;
 
