@@ -10,6 +10,7 @@ async function cargarRecomendaciones(usuario_id) {
         if (data.length > 0) {
             data.forEach((pelicula) => recomendaciones.push(pelicula))
         }
+        console.log(recomendaciones)
 
         if (recomendaciones.length > 0) {
             recomendaciones.forEach(pelicula => {

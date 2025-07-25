@@ -7,7 +7,6 @@ router.get("/:usuario_id", async (req, res) => {
 
     try {
         const peliculas = await peliculaModelo.obtenerRecomendaciones(usuario_id);
-        console.log(peliculas)
         res.status(200).json(peliculas);
     } catch (err) {
         console.error(err);
