@@ -15,33 +15,18 @@
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="peliculas.html">Películas</a></li>
-                <li><a href="series.html">Series</a></li>
-                <li><a href="libros.html">Libros</a></li>
                 <li><a href="micuenta.html">Mi Perfil</a></li>
-                <li><a href="">Buscar</a>
-                    <ul>
-                        <li><a href="buscar-pelis.html">Buscar Películas</a></li>
-                        <li><a href="buscar-ser.html">Buscar Series</a></li>
-                        <li><a href="buscar-lib.html">Buscar Libros</a></li>
-                    </ul>
+                <li><a href="buscar-pelis.html">Buscar</a>
                 </li>
             </ul>
         </nav>
     </header>
     <main>
         <section class="cuadro-de-ingreso">
-            <h2>Acá podés crear tus películas/series/libros para agregarlos a tu lista</h2>
+            <h2>Acá podés crear películas para agregarlas a tu lista</h2>
             <form action="" method="POST">
                 <div class="creacion-div">
-                    <label for="tipo-de-contenido">Qué querés crear?</label>
-                    <select id="tipo-de-contenido" name="tipo-de-contenido">
-                        <option value="pelicula">Película</option>
-                        <option value="serie">Serie</option>
-                        <option value="libro">Libro</option>
-                    </select>
-                </div>
-                <div class="creacion-div">
-                    <label for="titulo">Título de la obra:</label>
+                    <label for="titulo">Título de la pelicula:</label>
                     <input type="text" id="titulo" name="titulo" required>
                 </div>
                 <div class="creacion-div">
@@ -49,8 +34,8 @@
                     <input type="number" id="anio" name="anio" required>
                 </div>
                 <div class="creacion-div">
-                    <label for="director-autor">Director/Autor:</label>
-                    <input type="text" id="director-autor" name="director-autor" required>
+                    <label for="director">Director:</label>
+                    <input type="text" id="director-" name="director" required>
                 </div>
                 <div class="creacion-div">
                     <label for="sinopsis">Sinopsis:</label>

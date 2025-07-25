@@ -7,72 +7,55 @@ async function cargarRecomendaciones(usuario_id) {
         contenedor.innerHTML = "";
 
         const recomendaciones = [];
-
-        if (data.pelicula) recomendaciones.push({ ...data.pelicula, tipo: 'Pelicula' });
-        if (data.serie) recomendaciones.push({ ...data.serie, tipo: 'Serie' });
-        if (data.libro) recomendaciones.push({ ...data.libro, tipo: 'Libro' });
+        if (data.length > 0) {
+            data.forEach((pelicula) => recomendaciones.push(pelicula))
+        }
+        console.log(recomendaciones)
 
         if (recomendaciones.length > 0) {
-            recomendaciones.forEach(item => {
+            recomendaciones.forEach(pelicula => {
                 const tarjeta = document.createElement("div");
-                tarjeta.classList.add("tarjeta");
+                tarjeta.classList.add(`tarjeta`);
+                tarjeta.id = pelicula.id
 
                 const imagen = document.createElement("img");
-                imagen.src = item.imagen;
-                imagen.alt = item.nombre;
+                imagen.src = pelicula.imagen;
+                imagen.alt = pelicula.nombre;
                 imagen.classList.add("recomendacion-imagen");
 
                 const titulo = document.createElement("p");
                 titulo.classList.add("recomendacion-titulo");
-                titulo.textContent = item.nombre;
+                titulo.textContent = pelicula.nombre;
 
                 const botonAgregar = document.createElement("button");
                 botonAgregar.textContent = "Agregar";
                 botonAgregar.classList.add("boton-agregar");
 
                 botonAgregar.addEventListener("click", async () => {
-                    const itemId = item.id;
-                    const itemTipo = item.tipo;
-
-                    let endpoint = '';
-                    switch (itemTipo) {
-                        case 'Pelicula':
-                            endpoint = 'api/usuarios_peliculas';
-                            break;
-                        case 'Serie':
-                            endpoint = 'api/usuarioSeries';
-                            break;
-                        case 'Libro':
-                            endpoint = 'api/usuarios_libros';
-                            break;
-                        default:
-                            console.error("Tipo de recomendación desconocido:", itemTipo);
-                            alert("No se pudo agregar la recomendación: tipo desconocido.");
-                            return;
-                    }
+                    const pelicula_id = pelicula.id;
 
                     try {
-                        const response = await fetch(`http://localhost:3000/${endpoint}`, {
+                        const response = await fetch(`http://localhost:3000/api/usuarios_peliculas`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({
-                                usuario_id: usuario_id,
-                                [`${itemTipo.toLowerCase()}_id`]: itemId,
+                                usuario_id,
+                                pelicula_id,
                                 calificacion: "",
                                 estado: "1"
                             })
                         });
 
                         if (response.ok) {
-                            alert(`"${item.nombre}" se agrego a tu perfil de ${itemTipo}s.`);
+                            alert(`"${pelicula.nombre}" se agrego a tu perfil de peliculas.`);
                             location.reload();
                             botonAgregar.textContent = "Agregado";
                             botonAgregar.disabled = true;
                         } else {
                             const errorData = await response.json();
-                            alert(`Error al agregar "${item.nombre}": ${errorData.message || response.statusText}`);
+                            alert(`Error al agregar "${pelicula.nombre}": ${errorData.message || response.statusText}`);
                         }
                     } catch (error) {
                         console.error("Error al enviar la solicitud para agregar:", error);
