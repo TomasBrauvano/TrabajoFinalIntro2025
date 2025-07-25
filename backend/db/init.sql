@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS plataformas (
 	pagina_url TEXT NOT NULL,
 	ceo VARCHAR(50) NOT NULL,
 	disponibilidad_mundial BOOLEAN NOT NULL,
+    creador_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS usuario_pelicula (
