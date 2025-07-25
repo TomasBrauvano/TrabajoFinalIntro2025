@@ -91,6 +91,6 @@ INSERT INTO peliculas (nombre, anio, director, sinopsis, imagen, creador_id, cat
 ('El Dictador', 2012, 'Larry Charles', 'Un dictador excéntrico visita Estados Unidos y vive situaciones ridículas.', 'https://m.media-amazon.com/images/S/pv-target-images/95df6af83a949c53078666663510af758a2423e5567f275a3dbd63f166a9ae16.jpg', 1, 7),
 ('Buenos Presagios', 1990, 'Terry Pratchett y Neil Gaiman', 'Un ángel y un demonio intentan evitar el Apocalipsis.', 'https://images.cdn2.buscalibre.com/fit-in/520x520/0d/c6/0dc6942c3cf441bca1769def52320170.jpg', 1, 7),
 ('The Office', 2005, 'Greg Daniels', 'Documental ficticio sobre una oficina de ventas de papel.', 'https://es.web.img3.acsta.net/pictures/14/02/04/13/20/128334.jpg', 1, 7),
-('Misión Imposible', 1996, 'Brian De Palma', 'Un agente secreto es acusado injustamente y debe limpiar su nombre.', 'https://pics.filmaffinity.com/Misiaon_imposible-107188957-large.jpg', 1, 8);
-('Los Juegos del Hambre', 2008, 'Suzanne Collins', 'Una joven lucha por sobrevivir en un juego mortal.', 'https://images.cdn3.buscalibre.com/fit-in/360x360/12/d4/12d48178474f8ab70263bafa6aed8931.jpg', 1, 8);
+('Misión Imposible', 1996, 'Brian De Palma', 'Un agente secreto es acusado injustamente y debe limpiar su nombre.', 'https://es.web.img2.acsta.net/pictures/14/02/24/11/10/117666.jpg', 1, 8),
+('Los Juegos del Hambre', 2008, 'Suzanne Collins', 'Una joven lucha por sobrevivir en un juego mortal.', 'https://images.cdn3.buscalibre.com/fit-in/360x360/12/d4/12d48178474f8ab70263bafa6aed8931.jpg', 1, 8),
 ('Jack Ryan', 2018, 'Carlton Cuse', 'Un analista de la CIA se ve envuelto en operaciones de alto riesgo.', 'https://m.media-amazon.com/images/M/MV5BNGYxNzgzNTQtY2U0OC00NzU2LTgxZmYtNmZkMmVlMjgyMzM3XkEyXkFqcGc@._V1_.jpg', 1, 8);
