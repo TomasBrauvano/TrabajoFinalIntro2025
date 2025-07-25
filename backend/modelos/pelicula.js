@@ -55,15 +55,15 @@ async function eliminarPorId(id) {
     }
 }
 
-async function obtenerRecomendacionAleatoria(usuario_id) {
+async function obtenerRecomendaciones(usuario_id) {
     try {
         const resultado = await pool.query(
-            'SELECT p.* FROM peliculas p JOIN usuarios u ON p.categoria = u.categoria_preferida WHERE u.id = $1 AND p.id NOT IN ( SELECT pelicula_id FROM usuario_pelicula WHERE usuario_id = $1 ) ORDER BY RANDOM() LIMIT 1;',
+            'SELECT p.* FROM peliculas p JOIN usuarios u ON p.categoria = u.categoria_preferida WHERE u.id = $1 AND p.id NOT IN ( SELECT pelicula_id FROM usuario_pelicula WHERE usuario_id = $1 );',
             [usuario_id]
         );
-        return resultado.rows[0];
+        return resultado.rows;
     } catch (error) {
-        console.error("Error al obtener película aleatoria por categoría:", error);
+        console.error("Error al obtener película", error);
         throw error;
     }
 }
@@ -73,4 +73,4 @@ async function obtenerPorNombre(nombre) {
     return res.rows;
 }
 
-module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodas, crear, actualizar, eliminarPorId, obtenerPorCreador, obtenerRecomendacionAleatoria, obtenerPorNombre };
+module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodas, crear, actualizar, eliminarPorId, obtenerPorCreador, obtenerRecomendaciones, obtenerPorNombre };
