@@ -28,12 +28,29 @@ CREATE TABLE IF NOT EXISTS peliculas (
     categoria INT REFERENCES categorias(id) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS plataformas (
+	id SERIAL PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	logo_url TEXT NOT NULL,
+	costo_mensual NUMERIC(10,2) NOT NULL,
+	pagina_url TEXT NOT NULL,
+	ceo VARCHAR(50) NOT NULL,
+	disponibilidad_mundial BOOLEAN NOT NULL,
+);
+
 CREATE TABLE IF NOT EXISTS usuario_pelicula (
     usuario_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
     pelicula_id INT NOT NULL REFERENCES peliculas(id) ON DELETE CASCADE,
     calificacion INT,
     estado INT NOT NULL DEFAULT 1 REFERENCES estados(id),
     PRIMARY KEY (usuario_id, pelicula_id)
+);
+
+CREATE TABLE IF NOT EXISTS pelicula_plataforma (
+	pelicula_id INT NOT NULL REFERENCES peliculas(id) ON DELETE CASCADE,
+	plataforma_id INT NOT NULL REFERENCES plataformas(id) ON DELETE CASCADE,
+	calif_general INT,
+	PRIMARY KEY (pelicula_id, plataforma_id)
 );
 
 INSERT INTO categorias (nombre) VALUES 
