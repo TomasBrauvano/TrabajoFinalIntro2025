@@ -497,6 +497,10 @@ main.container-cuadro-de-ingreso {
     transition: transform 0.2s;
 }
 
+.container-pelicula:hover {
+    transform: scale(1.05);
+}
+
 .container-info {
     width: 400px;
     display: flex;
@@ -509,4 +513,46 @@ main.container-cuadro-de-ingreso {
     height: 430px;
     object-fit: cover;
     border-radius: 8px 0px 0px 8px;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.boton-actualizar {
+    margin-top: 30px;
+    right: 10px;
+    background-color: #838383;
+    color: #1F2033;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    align-self: baseline;
+}
+
+.boton-eliminar {
+    margin-bottom: 30px;
+    right: 10px;
+    background-color: #838383;
+    color: #1F2033;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    align-self: baseline;
+}
+
+.container-pelicula:hover .boton-actualizar {
+    opacity: 1;
+}
+
+.container-pelicula:hover .boton-eliminar {
+    opacity: 1;
 }
