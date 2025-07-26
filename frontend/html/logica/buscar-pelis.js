@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             for (const p of peliculas) {
                 const div = document.createElement('div');
+                div.addEventListener("click", () => {
+                    window.location.href = `pelicula.html?id=${p.id}`
+                })
                 let noAgregada = true;
                 const pRes = await fetch(`http://localhost:3000/api/usuarios_peliculas/${usuario_id}/${p.id}`);
                 if (pRes.ok) {
@@ -38,7 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 mostrador.appendChild(div);
 
                 if (noAgregada) {
-                    document.querySelector(`.boton-agregar`).addEventListener("click", async () => {
+                    document.querySelector(`.boton-agregar`).addEventListener("click", async (event) => {
+                        event.stopPropagation();
 
                         try {
                             const response = await fetch(`http://localhost:3000/api/usuarios_peliculas`, {
