@@ -78,6 +78,7 @@ document.getElementById("titulo-config").addEventListener("click", function() {
   } else {
     section.style.display = "none";
   }
+});
 
 document.querySelectorAll(".desplegar-cambio").forEach(button => {
     button.addEventListener("click", function () {
