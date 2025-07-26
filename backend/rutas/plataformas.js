@@ -55,13 +55,28 @@ router.post("/", async (req, res) => {
     if (costo_mensual < 0) {
         return res.status(400).json({ error: 'El costo mensual no puede ser negativo' });
     }
+    const costoRegex = /^[0-9]{1,10}\.[0-9]{2}$/;
 
-    if (disponible_en_argentina = null) {
+    if (!costoRegex.test(costo_mensual)) {
+        return res.status(400).json({ error: 'El formato de costo mensual es inválido'})
+    }
+
+    if (!isAlpha(ceo)) {
+        return res.status(400).json({ error: 'El CEO solo puede contener letras'})
+    }
+
+    const urlRegex = /^https?:\/\/[^\s/$.?#].[^\s]*$/
+
+    if (!urlRegex.test(logo_url) || !urlRegex.test(pagina_url)) {
+        return res.status(400).json({ error: 'el formato de la url es inválido'})
+    }
+
+    if (!(disponible_en_argentina = true) && !(disponible_en_argentina = false)) {
         return res.status(400).json({ error: 'Disponible en Argentina si o no?' });
     }
 
     try {
-        const plataforma = await plataformaModelo.crear(creador_id, { nombre, logo_url, costo_mensual, pagina_url, ceo, disponible_en_argentina });
+        await plataformaModelo.crear(creador_id, { nombre, logo_url, costo_mensual, pagina_url, ceo, disponible_en_argentina });
         res.status(201).json({ mensaje: 'Plataforma creada' });
     } catch (err) {
         console.error(err);
@@ -75,6 +90,29 @@ router.put("/:id", async (req, res) => {
 
     if (!nombre || !logo_url || !costo_mensual || !pagina_url || !ceo || !disponible_en_argentina || !creador_id) {
         return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    if (costo_mensual < 0) {
+        return res.status(400).json({ error: 'El costo mensual no puede ser negativo' });
+    }
+    const costoRegex = /^[0-9]{1,10}\.[0-9]{2}$/;
+
+    if (!costoRegex.test(costo_mensual)) {
+        return res.status(400).json({ error: 'El formato de costo mensual es inválido'})
+    }
+
+    if (!isAlpha(ceo)) {
+        return res.status(400).json({ error: 'El CEO solo puede contener letras'})
+    }
+
+    const urlRegex = /^https?:\/\/[^\s/$.?#].[^\s]*$/
+
+    if (!urlRegex.test(logo_url) || !urlRegex.test(pagina_url)) {
+        return res.status(400).json({ error: 'el formato de la url es inválido'})
+    }
+
+    if (!(disponible_en_argentina = true) && !(disponible_en_argentina = false)) {
+        return res.status(400).json({ error: 'Disponible en Argentina si o no?' });
     }
 
     try {
