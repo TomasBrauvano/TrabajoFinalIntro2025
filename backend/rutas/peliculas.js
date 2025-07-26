@@ -30,6 +30,11 @@ router.get("/creadores/:creador_id", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     const { id } = req.params;
+
+    if (!Number.isInteger(parseFloat(id))) {
+        return res.status(400).json({ error: 'El id tiene que ser un numero entero mayor a 0' });
+    }
+
     try {
         const pelicula = await peliculaModelo.obtenerPorId(id);
         if (!pelicula) {
@@ -112,6 +117,10 @@ router.put("/:id", async (req, res) => {
 
     if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria) {
         return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    if (!Number.isInteger(parseFloat(id))) {
+        return res.status(400).json({ error: 'El id tiene que ser un numero entero mayor a 0' });
     }
 
     if (!(Number.isInteger(parseFloat(anio)) && parseInt(anio) >= 1888 && parseInt(anio) <= añoActual)) {
