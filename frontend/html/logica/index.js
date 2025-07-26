@@ -10,12 +10,17 @@ async function cargarRecomendaciones(usuario_id) {
         if (data.length > 0) {
             data.forEach((pelicula) => recomendaciones.push(pelicula))
         }
+        console.log(recomendaciones)
 
         if (recomendaciones.length > 0) {
             recomendaciones.forEach(pelicula => {
                 const tarjeta = document.createElement("div");
                 tarjeta.classList.add(`tarjeta`);
                 tarjeta.id = pelicula.id
+
+                tarjeta.addEventListener("click", () => {
+                    window.location.href = `pelicula.html?id=${pelicula.id}`
+                })
 
                 const imagen = document.createElement("img");
                 imagen.src = pelicula.imagen;
@@ -30,7 +35,8 @@ async function cargarRecomendaciones(usuario_id) {
                 botonAgregar.textContent = "Agregar";
                 botonAgregar.classList.add("boton-agregar");
 
-                botonAgregar.addEventListener("click", async () => {
+                botonAgregar.addEventListener("click", async (event) => {
+                    event.stopPropagation();
                     const pelicula_id = pelicula.id;
 
                     try {
@@ -50,8 +56,6 @@ async function cargarRecomendaciones(usuario_id) {
                         if (response.ok) {
                             alert(`"${pelicula.nombre}" se agrego a tu perfil de peliculas.`);
                             location.reload();
-                            botonAgregar.textContent = "Agregado";
-                            botonAgregar.disabled = true;
                         } else {
                             const errorData = await response.json();
                             alert(`Error al agregar "${pelicula.nombre}": ${errorData.message || response.statusText}`);

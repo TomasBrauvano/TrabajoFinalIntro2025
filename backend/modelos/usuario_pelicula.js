@@ -7,6 +7,13 @@ async function obtenerPeliculasPorIdUsuario(usuario_id) {
     return res.rows;
 }
 
+async function obtenerPorIds(usuario_id, pelicula_id) {
+    const res = await pool.query(
+        'SELECT * FROM usuario_pelicula up WHERE up.usuario_id = $1 AND up.pelicula_id = $2',
+        [usuario_id, pelicula_id]);
+    return res.rows[0];
+}
+
 async function agregar(usuario_id, pelicula_id, calificacion, estado) {
     let res;
     if (calificacion) {
@@ -43,4 +50,4 @@ async function eliminar(usuario_id, pelicula_id) {
     return res.rows[0];
 }
 
-module.exports = { obtenerPeliculasPorIdUsuario, agregar, actualizar, eliminar };
+module.exports = { obtenerPeliculasPorIdUsuario, agregar, actualizar, eliminar, obtenerPorIds };

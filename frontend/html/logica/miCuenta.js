@@ -46,7 +46,6 @@ async function actualizarUsuario(cambios) {
         apellido: usuario.apellido,
         contrasenia: usuario.contrasenia,
         categoria_preferida: usuario.categoria_preferida,
-        usuario_id: usuario_id,
         ...cambios
     };
 
@@ -70,9 +69,11 @@ async function actualizarUsuario(cambios) {
     }
 }
 
+
 document.getElementById("titulo-config").addEventListener("click", function() {
   let section = document.getElementById("configuraciones1");
-  if (section.style.display === "none") {
+  const estiloActual = window.getComputedStyle(section);
+  if (estiloActual.display === "none") {
     section.style.display = "flex";
   } else {
     section.style.display = "none";
@@ -80,14 +81,10 @@ document.getElementById("titulo-config").addEventListener("click", function() {
 });
 
 document.querySelectorAll(".desplegar-cambio").forEach(button => {
-    button.addEventListener("click", function(){
+    button.addEventListener("click", function () {
         let targetId = this.getAttribute("data-target");
         let div = document.getElementById(targetId);
-        if (div.style.display === "none") {
-            div.style.display = "block";
-        } else {
-            div.style.display = "none";
-        }
+        div.classList.toggle("hidden-content");
     });
 });
 
@@ -120,9 +117,7 @@ document.getElementById('cambiar-contrasenia').addEventListener('click', () => {
 document.querySelector('#eliminar-cuenta').addEventListener('click', async () => {
     try {
         const res = await fetch(`http://localhost:3000/api/usuarios/${usuario_id}`, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ usuario_id: usuario_id })
+            method: 'DELETE'
         });
 
         const data = await res.json();

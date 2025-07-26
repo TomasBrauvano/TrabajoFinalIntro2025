@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const usuarioModelo = require('../modelos/usuario');
+function isAlpha(str) {
+    return /^[a-zA-Z]*$/.test(str);
+}
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
@@ -24,12 +27,21 @@ router.post('/register', async (req, res) => {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
+    if (!isAlpha(nombre)) {
+        return res.status(400).json({ error: 'El campo nombre solo puede contener letras' });
+    }
+    if (!isAlpha(apellido)) {
+        return res.status(400).json({ error: 'El campo apellido solo puede contener letras' });
+    }
+    if (!(categoria_preferida >= 1 && categoria_preferida <= 8 && Number.isInteger(parseFloat(categoria_preferida)))) {
+        return res.status(400).json({ error: 'El campo categoria preferida solo puede contener un numero entero del 1 al 8' });
+    }
+
     try {
         const usuario = await usuarioModelo.obtenerPorNombreUsuario(nombre_usuario);
         if (usuario) {
             return res.status(409).json({ error: 'El nombre de usuario ya esta en uso' });
         }
-
         await usuarioModelo.crear({ nombre_usuario, nombre, apellido, contrasenia, categoria_preferida });
         res.status(201).json({ mensaje: 'Usuario creado' });
     } catch (err) {
@@ -40,10 +52,20 @@ router.post('/register', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { nombre_usuario, nombre, apellido, contrasenia, categoria_preferida, usuario_id } = req.body;
+    const { nombre_usuario, nombre, apellido, contrasenia, categoria_preferida } = req.body;
 
     if (!nombre_usuario || !nombre || !apellido || !contrasenia || !categoria_preferida) {
         return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    if (!isAlpha(nombre)) {
+        return res.status(400).json({ error: 'El campo nombre solo puede contener letras' });
+    }
+    if (!isAlpha(apellido)) {
+        return res.status(400).json({ error: 'El campo apellido solo puede contener letras' });
+    }
+    if (!(categoria_preferida >= 1 && categoria_preferida <= 8 && Number.isInteger(parseFloat(categoria_preferida)))) {
+        return res.status(400).json({ error: 'El campo categoria preferida solo puede contener un numero entero del 1 al 8' });
     }
 
     try {
@@ -51,10 +73,7 @@ router.put('/:id', async (req, res) => {
         if (!usuario) {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
-        if (parseInt(id, 10) !== usuario_id) {
-            return res.status(403).json({ error: 'No tenes permisos para actualizar a este usuario' });
-        }
-        const usuarioActualizado = await usuarioModelo.actualizar(id, { nombre_usuario, nombre, apellido, contrasenia, categoria_preferida });
+        await usuarioModelo.actualizar(id, { nombre_usuario, nombre, apellido, contrasenia, categoria_preferida });
         res.status(201).json({ mensaje: 'Usuario actualizado' });
     } catch (err) {
         console.error(err);
@@ -65,15 +84,11 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
-    const usuario_id = req.body.usuario_id;
 
     try {
         const usuario = await usuarioModelo.obtenerPorId(id);
         if (!usuario) {
             return res.status(404).json({ error: 'Usuario no encontrado' });
-        }
-        if (parseInt(id, 10) !== usuario_id) {
-            return res.status(403).json({ error: 'No tenes permisos para eliminar a este usuario' });
         }
         await usuarioModelo.eliminarPorId(id);
         res.status(200).json({ mensaje: 'Usuario eliminado' });
