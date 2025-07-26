@@ -359,11 +359,7 @@ textarea:focus {
     color: #EEE6FF;
 }
 
-#div1,
-#div2,
-#div3,
-#div4,
-#div5 {
+.hidden-content {
     display: none;
 }
 

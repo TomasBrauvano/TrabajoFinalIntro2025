@@ -72,7 +72,8 @@ async function actualizarUsuario(cambios) {
 
 document.getElementById("titulo-config").addEventListener("click", function() {
   let section = document.getElementById("configuraciones1");
-  if (section.style.display === "none") {
+  const estiloActual = window.getComputedStyle(section);
+  if (estiloActual.display === "none") {
     section.style.display = "flex";
   } else {
     section.style.display = "none";
@@ -83,11 +84,7 @@ document.querySelectorAll(".desplegar-cambio").forEach(button => {
     button.addEventListener("click", function(){
         let targetId = this.getAttribute("data-target");
         let div = document.getElementById(targetId);
-        if (div.style.display === "none") {
-            div.style.display = "block";
-        } else {
-            div.style.display = "none";
-        }
+        div.classList.toggle("hidden-content");
     });
 });
 
