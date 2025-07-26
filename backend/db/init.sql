@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS usuario_pelicula (
 CREATE TABLE IF NOT EXISTS pelicula_plataforma (
 	pelicula_id INT NOT NULL REFERENCES peliculas(id) ON DELETE CASCADE,
 	plataforma_id INT NOT NULL REFERENCES plataformas(id) ON DELETE CASCADE,
-	calif_general INT,
+	calif_general NUMERIC(2,2),
 	PRIMARY KEY (pelicula_id, plataforma_id)
 );
 

@@ -40,6 +40,12 @@ router.put('/', async (req, res) => {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
+    const califGenRegex = /^(10|[0-9])\.[0-9]{2}$/;
+
+    if (!califGenRegex.test(calif_general)) {
+        return res.status(400).json({ error: 'Calificacion general en formato inválido'})
+    }
+
     try {
         const relacionActualizada = await peliculaPlataformaModelo.actualizar(pelicula_id, plataforma_id, calif_general);
         if (!relacionActualizada) {
