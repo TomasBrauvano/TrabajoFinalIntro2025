@@ -461,7 +461,7 @@ input[type="checkbox"]:checked+.conf-input {
     transform: scale(1.05);
 }
 
-.contenedor-cuadro-de-ingreso {
+main.container-cuadro-de-ingreso {
     display: flex;
     align-items: center;
 }
