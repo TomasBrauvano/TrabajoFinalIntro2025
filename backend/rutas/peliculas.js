@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const peliculaModelo = require('../modelos/pelicula');
 const usuarioPeliculaModelo = require('../modelos/usuario_pelicula');
+const añoActual = new Date().getFullYear();
+function isAlpha(str) {
+    return /^[a-zA-Z ]+$/.test(str);
+}
 
 router.get("/", async (req, res) => {
     try {
@@ -67,6 +71,28 @@ router.post("/", async (req, res) => {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
+    if (!(Number.isInteger(parseFloat(anio)) && parseInt(anio) >= 1888 && parseInt(anio) <= añoActual)) {
+        return res.status(400).json({ error: `El campo año solo puede contener un numero entero del 1888 al ${añoActual}` });
+    }
+
+    if (!isAlpha(director)) {
+        return res.status(400).json({ error: 'El campo director solo puede contener letras' });
+    }
+
+    if (!(categoria >= 1 && categoria <= 8 && Number.isInteger(parseFloat(categoria)))) {
+        return res.status(400).json({ error: 'El campo categoria preferida solo puede contener un numero entero del 1 al 8' });
+    }
+
+    if (calificacion) {
+        if (!(calificacion >= 1 && calificacion <= 5 && Number.isInteger(parseFloat(calificacion)))) {
+            return res.status(400).json({ error: 'El campo calificacion solo puede contener un numero entero del 1 al 5' });
+        }
+    }
+
+    if (!(estado >= 1 && estado <= 3 && Number.isInteger(parseFloat(estado)))) {
+        return res.status(400).json({ error: 'El campo estado solo puede contener un numero entero del 1 al 3' });
+    }
+
     try {
         const pelicula = await peliculaModelo.crear(creador_id, { nombre, anio, director, sinopsis, imagen, categoria });
         await usuarioPeliculaModelo.agregar(creador_id, pelicula.id, calificacion, estado);
@@ -83,6 +109,18 @@ router.put("/:id", async (req, res) => {
 
     if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria) {
         return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    if (!(Number.isInteger(parseFloat(anio)) && parseInt(anio) >= 1888 && parseInt(anio) <= añoActual)) {
+        return res.status(400).json({ error: `El campo año solo puede contener un numero entero del 1888 al ${añoActual}` });
+    }
+
+    if (!isAlpha(director)) {
+        return res.status(400).json({ error: 'El campo director solo puede contener letras' });
+    }
+
+    if (!(categoria >= 1 && categoria <= 8 && Number.isInteger(parseFloat(categoria)))) {
+        return res.status(400).json({ error: 'El campo categoria preferida solo puede contener un numero entero del 1 al 8' });
     }
 
     try {
