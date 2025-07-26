@@ -19,13 +19,17 @@ async function cargarPeliculasDelUsuario() {
             const estado = await resEstado.json();
             const div = document.createElement("div");
             div.classList.add("pelicula-item");
+            div.addEventListener("click", () => {
+                window.location.href = `pelicula.html?id=${p.id}`
+            })
             div.innerHTML = `
                 <img src="${p.imagen}" alt="${p.nombre}" width="200">
                 <h3>${p.nombre}</h3>
                 <button class="btn-desagregar" data-id="${p.id}">Desagregar</button>
             `;
 
-            div.querySelector(".btn-desagregar").addEventListener("click", async () => {
+            div.querySelector(".btn-desagregar").addEventListener("click", async (event) => {
+                event.stopPropagation();
                 const confirmar = confirm("¿Estás seguro de que querés desagregar esta película de tu lista?");
                 if (!confirmar) return;
 

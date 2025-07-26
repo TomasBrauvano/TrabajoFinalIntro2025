@@ -32,6 +32,9 @@ router.get("/:id", async (req, res) => {
     const { id } = req.params;
     try {
         const pelicula = await peliculaModelo.obtenerPorId(id);
+        if (!pelicula) {
+            return res.status(404).json({ error: 'Pelicula no encontrada' });
+        }
         res.status(200).json(pelicula);
     } catch (err) {
         console.error(err);

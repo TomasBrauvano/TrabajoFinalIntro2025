@@ -364,7 +364,7 @@ textarea:focus {
 
 #titulo-config:hover {
     color: #EEE6FF;
-    background:#40489c;
+    background: #40489c;
 }
 
 .hidden-content {
@@ -480,4 +480,33 @@ main.container-cuadro-de-ingreso {
 
 .cuadro-de-ingreso form {
     align-items: center;
+}
+
+.container-container-pelicula {
+    display: flex;
+    align-items: center;
+}
+
+.container-pelicula {
+    display: flex;
+    gap: 30px;
+    margin: 70px;
+    background-color: #2E3478;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+}
+
+.container-info {
+    width: 400px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+#imagen-pelicula {
+    width: 300px;
+    height: 430px;
+    object-fit: cover;
+    border-radius: 8px 0px 0px 8px;
 }
