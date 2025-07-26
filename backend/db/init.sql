@@ -28,12 +28,30 @@ CREATE TABLE IF NOT EXISTS peliculas (
     categoria INT REFERENCES categorias(id) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS plataformas (
+	id SERIAL PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	logo_url TEXT NOT NULL,
+	costo_mensual NUMERIC(10,2) NOT NULL,
+	pagina_url TEXT NOT NULL,
+	ceo VARCHAR(50) NOT NULL,
+	disponibie_en_argentina BOOLEAN NOT NULL,
+    creador_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS usuario_pelicula (
     usuario_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
     pelicula_id INT NOT NULL REFERENCES peliculas(id) ON DELETE CASCADE,
     calificacion INT,
     estado INT NOT NULL DEFAULT 1 REFERENCES estados(id),
     PRIMARY KEY (usuario_id, pelicula_id)
+);
+
+CREATE TABLE IF NOT EXISTS pelicula_plataforma (
+	pelicula_id INT NOT NULL REFERENCES peliculas(id) ON DELETE CASCADE,
+	plataforma_id INT NOT NULL REFERENCES plataformas(id) ON DELETE CASCADE,
+	calif_general INT,
+	PRIMARY KEY (pelicula_id, plataforma_id)
 );
 
 INSERT INTO categorias (nombre) VALUES 
@@ -55,7 +73,11 @@ INSERT INTO estados (nombre) VALUES
   ('pendiente'),
   ('viendo'),
   ('vista')
-ON CONFLICT (nombre) DO NOTHING;  
+ON CONFLICT (nombre) DO NOTHING;
+
+INSERT INTO plataformas (nombre,logo_url,costo_mensual,pagina_url,ceo,disponibie_en_argentina,creador_id)
+VALUES ('Netflix', 'https://images.ctfassets.net/y2ske730sjqp/1aONibCke6niZhgPxuiilC/2c401b05a07288746ddf3bd3943fbc76/BrandAssets_Logos_01-Wordmark.jpg?w=940', 7.99, 'https://www.netflix.com', 'Wilmot Reed Hastings Jr', true, 1),
+('Disney+', 'https://i.pinimg.com/736x/2b/fc/f1/2bfcf1f53b5d6fc10998509152011368.jpg', 17, 'https://www.disneyplus.com', 'Robert A. Iger', true, 1);
 
 INSERT INTO peliculas (nombre, anio, director, sinopsis, imagen, creador_id, categoria) VALUES
 ('El conjuro', 2013, 'James Wan', 'Una pareja de investigadores paranormales ayuda a una familia aterrorizada.', 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEil91uWcWktClfvIvmV6qtU11ZipAlkALkCOXzyuqv0XH8vNgmE_YErlx8nKvxP2nO6VWaJOw8Rgvgwm6XjILiH2jrbY6tZAG3QCrI8eYOwoUVOKYxXRPdRAV82UOmAx9R9nOwalinXt0Dg/s1600/the-conjuring-poster.jpg', 1, 1),
