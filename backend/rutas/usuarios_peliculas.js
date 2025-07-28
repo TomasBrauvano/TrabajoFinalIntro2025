@@ -24,6 +24,10 @@ router.get('/:usuario_id/:pelicula_id', async (req, res) => {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
+    if (!Number.isInteger(parseFloat(pelicula_id))) {
+        return res.status(400).json({ error: 'La id debe ser un numero entero positivo' });
+    }
+
     try {
         const pelicula = await usuarioPeliculaModelo.obtenerPorIds(usuario_id, pelicula_id);
         if (!pelicula) {
@@ -57,6 +61,20 @@ router.put('/', async (req, res) => {
 
     if (!usuario_id || !pelicula_id || !estado) {
         return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    if (!Number.isInteger(parseFloat(pelicula_id))) {
+        return res.status(400).json({ error: 'La id debe ser un numero entero positivo' });
+    }
+
+    if (calificacion) {
+        if (!(calificacion >= 1 && calificacion <= 5 && Number.isInteger(parseFloat(calificacion)))) {
+            return res.status(400).json({ error: 'El campo calificacion solo puede estar vacio o contener un numero entero del 1 al 5' });
+        }
+    }
+
+    if (!(estado >= 1 && estado <= 3 && Number.isInteger(parseFloat(estado)))) {
+        return res.status(400).json({ error: 'El campo estado solo puede contener un numero entero del 1 al 3' });
     }
 
     try {
