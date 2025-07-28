@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS plataformas (
 	costo_mensual NUMERIC(10,2) NOT NULL,
 	pagina_url TEXT NOT NULL,
 	ceo VARCHAR(50) NOT NULL,
-	disponibie_en_argentina BOOLEAN NOT NULL,
+	disponible_en_argentina BOOLEAN NOT NULL,
     creador_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
@@ -75,7 +75,7 @@ INSERT INTO estados (nombre) VALUES
   ('vista')
 ON CONFLICT (nombre) DO NOTHING;
 
-INSERT INTO plataformas (nombre,logo_url,costo_mensual,pagina_url,ceo,disponibie_en_argentina,creador_id)
+INSERT INTO plataformas (nombre,logo_url,costo_mensual,pagina_url,ceo,disponible_en_argentina,creador_id)
 VALUES ('Netflix', 'https://images.ctfassets.net/y2ske730sjqp/1aONibCke6niZhgPxuiilC/2c401b05a07288746ddf3bd3943fbc76/BrandAssets_Logos_01-Wordmark.jpg?w=940', 7.99, 'https://www.netflix.com', 'Wilmot Reed Hastings Jr', true, 1),
 ('Disney+', 'https://i.pinimg.com/736x/2b/fc/f1/2bfcf1f53b5d6fc10998509152011368.jpg', 17, 'https://www.disneyplus.com', 'Robert A. Iger', true, 1);
 

@@ -6,7 +6,7 @@ function crearTarjetaPlataforma(plataforma){
     <img src = "${plataforma.logo_url}" alt="Logo de ${plataforma.nombre}" class="recomendacion-imagen">
     <h3 class="recomendacion-titulo">${plataforma.nombre}</h3>
     <p class="plataforma-costo">Costo Mensual: $${Number(plataforma.costo_mensual).toFixed(2)}</p>
-    <p class="plataforma-disponibilidad">${plataforma.disponibie_en_argentina ? 'Disponible en Argentina' : 'No disponible en Argentina'}</p>
+    <p class="plataforma-disponibilidad">${plataforma.disponible_en_argentina ? 'Disponible en Argentina' : 'No disponible en Argentina'}</p>
     <p class="plataforma-ceo">CEO: ${plataforma.ceo}</p>
     <a href="${plataforma.pagina_url}" target="_blank" class="boton">Visitar Sitio</a>
     `;
