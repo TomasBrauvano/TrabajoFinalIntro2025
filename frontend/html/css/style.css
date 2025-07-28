@@ -676,12 +676,13 @@ main.container-cuadro-de-ingreso {
 
 #card-nombre {
     text-align: center;
+}
 
-.plataforma-item{
+.plataforma-item {
     background: linear-gradient(180deg, #2E3478, #1e1e1e);
 }
 
-.plataforma-item .recomendacion-imagen{
+.plataforma-item .recomendacion-imagen {
     width: 100%;
     height: 250px;
     /*object-fit: contain;*/
@@ -692,7 +693,7 @@ main.container-cuadro-de-ingreso {
     box-sizing: border-box;
 }
 
-.plataforma-item .recomendacion-titulo{
+.plataforma-item .recomendacion-titulo {
     font-size: 1.5rem;
     padding: 0 5px;
 }
