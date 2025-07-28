@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar una nueva cuenta</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="./imagenes/LOGO.png">
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="peliculas.html">Películas</a></li>
+                <li><a href="micuenta.html">Mi Perfil</a></li>
+                <li><a href="">Buscar</a>
+                    <ul>
+                        <li><a href="buscar-pelis.html">Buscar Películas</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
+    <main class="container-container-pelicula">
+        <section class="cuadro-de-ingreso">
+            <h2>Actualizar estado y calificacion</h2>
+            <h3 id="titulo"></h3>
+            <form action="" method="PUT">
+                <div class="formulario-inscripcion">
+                    <label for="estado">Estado:</label>
+                    <select id="estado" name="estado" required>
+                        <option value="1">Pendiente</option>
+                        <option value="2">Viendo</option>
+                        <option value="3">Vista</option>
+                    </select>
+                </div>
+                <div class="formulario-inscripcion">
+                    <label for="calificacion">Calificacion:</label>
+                    <select id="calificacion" name="calificacion" required>
+                        <option value="">Todavia no tengo una calificacion</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <button id="actualizar-pelicula">Actualizar</button>
+            </form>
+
+        </section>
+    </main>
+    <script src="/logica/actualizar-calificacion-estado.js"></script>
+</body>
+
+</html>
