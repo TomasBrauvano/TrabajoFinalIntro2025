@@ -15,18 +15,56 @@ async function cargarPeliculasDelUsuario() {
 
         mostrador.innerHTML = "";
         for (const p of peliculas) {
-            const resEstado = await fetch(`http://localhost:3000/api/estados/${p.estado}`);
-            const estado = await resEstado.json();
             const div = document.createElement("div");
-            div.classList.add("pelicula-item");
+            div.classList.add("pelicula");
             div.addEventListener("click", () => {
                 window.location.href = `pelicula.html?id=${p.id}`
             })
             div.innerHTML = `
-                <img src="${p.imagen}" alt="${p.nombre}" width="200">
                 <h3>${p.nombre}</h3>
+                <img src="${p.imagen}" alt="${p.nombre}" width="200">
+                <div class="personal">
+                <div class="estado-pelicula">
+                <span class="circulo-estado"></span>
+                <span>${p.estado_nombre}</span>
+                </div>
+                ${p.calificacion ? `
+                <div class="calificacion-pelicula">
+                <span>${p.calificacion}</span>
+                <span class="star"></span>
+                </div>
+                ` : ''}
+                <div class="container-logo-actualizar">
+                <img src="https://cdn-icons-png.flaticon.com/512/45/45406.png" class="logo-actualizar">
+                </div>
+                </div>
                 <button class="btn-desagregar" data-id="${p.id}">Desagregar</button>
             `;
+
+            const circulo = div.querySelector(".circulo-estado");
+            const estadoPelicula = div.querySelector(".estado-pelicula");
+            const logoActualizar = div.querySelector(".container-logo-actualizar");
+
+            switch (p.estado_nombre) {
+                case "pendiente":
+                    circulo.style = "background-color: #fd7e14;"
+                    break
+                case "viendo":
+                    circulo.style = "background-color: #007bff;"
+                    break
+                case "vista":
+                    circulo.style = "background-color: #28a745;"
+                    break
+            }
+
+            if (!p.calificacion) {
+                estadoPelicula.style.border = "none"
+            }
+
+            logoActualizar.addEventListener("click", async (event) => {
+                event.stopPropagation();
+                window.location.href = `actualizar-calificacion-estado.html?id=${p.id}`
+            });
 
             div.querySelector(".btn-desagregar").addEventListener("click", async (event) => {
                 event.stopPropagation();
@@ -52,7 +90,6 @@ async function cargarPeliculasDelUsuario() {
             });
 
             mostrador.appendChild(div);
-
         }
     } catch (err) {
         console.error(err);
