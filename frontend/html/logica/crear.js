@@ -21,8 +21,30 @@ async function cargarCategorias() {
     }
 }
 
+async function cargarPlataformas() {
+    try {
+        const res = await fetch("http://localhost:3000/api/plataformas");
+        const plataformas = await res.json();
+
+        const select = document.getElementById("plataformas");
+        select.innerHTML = "";
+
+        plataformas.forEach(plataforma => {
+            const option = document.createElement("option");
+            option.value = plataforma.id;
+            option.textContent = plataforma.nombre;
+            select.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error al cargar plataformas:", error);
+        const select = document.getElementById("plataformas");
+        select.innerHTML = `<option value="">No se pudieron cargar las plataformas</option>`;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     cargarCategorias();
+    cargarPlataformas();
     const boton = document.getElementById("crear");
 
     boton.addEventListener("click", async (e) => {
@@ -34,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const sinopsis = document.getElementById("sinopsis").value;
         const imagen = document.getElementById("url-imagen").value;
         const categoria = document.getElementById("categorias").value;
+        const plataforma = document.getElementById("plataformas").value;
         const estado = document.getElementById("estado").value;
         const calificacion = document.getElementById("calificacion").value;
         const body = {
@@ -44,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
             imagen,
             creador_id: usuario_id,
             categoria,
+            plataforma,
             calificacion,
             estado
         }
