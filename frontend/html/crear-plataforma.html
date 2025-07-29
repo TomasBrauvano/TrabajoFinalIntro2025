@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar una nueva cuenta</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="./imagenes/LOGO.png">
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="peliculas.html">Películas</a></li>
+                <li><a href="plataformas.html">Plataformas</a></li>
+                <li><a href="micuenta.html">Mi Perfil</a></li>
+                <li><a href="">Buscar</a>
+                    <ul>
+                        <li><a href="buscar-pelis.html">Buscar Películas</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container-cuadro-de-ingreso">
+        <section class="cuadro-de-ingreso">
+            <h2>Crea una plataforma</h2>
+            <form action="" method="POST">
+                <div class="creacion-div">
+                    <label for="nombre">Nombre de la plataforma:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="creacion-div">
+                    <label for="logo_url">Url del logo:</label>
+                    <input type="text" id="logo_url" name="logo_url" required>
+                </div>
+                <div class="creacion-div">
+                    <label for="costo_mensual">Costo mensual:</label>
+                    <input type="number" id="costo_mensual" name="costo_mensual" placeholder="Ej: 2.10"
+                        title="Por favor, ingrese el costo con uno o dos decimales, usando punto como separador (Ej: 2.10)."
+                        required>
+                </div>
+                <div class="creacion-div">
+                    <label for="pagina_url">Url de la pagina:</label>
+                    <input type="url" id="pagina_url" name="pagina_url" required>
+                </div>
+                <div class="creacion-div">
+                    <label for="ceo">Ceo de la plataforma:</label>
+                    <input type="text" id="ceo" name="ceo" required>
+                </div>
+                <div class="creacion-div">
+                    <label for="disponible_en_argentina">Esta disponible en argentina?:</label>
+                    <select id="disponible_en_argentina" name="disponible_en_argentina">
+                        <option value="true">Si</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <button id="crear">Crear</button>
+            </form>
+        </section>
+    </main>
+    <script src="/logica/crear-plataforma.js"></script>
+</body>
+
+</html>
