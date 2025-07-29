@@ -407,7 +407,7 @@ input[type="checkbox"]:checked+.conf-input {
 }
 
 .pelicula-item {
-    min-width: 300px;
+    width: 300px;
     height: auto;
     background-color: #2E3478;
     color: white;
@@ -456,12 +456,13 @@ input[type="checkbox"]:checked+.conf-input {
 }
 
 .pelicula-item h3 {
+    width: 90%;
     text-align: center;
     font-size: 1rem;
     margin: 10px 0;
     padding: 0 5px;
     color: white;
-    white-space: nowrap;
+    white-space: initial;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -561,8 +562,7 @@ main.container-cuadro-de-ingreso {
 
 
 .pelicula {
-    min-width: 300px;
-    height: auto;
+    width: 300px;
     background-color: #2E3478;
     color: white;
     border-radius: 8px;
@@ -586,9 +586,12 @@ main.container-cuadro-de-ingreso {
     width: 300px;
     height: 430px;
     object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .pelicula h3 {
+    width: 90%;
     text-align: center;
     font-size: 1rem;
     margin: 10px 0;
@@ -696,4 +699,50 @@ main.container-cuadro-de-ingreso {
 .plataforma-item .recomendacion-titulo {
     font-size: 1.5rem;
     padding: 0 5px;
+}
+
+.pelicula-plataforma {
+    width: 300px;
+    height: auto;
+    background-color: #2E3478;
+    color: white;
+    border-radius: 8px;
+    flex-shrink: 0;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.pelicula-plataforma:hover {
+    transform: scale(1.05);
+}
+
+.pelicula-plataforma img {
+    width: 300px;
+    height: 430px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.pelicula-plataforma h3 {
+    width: 90%;
+    text-align: center;
+    font-size: 1rem;
+    margin: 10px 0;
+    padding: 0 5px;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pelicula-plataforma:hover .boton-agregar {
+    opacity: 1;
 }

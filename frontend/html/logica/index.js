@@ -15,7 +15,7 @@ async function cargarRecomendaciones(usuario_id) {
         if (recomendaciones.length > 0) {
             recomendaciones.forEach(pelicula => {
                 const tarjeta = document.createElement("div");
-                tarjeta.classList.add(`tarjeta`);
+                tarjeta.classList.add(`pelicula`);
                 tarjeta.id = pelicula.id
 
                 tarjeta.addEventListener("click", () => {
@@ -25,10 +25,8 @@ async function cargarRecomendaciones(usuario_id) {
                 const imagen = document.createElement("img");
                 imagen.src = pelicula.imagen;
                 imagen.alt = pelicula.nombre;
-                imagen.classList.add("recomendacion-imagen");
 
-                const titulo = document.createElement("p");
-                titulo.classList.add("recomendacion-titulo");
+                const titulo = document.createElement("h3");
                 titulo.textContent = pelicula.nombre;
 
                 const botonAgregar = document.createElement("button");
@@ -101,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (logoutLink) {
         logoutLink.addEventListener("click", (event) => {
-            console.log("a")
             event.preventDefault();
 
             localStorage.clear();
