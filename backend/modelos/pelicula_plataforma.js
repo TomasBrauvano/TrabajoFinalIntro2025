@@ -1,11 +1,11 @@
 const pool = require('./db');
 
 async function obtenerPeliculasPorIdPlataforma(plataforma_id) {
-    const res = await pool.query('SELECT pp.calif_general , p.* FROM pelicula_plataforma pp JOIN peliculas p ON p.id = pp.pelicula_id WHERE plataforma_id = $1',[plataforma_id]);
+    const res = await pool.query('SELECT pp.calif_general , p.* FROM pelicula_plataforma pp JOIN peliculas p ON p.id = pp.pelicula_id WHERE plataforma_id = $1', [plataforma_id]);
     return res.rows;
 }
 
-async function agregar( pelicula_id, plataforma_id, calif_general) {
+async function agregar(pelicula_id, plataforma_id, calif_general) {
     let res;
     if (calif_general) {
         res = await pool.query(

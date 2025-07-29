@@ -58,6 +58,25 @@ router.get("/categorias/:id_categoria", async (req, res) => {
     }
 })
 
+router.get("/plataformas/:id_plataforma", async (req, res) => {
+    const { id_plataforma } = req.params;
+
+    if (!(Number.isInteger(parseFloat(id_plataforma)) && id_plataforma > 0)) {
+        return res.status(400).json({ error: 'El id tiene que ser un numero entero mayor a 0' });
+    }
+
+    try {
+        const peliculas = await peliculaModelo.obtenerPorPlataforma(id_plataforma);
+        if (!peliculas) {
+            return res.status(404).json({ error: 'No se encotraron peliculas' });
+        }
+        res.status(200).json(peliculas);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+})
+
 router.post("/buscar", async (req, res) => {
     const { nombre } = req.body;
     try {

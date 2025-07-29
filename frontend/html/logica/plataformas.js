@@ -1,4 +1,4 @@
-function crearTarjetaPlataforma(plataforma){
+function crearTarjetaPlataforma(plataforma) {
     const tarjetaDiv = document.createElement("div");
     tarjetaDiv.classList.add("tarjeta", "plataforma-item");
 
@@ -18,10 +18,10 @@ async function cargarPlataformas() {
     const mostradorDeContenido = document.querySelector(".mostrador-de-contenido");
     mostradorDeContenido.innerHTML = '<p>Cargando plataformas...</p>'
 
-    try{
+    try {
         const res = await fetch("http://localhost:3000/api/plataformas");
 
-        if(!res.ok){
+        if (!res.ok) {
             throw new Error(`Error HTTP: ${res.status} - ${res.statusText}`);
         }
 
@@ -29,16 +29,22 @@ async function cargarPlataformas() {
 
         mostradorDeContenido.innerHTML = '';
 
-        if(plataformas.length == 0){
+        if (plataformas.length == 0) {
             mostradorDeContenido.innerHTML = '<p>No hay plataformas registradas en este momento.</p>';
             return;
         }
 
-        plataformas.forEach(plataforma => {
+        for (const plataforma of plataformas) {
             const tarjeta = crearTarjetaPlataforma(plataforma);
+            tarjeta.addEventListener("click", () => {
+                window.location.href = `peliculas-por-plataforma.html?id=${plataforma.id}`
+            })
+            tarjeta.querySelector(".boton").addEventListener("click", (event) => {
+                event.stopPropagation();
+            })
             mostradorDeContenido.appendChild(tarjeta);
-        });
-    }catch(error){
+        };
+    } catch (error) {
         console.error("Error al cargar plataformas", error);
         mostradorDeContenido.innerHTML = `<p>Error al cargar las plataformas: ${error.message}. Por favor, intente de nuevo mas tarde.</p>`
     }
