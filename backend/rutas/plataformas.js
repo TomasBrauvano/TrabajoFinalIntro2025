@@ -114,7 +114,7 @@ router.put("/:id", async (req, res) => {
         return res.status(400).json({ error: 'el formato de la url es inválido' })
     }
 
-    if (!(disponible_en_argentina = true) && !(disponible_en_argentina = false)) {
+    if (!(disponible_en_argentina === "true") && !(disponible_en_argentina === "false")) {
         return res.status(400).json({ error: 'Disponible en Argentina si o no?' });
     }
 
@@ -123,7 +123,7 @@ router.put("/:id", async (req, res) => {
         if (!plataforma) {
             return res.status(404).json({ error: 'Plataforma no encontrada' });
         }
-        await plataformaModelo.actualizar(id, { nombre, logo_url, costo_mensual, pagina_url, ceo, disponible_en_argentina });
+        await plataformaModelo.actualizar(id, { nombre, logo_url, costo_mensual, pagina_url, ceo, disponible_en_argentina, creador_id });
         res.status(201).json({ mensaje: 'Plataforma actualizada' });
     } catch (err) {
         console.error(err);
