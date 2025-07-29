@@ -27,46 +27,41 @@
     </header>
     <main class="container-container-pelicula">
         <section class="cuadro-de-ingreso">
-            <h2>Actualizar pelicula</h2>
+            <h2>Actualizar plataforma</h2>
             <form action="" method="PUT">
                 <div class="formulario-inscripcion">
-                    <label for="nombre">Titulo:</label>
+                    <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required>
                 </div>
                 <div class="formulario-inscripcion">
-                    <label for="anio">Año:</label>
-                    <input type="text" id="anio" name="anio" required>
+                    <label for="logo_url">URL del Logo:</label>
+                    <input type="text" id="logo_url" name="logo_url" required>
                 </div>
                 <div class="formulario-inscripcion">
-                    <label for="director">Director:</label>
-                    <input type="text" id="director" name="director" required>
+                    <label for="costo_mensual">Costo Mensual:</label>
+                    <input type="number" id="costo_mensual" name="costo_mensual" required>
                 </div>
                 <div class="formulario-inscripcion">
-                    <label for="sinopsis">Sinopsis:</label>
-                    <textarea type="text" id="sinopsis" name="sinopsis" required></textarea>
+                    <label for="pagina_url">URL de la Pagina:</label>
+                    <input type="text" id="pagina_url" name="pagina_url" required>
                 </div>
                 <div class="formulario-inscripcion">
-                    <label for="imagen">Url imagen:</label>
-                    <input type="text" id="imagen" name="imagen" required>
+                    <label for="ceo">CEO:</label>
+                    <input type="text" id="ceo" name="ceo" required>
                 </div>
                 <div class="formulario-inscripcion">
-                    <label for="categoria">Categoria:</label>
-                    <select id="categoria" name="categoria" required>
-                        <option value="">Cargando categorías...</option>
+                    <label for="disponible_en_argentina">Está disponible en Argentina?:</label>
+                    <select id="disponible_en_argentina" name="disponible_en_argentina" required>
+                        <option value="true">Si</option>
+                        <option value="false">No</option>
                     </select>
                 </div>
-                <div class="formulario-inscripcion">
-                    <label for="plataforma">Disponible en:</label>
-                    <select id="plataforma" name="plataforma" required>
-                        <option value="">Cargando plataformas...</option>
-                    </select>
-                </div>
-                <button id="actualizar-pelicula">Actualizar pelicula</button>
+                <button id="actualizar-plataforma">Actualizar plataforma</button>
             </form>
 
         </section>
     </main>
-    <script src="/logica/actualizar-pelicula.js"></script>
+    <script src="/logica/actualizar-plataforma.js"></script>
 </body>
 
 </html>

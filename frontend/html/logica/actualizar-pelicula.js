@@ -21,11 +21,33 @@ async function cargarCategorias() {
     }
 }
 
+async function cargarPlataformas() {
+    try {
+        const res = await fetch("http://localhost:3000/api/plataformas");
+        const plataformas = await res.json();
+
+        const select = document.getElementById("plataforma");
+        select.innerHTML = "";
+
+        plataformas.forEach(plataforma => {
+            const option = document.createElement("option");
+            option.value = plataforma.id;
+            option.textContent = plataforma.nombre;
+            select.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Error al cargar plataformas:", error);
+        const select = document.getElementById("plataformas");
+        select.innerHTML = `<option value="">No se pudieron cargar las plataformas</option>`;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const pelicula_id = urlParams.get('id');
 
     await cargarCategorias();
+    await cargarPlataformas();
 
     const container = document.querySelector(".cuadro-de-ingreso");
     const boton = document.getElementById("actualizar-pelicula");
@@ -46,6 +68,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 const categoriaSelect = document.getElementById("categoria");
                 categoriaSelect.value = pelicula.categoria;
+
+                const plataformaSelect = document.getElementById("plataforma");
+                plataformaSelect.value = pelicula.plataforma;
 
             } else if (respuesta.status === 404) {
                 container.innerHTML = "<h2>La pelicula no existe</h2>";
@@ -76,6 +101,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const sinopsis = document.getElementById("sinopsis").value;
             const imagen = document.getElementById("imagen").value;
             const categoria = document.getElementById("categoria").value;
+            const plataforma = document.getElementById("plataforma").value;
 
             try {
                 const res = await fetch(`http://localhost:3000/api/peliculas/${pelicula_id}`, {
@@ -90,7 +116,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                         sinopsis: sinopsis || pelicula.sinopsis,
                         imagen: imagen || pelicula.imagen,
                         creador_id: usuario_id,
-                        categoria: categoria
+                        categoria: categoria,
+                        plataforma: plataforma
                     }),
                 });
 
