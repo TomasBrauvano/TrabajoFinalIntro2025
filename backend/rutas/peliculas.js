@@ -92,9 +92,9 @@ router.post("/buscar", async (req, res) => {
 })
 
 router.post("/", async (req, res) => {
-    const { nombre, anio, director, sinopsis, imagen, creador_id, categoria, calificacion, estado } = req.body;
+    const { nombre, anio, director, sinopsis, imagen, creador_id, categoria, plataforma, calificacion, estado } = req.body;
 
-    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria || !estado) {
+    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !plataforma || !categoria || !estado) {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
@@ -121,7 +121,7 @@ router.post("/", async (req, res) => {
     }
 
     try {
-        const pelicula = await peliculaModelo.crear(creador_id, { nombre, anio, director, sinopsis, imagen, categoria });
+        const pelicula = await peliculaModelo.crear(creador_id, { nombre, anio, director, sinopsis, imagen, categoria, plataforma });
         await usuarioPeliculaModelo.agregar(creador_id, pelicula.id, calificacion, estado);
         res.status(201).json({ mensaje: 'Pelicula creada' });
     } catch (err) {
@@ -132,9 +132,9 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     const { id } = req.params;
-    const { nombre, anio, director, sinopsis, imagen, creador_id, categoria } = req.body;
+    const { nombre, anio, director, sinopsis, imagen, creador_id, categoria, plataforma } = req.body;
 
-    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria) {
+    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria || !plataforma) {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
@@ -159,7 +159,7 @@ router.put("/:id", async (req, res) => {
         if (!pelicula) {
             return res.status(404).json({ error: 'Pelicula no encontrada' });
         }
-        await peliculaModelo.actualizar(id, { nombre, anio, director, sinopsis, imagen, creador_id, categoria });
+        await peliculaModelo.actualizar(id, { nombre, anio, director, sinopsis, imagen, creador_id, categoria, plataforma });
         res.status(201).json({ mensaje: 'Pelicula actualizada' });
     } catch (err) {
         console.error(err);

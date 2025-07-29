@@ -20,18 +20,18 @@ async function obtenerTodas() {
     return res.rows;
 }
 
-async function crear(creador_id, { nombre, anio, director, sinopsis, imagen, categoria }) {
+async function crear(creador_id, { nombre, anio, director, sinopsis, imagen, categoria, plataforma }) {
     const res = await pool.query(
-        'INSERT INTO peliculas (nombre, anio, director, sinopsis, imagen, creador_id, categoria) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
-        [nombre, anio, director, sinopsis, imagen, creador_id, categoria]
+        'INSERT INTO peliculas (nombre, anio, director, sinopsis, imagen, creador_id, categoria, plataforma) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+        [nombre, anio, director, sinopsis, imagen, creador_id, categoria, plataforma]
     );
     return res.rows[0];
 }
 
-async function actualizar(id, { nombre, anio, director, sinopsis, imagen, creador_id, categoria }) {
+async function actualizar(id, { nombre, anio, director, sinopsis, imagen, creador_id, categoria, plataforma }) {
     const resultado = await pool.query(
-        'UPDATE peliculas SET nombre = $1 , anio = $2 , director = $3 , sinopsis = $4 , imagen = $5 , creador_id = $6 , categoria = $7  WHERE id = $8 RETURNING *',
-        [nombre, anio, director, sinopsis, imagen, creador_id, categoria, id]
+        'UPDATE peliculas SET nombre = $1 , anio = $2 , director = $3 , sinopsis = $4 , imagen = $5 , creador_id = $6 , categoria = $7, plataforma = $8  WHERE id = $9 RETURNING *',
+        [nombre, anio, director, sinopsis, imagen, creador_id, categoria, plataforma, id]
     );
     return resultado.rows[0];
 }
