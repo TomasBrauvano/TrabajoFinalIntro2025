@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const plataformaModelo = require('../modelos/plataforma');
 const peliculaPlataformaModelo = require('../modelos/pelicula_plataforma');
+function isAlpha(str) {
+    return /^[a-zA-Z ]+$/.test(str);
+}
 
 router.get("/", async (req, res) => {
     try {
@@ -55,23 +58,23 @@ router.post("/", async (req, res) => {
     if (costo_mensual < 0) {
         return res.status(400).json({ error: 'El costo mensual no puede ser negativo' });
     }
-    const costoRegex = /^[0-9]{1,10}\.[0-9]{2}$/;
+    const costoRegex = /^[0-9]{1,10}\.[0-9]{1,2}$/;
 
     if (!costoRegex.test(costo_mensual)) {
-        return res.status(400).json({ error: 'El formato de costo mensual es inválido'})
+        return res.status(400).json({ error: 'El formato de costo mensual es inválido' })
     }
 
     if (!isAlpha(ceo)) {
-        return res.status(400).json({ error: 'El CEO solo puede contener letras'})
+        return res.status(400).json({ error: 'El CEO solo puede contener letras' })
     }
 
     const urlRegex = /^https?:\/\/[^\s/$.?#].[^\s]*$/
 
     if (!urlRegex.test(logo_url) || !urlRegex.test(pagina_url)) {
-        return res.status(400).json({ error: 'el formato de la url es inválido'})
+        return res.status(400).json({ error: 'el formato de la url es inválido' })
     }
 
-    if (!(disponible_en_argentina = true) && !(disponible_en_argentina = false)) {
+    if (!(disponible_en_argentina === "true") && !(disponible_en_argentina === "false")) {
         return res.status(400).json({ error: 'Disponible en Argentina si o no?' });
     }
 
@@ -98,17 +101,17 @@ router.put("/:id", async (req, res) => {
     const costoRegex = /^[0-9]{1,10}\.[0-9]{2}$/;
 
     if (!costoRegex.test(costo_mensual)) {
-        return res.status(400).json({ error: 'El formato de costo mensual es inválido'})
+        return res.status(400).json({ error: 'El formato de costo mensual es inválido' })
     }
 
     if (!isAlpha(ceo)) {
-        return res.status(400).json({ error: 'El CEO solo puede contener letras'})
+        return res.status(400).json({ error: 'El CEO solo puede contener letras' })
     }
 
     const urlRegex = /^https?:\/\/[^\s/$.?#].[^\s]*$/
 
     if (!urlRegex.test(logo_url) || !urlRegex.test(pagina_url)) {
-        return res.status(400).json({ error: 'el formato de la url es inválido'})
+        return res.status(400).json({ error: 'el formato de la url es inválido' })
     }
 
     if (!(disponible_en_argentina = true) && !(disponible_en_argentina = false)) {
@@ -120,7 +123,7 @@ router.put("/:id", async (req, res) => {
         if (!plataforma) {
             return res.status(404).json({ error: 'Plataforma no encontrada' });
         }
-        await plataformaModelo.actualizar( id, { nombre, logo_url, costo_mensual, pagina_url, ceo, disponible_en_argentina });
+        await plataformaModelo.actualizar(id, { nombre, logo_url, costo_mensual, pagina_url, ceo, disponible_en_argentina });
         res.status(201).json({ mensaje: 'Plataforma actualizada' });
     } catch (err) {
         console.error(err);
