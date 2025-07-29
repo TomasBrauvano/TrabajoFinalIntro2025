@@ -56,4 +56,20 @@ async function obtenerPorNombre(nombre) {
     return res.rows;
 }
 
-module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodas, crear, actualizar, eliminarPorId, obtenerPorCreador, obtenerRecomendaciones, obtenerPorNombre };
+async function obtenerPorPlataforma(plataforma) {
+    const res = await pool.query(`SELECT
+            p.id AS pelicula_id,
+            p.nombre AS nombre_pelicula,
+            p.imagen,
+            pl.id AS plataforma_id,
+            pl.nombre AS nombre_plataforma
+            FROM
+            peliculas p
+            JOIN
+            plataformas pl ON p.plataforma = pl.id
+            WHERE
+            pl.id = $1`, [plataforma]);
+    return res.rows;
+}
+
+module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodas, crear, actualizar, eliminarPorId, obtenerPorCreador, obtenerRecomendaciones, obtenerPorNombre, obtenerPorPlataforma };
