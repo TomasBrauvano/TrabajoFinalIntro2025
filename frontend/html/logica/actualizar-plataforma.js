@@ -88,3 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         boton.disabled = true;
     }
 });
+
+function cancelar() {
+    window.location.href="mis-plataformas.html"
+};

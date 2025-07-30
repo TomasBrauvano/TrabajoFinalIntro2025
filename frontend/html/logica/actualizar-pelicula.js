@@ -47,6 +47,9 @@ async function cargarPlataformas() {
     }
 }
 
+function cancelar() {
+    window.location.href="pelicula.html"
+};
 document.addEventListener("DOMContentLoaded", async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const pelicula_id = urlParams.get('id');
