@@ -1,7 +1,7 @@
 const peliculaContainer = document.querySelector(".container-info");
 const container = document.querySelector(".container-container-pelicula")
 const botones = document.querySelector(".botones");
-const usuario_id = localStorage.getItem("usuario_id");
+const usuario_id = sessionStorage.getItem("usuario_id");
 
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);

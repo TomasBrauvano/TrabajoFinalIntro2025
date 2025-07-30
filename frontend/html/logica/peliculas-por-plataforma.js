@@ -1,5 +1,5 @@
 const mostrador = document.querySelector(".mostrador-de-contenido");
-const usuario_id = JSON.parse(localStorage.getItem("usuario_id"));
+const usuario_id = JSON.parse(sessionStorage.getItem("usuario_id"));
 const titulo = document.getElementById("titulo-plataforma");
 
 async function cargarPeliculasDelUsuario() {

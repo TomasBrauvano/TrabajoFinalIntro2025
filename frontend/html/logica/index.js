@@ -81,7 +81,7 @@ async function cargarRecomendaciones(usuario_id) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const usuario_id = localStorage.getItem("usuario_id");
+    const usuario_id = sessionStorage.getItem("usuario_id");
     const btnLogin = document.getElementById("btn-login");
     const btnRegister = document.getElementById("btn-register");
     const elementosLogueado = document.querySelectorAll(".logeado");
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         logoutLink.addEventListener("click", (event) => {
             event.preventDefault();
 
-            localStorage.clear();
+            sessionStorage.clear();
 
             location.reload();
         });

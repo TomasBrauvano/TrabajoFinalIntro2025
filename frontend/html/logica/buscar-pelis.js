@@ -1,4 +1,4 @@
-const usuario_id = localStorage.getItem("usuario_id");
+const usuario_id = sessionStorage.getItem("usuario_id");
 document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('input-busqueda');
     const boton = document.querySelector('.boton-busqueda');
