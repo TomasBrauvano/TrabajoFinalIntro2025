@@ -750,3 +750,15 @@ main.container-cuadro-de-ingreso {
 .pelicula:hover .boton-agregar {
     opacity: 1;
 }
+
+.lista-de-contenido .boton-crear {
+    position: absolute;
+    top: 140px;
+    right: 10px;
+    background-color: #838383;
+    color: #1F2033;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
