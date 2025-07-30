@@ -98,7 +98,7 @@ router.put("/:id", async (req, res) => {
     if (costo_mensual < 0) {
         return res.status(400).json({ error: 'El costo mensual no puede ser negativo' });
     }
-    const costoRegex = /^[0-9]{1,10}\.[0-9]{2}$/;
+    const costoRegex = /^[0-9]{1,10}\.[0-9]{1,2}$/;
 
     if (!costoRegex.test(costo_mensual)) {
         return res.status(400).json({ error: 'El formato de costo mensual es inválido' })
