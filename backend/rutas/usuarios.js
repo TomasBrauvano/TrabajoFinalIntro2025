@@ -109,7 +109,7 @@ router.post("/login", async (req, res) => {
         if (usuario.contrasenia === contrasenia) {
             res.status(200).json({ mensaje: 'Usuario logeado', id: usuario.id });
         } else {
-            res.status(401).json({ mensaje: 'La contraseña no coincide' });
+            res.status(401).json({ error: 'La contraseña no coincide' });
         }
     } catch (err) {
         console.error(err);
