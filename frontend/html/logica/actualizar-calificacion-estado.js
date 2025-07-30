@@ -97,5 +97,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function cancelar() {
-    window.location.href="pelicula.html"
+    window.location.href="peliculas.html"
 };
