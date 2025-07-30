@@ -94,7 +94,7 @@ router.post("/buscar", async (req, res) => {
 router.post("/", async (req, res) => {
     const { nombre, anio, director, sinopsis, imagen, creador_id, categoria, plataforma, calificacion, estado } = req.body;
 
-    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !plataforma || !categoria || !estado) {
+    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria || !estado) {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
@@ -134,7 +134,7 @@ router.put("/:id", async (req, res) => {
     const { id } = req.params;
     const { nombre, anio, director, sinopsis, imagen, creador_id, categoria, plataforma } = req.body;
 
-    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria || !plataforma) {
+    if (!nombre || !anio || !director || !sinopsis || !imagen || !creador_id || !categoria) {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 

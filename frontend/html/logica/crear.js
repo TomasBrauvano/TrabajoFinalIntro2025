@@ -29,6 +29,11 @@ async function cargarPlataformas() {
         const select = document.getElementById("plataformas");
         select.innerHTML = "";
 
+        const optionNula = document.createElement("option");
+        optionNula.value = "";
+        optionNula.textContent = "No se encuentra en ninguna de estas plataformas";
+        select.appendChild(optionNula);
+
         plataformas.forEach(plataforma => {
             const option = document.createElement("option");
             option.value = plataforma.id;
