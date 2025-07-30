@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const peliculaModelo = require('../modelos/pelicula');
 const usuarioPeliculaModelo = require('../modelos/usuario_pelicula');
+const plataformaModelo = require('../modelos/plataforma');
 const añoActual = new Date().getFullYear();
 function isAlpha(str) {
     return /^[a-zA-Z ]+$/.test(str);
@@ -120,6 +121,18 @@ router.post("/", async (req, res) => {
         return res.status(400).json({ error: 'El campo estado solo puede contener un numero entero del 1 al 3' });
     }
 
+    if (plataforma) {
+        try {
+            const existePlataforma = await plataformaModelo.obtenerPorId(plataforma)
+            if (!existePlataforma) {
+                return res.status(400).json({ error: 'La plataforma no existe' });
+            }
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'La plataforma no existe' });
+        }
+    }
+
     try {
         const pelicula = await peliculaModelo.crear(creador_id, { nombre, anio, director, sinopsis, imagen, categoria, plataforma });
         await usuarioPeliculaModelo.agregar(creador_id, pelicula.id, calificacion, estado);
@@ -152,6 +165,18 @@ router.put("/:id", async (req, res) => {
 
     if (!(categoria >= 1 && categoria <= 8 && Number.isInteger(parseFloat(categoria)))) {
         return res.status(400).json({ error: 'El campo categoria preferida solo puede contener un numero entero del 1 al 8' });
+    }
+
+    if (plataforma) {
+        try {
+            const existePlataforma = await plataformaModelo.obtenerPorId(plataforma)
+            if (!existePlataforma) {
+                return res.status(400).json({ error: 'La plataforma no existe' });
+            }
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'La plataforma no existe' });
+        }
     }
 
     try {

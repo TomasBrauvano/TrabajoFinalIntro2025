@@ -45,11 +45,11 @@ async function actualizar(id, { nombre, anio, director, sinopsis, imagen, creado
         );
     } else {
         res = await pool.query(
-            'UPDATE peliculas SET nombre = $1 , anio = $2 , director = $3 , sinopsis = $4 , imagen = $5 , creador_id = $6 , categoria = $7  WHERE id = $8 RETURNING *',
+            'UPDATE peliculas SET nombre = $1 , anio = $2 , director = $3 , sinopsis = $4 , imagen = $5 , creador_id = $6 , categoria = $7 , plataforma = NULL  WHERE id = $8 RETURNING *',
             [nombre, anio, director, sinopsis, imagen, creador_id, categoria, id]
         );
     }
-    return resultado.rows[0];
+    return res.rows[0];
 }
 
 async function eliminarPorId(id) {
