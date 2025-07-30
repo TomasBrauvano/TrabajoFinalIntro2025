@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS peliculas (
     imagen TEXT NOT NULL,
     creador_id INT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
     categoria INT REFERENCES categorias(id) NOT NULL,
-    plataforma INT REFERENCES plataformas(id) NOT NULL
+    plataforma INT REFERENCES plataformas(id) ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS usuario_pelicula (
