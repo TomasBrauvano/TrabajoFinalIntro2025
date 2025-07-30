@@ -16,6 +16,7 @@ function crearTarjetaPlataforma(plataforma) {
 
 async function cargarPlataformas() {
     const mostradorDeContenido = document.querySelector(".mostrador-de-contenido");
+    const listaDeContenido = document.querySelector(".lista-de-contenido");
     mostradorDeContenido.innerHTML = '<p>Cargando plataformas...</p>'
 
     try {
@@ -28,6 +29,15 @@ async function cargarPlataformas() {
         const plataformas = await res.json();
 
         mostradorDeContenido.innerHTML = '';
+
+        const btnCrear = document.createElement("button");
+        btnCrear.textContent = "Crear Plataforma";
+        btnCrear.classList.add("boton-crear")
+        listaDeContenido.appendChild(btnCrear)
+
+        btnCrear.addEventListener("click", () => {
+            window.location.href = "crear-plataforma.html"
+        })
 
         if (plataformas.length == 0) {
             mostradorDeContenido.innerHTML = '<p>No hay plataformas registradas en este momento.</p>';
