@@ -24,16 +24,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                 } catch (error) {
                     console.error(`Error de red al obtener categoría ${categoriaId}:`, error);
                 }
-                try {
-                    const resp = await fetch(`http://localhost:3000/api/plataformas/${pelicula.plataforma}`)
-                    if (resp.ok) {
-                        plataforma = await resp.json();
-                    } else {
-                        const errorData = await response.json()
-                        console.error(`Error al obtener plataforma ${pelicula.plataforma}: ${errorData.message || response.statusText}`);
+                if (pelicula.plataforma) {
+                    try {
+                        const resp = await fetch(`http://localhost:3000/api/plataformas/${pelicula.plataforma}`)
+                        if (resp.ok) {
+                            plataforma = await resp.json();
+                        } else {
+                            const errorData = await response.json()
+                            console.error(`Error al obtener plataforma ${pelicula.plataforma}: ${errorData.message || response.statusText}`);
+                        }
+                    } catch (error) {
+                        console.error(`Error de red al obtener plataforma ${plataforma}:`, error);
                     }
-                } catch(error) {
-                    console.error(`Error de red al obtener plataforma ${plataforma}:`, error);
                 }
                 document.getElementById('imagen-pelicula').src = pelicula.imagen;
                 document.getElementById('titulo-pelicula').textContent = `Titulo: ${pelicula.nombre}`;
@@ -41,7 +43,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 document.getElementById('director-pelicula').textContent = `Director: ${pelicula.director}`;
                 document.getElementById('sinopsis-pelicula').textContent = `Sinopsis: ${pelicula.sinopsis}`;
                 document.getElementById('categoria-pelicula').textContent = `Categoria: ${categoria.nombre}`;
-                document.getElementById('plataforma-pelicula').textContent = `Disponible en: ${plataforma.nombre}`;
+                if (pelicula.plataforma) {
+                    const plataformaH3 = document.createElement("h3");
+                    plataformaH3.textContent = `Disponible en: ${plataforma.nombre}`;
+                    peliculaContainer.appendChild(plataformaH3)
+                }
 
                 if (pelicula.creador_id === parseInt(usuario_id)) {
                     const btnActualizar = document.createElement("button");
