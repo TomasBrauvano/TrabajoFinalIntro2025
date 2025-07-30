@@ -448,7 +448,7 @@ input[type="checkbox"]:checked+.conf-input {
     opacity: 1;
 }
 
-.pelicula-item img {
+.pelicula-item:not(.plataforma-card) img {
     width: 300px;
     height: 430px;
     object-fit: cover;
@@ -456,7 +456,7 @@ input[type="checkbox"]:checked+.conf-input {
     border-top-right-radius: 8px;
 }
 
-.pelicula-item h3 {
+.pelicula-item:not(.plataforma-card) h3 {
     width: 90%;
     text-align: center;
     font-size: 1rem;
@@ -761,4 +761,49 @@ main.container-cuadro-de-ingreso {
     padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.plataforma-card {
+    height: 380px; 
+    justify-content: space-between; 
+    padding: 0; 
+}
+
+.plataforma-card .recomendacion-titulo {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem; 
+    font-weight: bold;
+    color: #EEE6FF;
+    padding: 10px 5px; 
+    background-color: #2E3478; 
+    border-radius: 8px 8px 0 0; 
+    box-sizing: border-box;
+    flex-shrink: 0; 
+    margin: 0;
+}
+
+.plataforma-card img {
+    width: 100%; 
+    height: 250px; 
+    object-fit: fill; 
+    padding: 0;
+    background-color: #1F2033; 
+    display: block;
+    flex-grow: 1; 
+    box-sizing: border-box; 
+    border-radius: 0; 
+}
+
+.mis-plataformas-acciones {
+    width: 100%;
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    padding: 0;
+    background-color: #2E3478; 
+    border-top: 0; 
+    border-radius: 0 0 8px 8px; 
+    box-sizing: border-box;
+    flex-shrink: 0;
 }

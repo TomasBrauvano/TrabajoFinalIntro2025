@@ -27,17 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const tarjetaDiv = document .createElement('div');
                 tarjetaDiv.classList.add('pelicula-item', 'plataforma-card');
 
-                const costo = parseFloat(plataforma.costo_mensual);
-                let costoFormateado = "N/A";
-                if (!isNaN(costo)) {
-                    costoFormateado = `$${costo.toFixed(2)}`; 
-                }
-                
-                const disponibleArgentina = plataforma.disponible_en_argentina ? 'Sí' : 'No';
-
                 tarjetaDiv.innerHTML = `
                     <h3 class="recomendacion-titulo">${plataforma.nombre}</h3>
-                   <img src="${plataforma.logo_url}" alt="Logo de ${plataforma.nombre}">
+                    <img src="${plataforma.logo_url}" alt="Logo de ${plataforma.nombre}">
+                    
                     <div class="mis-plataformas-acciones">
                         <button class="btn-actualizar-plataforma" data-id="${plataforma.id}">Actualizar</button>
                         <button class="btn-eliminar-plataforma" data-id="${plataforma.id}">Eliminar</button>
