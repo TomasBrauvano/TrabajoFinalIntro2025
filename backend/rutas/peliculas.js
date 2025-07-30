@@ -99,7 +99,7 @@ router.post("/", async (req, res) => {
         return res.status(400).json({ error: 'Faltan campos' });
     }
 
-    if (!(Number.isInteger(parseFloat(anio)) && parseInt(anio) >= 1888 && parseInt(anio) <= añoActual)) {
+    if (!(String(Number(anio)).length === anio.length && Number.isInteger(parseFloat(anio)) && parseInt(anio) >= 1888 && parseInt(anio) <= añoActual)) {
         return res.status(400).json({ error: `El campo año solo puede contener un numero entero del 1888 al ${añoActual}` });
     }
 
@@ -155,7 +155,7 @@ router.put("/:id", async (req, res) => {
         return res.status(400).json({ error: 'El id tiene que ser un numero entero mayor a 0' });
     }
 
-    if (!(Number.isInteger(parseFloat(anio)) && parseInt(anio) >= 1888 && parseInt(anio) <= añoActual)) {
+    if (!(String(Number(anio)).length === anio.length && Number.isInteger(parseFloat(anio)) && parseInt(anio) >= 1888 && parseInt(anio) <= añoActual)) {
         return res.status(400).json({ error: `El campo año solo puede contener un numero entero del 1888 al ${añoActual}` });
     }
 
