@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const listaMisPlataformasDiv = document.getElementById('lista-mis-plataformas');
-    const usuario_id = JSON.parse(localStorage.getItem("usuario_id"));
+    const usuario_id = JSON.parse(sessionStorage.getItem("usuario_id"));
 
     async function obtenerYMostrarMisPlataformas() {
         listaMisPlataformasDiv.innerHTML = '<p>Cargando tus plataformas...</p>';

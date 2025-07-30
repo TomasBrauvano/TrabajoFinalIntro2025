@@ -19,7 +19,7 @@ async function cargarCategorias() {
     }
 }
 
-const usuario_id = JSON.parse(localStorage.getItem("usuario_id"));
+const usuario_id = JSON.parse(sessionStorage.getItem("usuario_id"));
 let usuario;
 (async () => {
     cargarCategorias()
@@ -124,7 +124,7 @@ document.querySelector('#eliminar-cuenta').addEventListener('click', async () =>
 
         if (res.ok) {
             alert('Cuenta eliminada');
-            localStorage.clear();
+            sessionStorage.clear();
             window.location.href = "index.html";
         } else {
             alert(data.error || 'Error al eliminar');

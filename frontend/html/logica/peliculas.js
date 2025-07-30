@@ -1,5 +1,5 @@
 const mostrador = document.querySelector(".mostrador-de-contenido");
-const usuario_id = JSON.parse(localStorage.getItem("usuario_id"));
+const usuario_id = JSON.parse(sessionStorage.getItem("usuario_id"));
 const listaDeContenido = document.querySelector(".lista-de-contenido");
 
 const btnCrear = document.createElement("button");

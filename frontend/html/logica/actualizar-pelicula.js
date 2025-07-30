@@ -1,4 +1,4 @@
-const usuario_id = JSON.parse(localStorage.getItem("usuario_id"));
+const usuario_id = JSON.parse(sessionStorage.getItem("usuario_id"));
 
 async function cargarCategorias() {
     try {

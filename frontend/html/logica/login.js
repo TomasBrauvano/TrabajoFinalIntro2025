@@ -5,8 +5,8 @@ document.getElementById('boton-ingreso').addEventListener('click', async () => {
         nombre_usuario,
         contrasenia
     };
-    console.log(localStorage.getItem('usuario_id'))
-    if (!localStorage.getItem('usuario_id')) {
+    console.log(sessionStorage.getItem('usuario_id'))
+    if (!sessionStorage.getItem('usuario_id')) {
         try {
             const response = await fetch('http://localhost:3000/api/usuarios/login', {
                 method: 'POST',
@@ -19,7 +19,7 @@ document.getElementById('boton-ingreso').addEventListener('click', async () => {
             const data = await response.json();
             console.log(data)
             if (response.ok) {
-                localStorage.setItem('usuario_id', data.id);
+                sessionStorage.setItem('usuario_id', data.id);
                 window.location.href = 'index.html';
             } else {
                 alert(data.error || 'Error al iniciar sesión');
