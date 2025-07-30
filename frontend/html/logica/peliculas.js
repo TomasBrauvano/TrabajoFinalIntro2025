@@ -1,5 +1,16 @@
 const mostrador = document.querySelector(".mostrador-de-contenido");
 const usuario_id = JSON.parse(localStorage.getItem("usuario_id"));
+const listaDeContenido = document.querySelector(".lista-de-contenido");
+
+const btnCrear = document.createElement("button");
+btnCrear.textContent = "Crear Pelicula";
+btnCrear.classList.add("boton-crear")
+
+btnCrear.addEventListener("click", () => {
+    window.location.href = "crear.html"
+})
+
+listaDeContenido.appendChild(btnCrear)
 
 async function cargarPeliculasDelUsuario() {
     try {
