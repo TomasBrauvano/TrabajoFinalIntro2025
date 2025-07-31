@@ -15,34 +15,33 @@
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="peliculas.html">Películas</a></li>
-                <li><a href="series.html">Series</a></li>
-                <li><a href="libros.html">Libros</a></li>
+                <li><a href="plataformas.html">Plataformas</a></li>
+                <li><a href="mis-plataformas.html">Mis Plataformas</a></li>
                 <li><a href="micuenta.html">Mi Perfil</a></li>
                 <li><a href="">Buscar</a>
                     <ul>
                         <li><a href="buscar-pelis.html">Buscar Películas</a></li>
-                        <li><a href="buscar-ser.html">Buscar Series</a></li>
-                        <li><a href="buscar-lib.html">Buscar Libros</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
     </header>
 
-    <main>
+    <main class="container-perfil">
         <section id="card-nombre">
             <h1>¡Hola, <span id="nombre-apellido"></span>!</h1>
-            <p>user: <span id="nombre-usuario"></span></p>
+            <p>User: <span id="nombre-usuario"></span></p>
         </section>
-        <h2 id="titulo-config">Configuraciones:</h2>
+        <div id="config-header-container">
+            <h2 id="titulo-config">Configuraciones:</h2>
+        </div>
         <section id="configuraciones1">
             <h3>Datos de la Cuenta:</h3>
             <div class="datos-linea">
                 <label for="toggle-nombre">Nombre Actual:</label>
                 <p><span id="nombre-actual"></span></p>
                 <button class="desplegar-cambio" data-target="div1">Cambiar nombre</button>
-                <div id="div1">
-                    <label for="cambio-nombre">Nombre nuevo:</label>
+                <div id="div1" class="hidden-content"> <label for="cambio-nombre">Nombre nuevo:</label>
                     <input type="text" id="cambio-nombre" name="cambio-nombre">
                     <button id="cambiar-nombre">Confirmar</button>
                 </div>
@@ -51,8 +50,7 @@
                 <label for="toggle-apellido">Apellido Actual:</label>
                 <p><span id="apellido-actual"></span></p>
                 <button class="desplegar-cambio" data-target="div2">Cambiar apellido</button>
-                <div id="div2">
-                    <label for="cambio-apellido">Apellido nuevo:</label>
+                <div id="div2" class="hidden-content"> <label for="cambio-apellido">Apellido nuevo:</label>
                     <input type="text" id="cambio-apellido" name="cambio-apellido">
                     <button id="cambiar-apellido">Confirmar</button>
                 </div>
@@ -61,16 +59,14 @@
                 <label for="toggle-categoria">Categoria preferida Actual:</label>
                 <p><span id="categoria-actual"></span></p>
                 <button class="desplegar-cambio" data-target="div3">Cambiar categoria preferida</button>
-                <div id="div3">
-                    <label for="cambio-categoria">Categoria nueva:</label>
+                <div id="div3" class="hidden-content"> <label for="cambio-categoria">Categoria nueva:</label>
                     <select id="cambio-categoria" name="cambio-categoria"></select>
                     <button id="cambiar-categoria">Confirmar</button>
                 </div>
             </div>
             <div class="datos-linea">
                 <button class="desplegar-cambio" data-target="div4">Cambiar Contraseña</button>
-                <div id="div4">
-                    <label for="cambio-contrasenia">Contraseña nueva:</label>
+                <div id="div4" class="hidden-content"> <label for="cambio-contrasenia">Contraseña nueva:</label>
                     <input type="password" id="cambio-contrasenia" name="cambio-contrasenia">
                     <label for="cambio-confirmacion-contra">Confirmar contraseña nueva:</label>
                     <input type="password" id="cambio-confirmacion-contra" name="cambio-confirmacion-contra">
@@ -79,7 +75,7 @@
             </div>
             <div class="datos-linea">
                 <button class="desplegar-cambio" data-target="div5">Eliminar cuenta</button>
-                <div id="div5">
+                <div id="div5" class="hidden-content">
                     <p>Estás seguro?</p>
                     <button id="eliminar-cuenta">Confirmar</button>
                 </div>

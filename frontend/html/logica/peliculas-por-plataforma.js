@@ -1,47 +1,50 @@
-const usuario_id = sessionStorage.getItem("usuario_id");
-document.addEventListener('DOMContentLoaded', () => {
-    const input = document.getElementById('input-busqueda');
-    const boton = document.querySelector('.boton-busqueda');
-    const mostrador = document.querySelector('.mostrador-de-contenido');
-    boton.addEventListener('click', async () => {
-        const valor = input.value.trim().toLowerCase();
-        if (!valor) return;
+const mostrador = document.querySelector(".mostrador-de-contenido");
+const usuario_id = JSON.parse(sessionStorage.getItem("usuario_id"));
+const titulo = document.getElementById("titulo-plataforma");
+
+async function cargarPeliculasDelUsuario() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const plataforma_id = urlParams.get('id');
+
+    if (plataforma_id) {
         try {
-            const res = await fetch('http://localhost:3000/api/peliculas/buscar', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nombre: valor })
-            });
-            if (res.status == 404) {
-                mostrador.innerHTML = '<p>No hay peliculas con ese nombre, <a href="crear.html">creala</a></p>';
-                return
-            } else if (!res.ok) throw new Error('Error en la búsqueda');
+            const res = await fetch(`http://localhost:3000/api/peliculas/plataformas/${plataforma_id}`);
             const peliculas = await res.json();
-            mostrador.innerHTML = '';
+            if (!res.ok) return alert(peliculas.error);
+
+            if (peliculas.length === 0) {
+                mostrador.innerHTML = '<p>Esta plataforma no tiene peliculas.</p>';
+                return;
+            }
+
+            console.log(peliculas)
+
+            titulo.textContent = `Peliculas de ${peliculas[0].nombre_plataforma}`;
+
+            mostrador.innerHTML = "";
 
             for (const p of peliculas) {
+                console.log(p)
                 const div = document.createElement('div');
                 div.addEventListener("click", () => {
-                    window.location.href = `pelicula.html?id=${p.id}`
+                    window.location.href = `pelicula.html?id=${p.pelicula_id}`
                 })
                 let noAgregada = true;
-                const pRes = await fetch(`http://localhost:3000/api/usuarios_peliculas/${usuario_id}/${p.id}`);
+                const pRes = await fetch(`http://localhost:3000/api/usuarios_peliculas/${usuario_id}/${p.pelicula_id}`);
                 if (pRes.ok) {
                     noAgregada = false;
                 }
-                div.classList.add('pelicula-item');
+                div.classList.add('pelicula-plataforma');
                 div.innerHTML = `
-                    <img src="${p.imagen}" alt="${p.nombre}" width="200">
-                    <h3>Título: ${p.nombre}</h3>
+                    <img src="${p.imagen}" alt="${p.nombre_pelicula}">
+                    <h3>${p.nombre_pelicula}</h3>
                     ${noAgregada ? `
                     <button class="boton-agregar">Agregar</button>
                     `: ''}
                 `;
 
-                mostrador.appendChild(div);
-
                 if (noAgregada) {
-                    document.querySelector(`.boton-agregar`).addEventListener("click", async (event) => {
+                    div.querySelector(`.boton-agregar`).addEventListener("click", async (event) => {
                         event.stopPropagation();
 
                         try {
@@ -52,14 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
                                 },
                                 body: JSON.stringify({
                                     usuario_id,
-                                    pelicula_id: p.id,
+                                    pelicula_id: p.pelicula_id,
                                     calificacion: "",
                                     estado: "1"
                                 })
                             });
 
                             if (response.ok) {
-                                alert(`"${p.nombre}" se agrego a tu perfil de peliculas.`);
+                                alert(`"${p.nombre_pelicula}" se agrego a tu perfil de peliculas.`);
                                 location.reload();
                             } else {
                                 const errorData = await response.json();
@@ -71,11 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     });
                 }
+                mostrador.appendChild(div);
             };
-
         } catch (err) {
             console.error(err);
-            mostrador.innerHTML = '<p>Error al buscar películas.</p>';
+            mostrador.innerHTML = '<p>Error al cargar tus películas</p>';
         }
-    });
-});
+    }
+
+}
+
+cargarPeliculasDelUsuario();

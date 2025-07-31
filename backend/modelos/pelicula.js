@@ -20,52 +20,51 @@ async function obtenerTodas() {
     return res.rows;
 }
 
-async function crear(creador_id, { nombre, anio, director, sinopsis, imagen, categoria }) {
-    try {
-        const res = await pool.query(
+async function crear(creador_id, { nombre, anio, director, sinopsis, imagen, categoria, plataforma }) {
+    let res;
+    if (plataforma) {
+        res = await pool.query(
+            'INSERT INTO peliculas (nombre, anio, director, sinopsis, imagen, creador_id, categoria, plataforma) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+            [nombre, anio, director, sinopsis, imagen, creador_id, categoria, plataforma]
+        );
+    } else {
+        res = await pool.query(
             'INSERT INTO peliculas (nombre, anio, director, sinopsis, imagen, creador_id, categoria) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
             [nombre, anio, director, sinopsis, imagen, creador_id, categoria]
         );
-        return res.rows[0];
-    } catch (err) {
-        throw err;
     }
+    return res.rows[0];
 }
 
-async function actualizar(id, { nombre, anio, director, sinopsis, imagen, creador_id, categoria }) {
-    try {
-        const resultado = await pool.query(
-            'UPDATE peliculas SET nombre = $1 , anio = $2 , director = $3 , sinopsis = $4 , imagen = $5 , creador_id = $6 , categoria = $7  WHERE id = $8 RETURNING *',
+async function actualizar(id, { nombre, anio, director, sinopsis, imagen, creador_id, categoria, plataforma }) {
+    let res;
+    if (plataforma) {
+        res = await pool.query(
+            'UPDATE peliculas SET nombre = $1 , anio = $2 , director = $3 , sinopsis = $4 , imagen = $5 , creador_id = $6 , categoria = $7, plataforma = $8  WHERE id = $9 RETURNING *',
+            [nombre, anio, director, sinopsis, imagen, creador_id, categoria, plataforma, id]
+        );
+    } else {
+        res = await pool.query(
+            'UPDATE peliculas SET nombre = $1 , anio = $2 , director = $3 , sinopsis = $4 , imagen = $5 , creador_id = $6 , categoria = $7 , plataforma = NULL  WHERE id = $8 RETURNING *',
             [nombre, anio, director, sinopsis, imagen, creador_id, categoria, id]
         );
-        return resultado.rows[0];
-    } catch (err) {
-        throw err;
     }
+    return res.rows[0];
 }
 
 async function eliminarPorId(id) {
-    try {
-        const resultado = await pool.query(
-            'DELETE FROM peliculas WHERE id = $1 RETURNING *', [id]
-        )
-        return resultado.rows[0];
-    } catch (err) {
-        throw err;
-    }
+    const resultado = await pool.query(
+        'DELETE FROM peliculas WHERE id = $1 RETURNING *', [id]
+    )
+    return resultado.rows[0];
 }
 
-async function obtenerRecomendacionAleatoria(usuario_id) {
-    try {
-        const resultado = await pool.query(
-            'SELECT p.* FROM peliculas p JOIN usuarios u ON p.categoria = u.categoria_preferida WHERE u.id = $1 AND p.id NOT IN ( SELECT pelicula_id FROM usuario_pelicula WHERE usuario_id = $1 ) ORDER BY RANDOM() LIMIT 1;',
-            [usuario_id]
-        );
-        return resultado.rows[0];
-    } catch (error) {
-        console.error("Error al obtener película aleatoria por categoría:", error);
-        throw error;
-    }
+async function obtenerRecomendaciones(usuario_id) {
+    const resultado = await pool.query(
+        'SELECT p.* FROM peliculas p JOIN usuarios u ON p.categoria = u.categoria_preferida WHERE u.id = $1 AND p.id NOT IN ( SELECT pelicula_id FROM usuario_pelicula WHERE usuario_id = $1 );',
+        [usuario_id]
+    );
+    return resultado.rows;
 }
 
 async function obtenerPorNombre(nombre) {
@@ -73,4 +72,20 @@ async function obtenerPorNombre(nombre) {
     return res.rows;
 }
 
-module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodas, crear, actualizar, eliminarPorId, obtenerPorCreador, obtenerRecomendacionAleatoria, obtenerPorNombre };
+async function obtenerPorPlataforma(plataforma) {
+    const res = await pool.query(`SELECT
+            p.id AS pelicula_id,
+            p.nombre AS nombre_pelicula,
+            p.imagen,
+            pl.id AS plataforma_id,
+            pl.nombre AS nombre_plataforma
+            FROM
+            peliculas p
+            JOIN
+            plataformas pl ON p.plataforma = pl.id
+            WHERE
+            pl.id = $1`, [plataforma]);
+    return res.rows;
+}
+
+module.exports = { obtenerPorId, obtenerPorCategoria, obtenerTodas, crear, actualizar, eliminarPorId, obtenerPorCreador, obtenerRecomendaciones, obtenerPorNombre, obtenerPorPlataforma };

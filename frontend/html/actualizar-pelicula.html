@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar pelicula</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <img id="logo" src="./imagenes/LOGO.png">
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="peliculas.html">Películas</a></li>
+                <li><a href="plataformas.html">Plataformas</a></li>
+                <li><a href="mis-plataformas.html">Mis Plataformas</a></li>
+                <li><a href="micuenta.html">Mi Perfil</a></li>
+                <li><a href="">Buscar</a>
+                    <ul>
+                        <li><a href="buscar-pelis.html">Buscar Películas</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
+    <main class="container-container-pelicula">
+        <section class="cuadro-de-ingreso">
+            <h2>Actualizar pelicula</h2>
+            <form action="" method="PUT">
+                <div class="formulario-inscripcion">
+                    <label for="nombre">Titulo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="formulario-inscripcion">
+                    <label for="anio">Año:</label>
+                    <input type="text" id="anio" name="anio" required>
+                </div>
+                <div class="formulario-inscripcion">
+                    <label for="director">Director:</label>
+                    <input type="text" id="director" name="director" required>
+                </div>
+                <div class="formulario-inscripcion">
+                    <label for="sinopsis">Sinopsis:</label>
+                    <textarea type="text" id="sinopsis" name="sinopsis" required></textarea>
+                </div>
+                <div class="formulario-inscripcion">
+                    <label for="imagen">Url imagen:</label>
+                    <input type="text" id="imagen" name="imagen" required>
+                </div>
+                <div class="formulario-inscripcion">
+                    <label for="categoria">Categoria:</label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="">Cargando categorías...</option>
+                    </select>
+                </div>
+                <div class="formulario-inscripcion">
+                    <label for="plataforma">Disponible en:</label>
+                    <select id="plataforma" name="plataforma" required>
+                        <option value="">Cargando plataformas...</option>
+                    </select>
+                </div>
+                <button id="actualizar-pelicula">Actualizar pelicula</button>
+                <button type="button" onclick="cancelar()">Cancelar</button>
+            </form>
+
+        </section>
+    </main>
+    <script src="/logica/actualizar-pelicula.js"></script>
+</body>
+
+</html>
