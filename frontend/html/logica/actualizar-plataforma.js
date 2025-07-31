@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (plataforma_id) {
         try {
             const respuesta = await fetch(`http://localhost:3000/api/plataformas/${plataforma_id}`);
+            plataforma = await respuesta.json();
             if (respuesta.ok) {
-                plataforma = await respuesta.json();
 
                 document.getElementById("nombre").value = plataforma.nombre || '';
                 document.getElementById("logo_url").value = plataforma.logo_url || '';
@@ -22,15 +22,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 const disponibilidadSelect = document.getElementById("disponible_en_argentina");
                 disponibilidadSelect.value = plataforma.disponible_en_argentina;
-
-            } else if (respuesta.status === 404) {
-                container.innerHTML = "<h2>La plataforma no existe</h2>";
-            } else if (respuesta.status === 400) {
-                container.innerHTML = "<h2>La id tiene que ser un numero entero positivo</h2>";
             } else {
-                console.error(`Error al cargar plataforma: ${respuesta.status} ${respuesta.statusText}`);
-                container.innerHTML = `<h2>Error al cargar plataforma: ${respuesta.statusText}</h2>`;
-                boton.disabled = true;
+                return container.innerHTML = `<p>${plataforma.error}</p>`;
             }
         } catch (error) {
             console.error("Error al cargar plataforma:", error);
@@ -90,5 +83,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function cancelar() {
-    window.location.href="mis-plataformas.html"
+    window.location.href = "mis-plataformas.html"
 };

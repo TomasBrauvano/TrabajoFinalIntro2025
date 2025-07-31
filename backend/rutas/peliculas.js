@@ -32,7 +32,7 @@ router.get("/creadores/:creador_id", async (req, res) => {
 router.get("/:id", async (req, res) => {
     const { id } = req.params;
 
-    if (!Number.isInteger(parseFloat(id))) {
+    if (!(Number.isInteger(parseFloat(id)) && id > 0)) {
         return res.status(400).json({ error: 'El id tiene que ser un numero entero mayor a 0' });
     }
 

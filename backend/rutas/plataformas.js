@@ -18,8 +18,16 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     const { id } = req.params;
+
+    if (!(Number.isInteger(parseFloat(id)) && id > 0)) {
+        return res.status(400).json({ error: 'El id tiene que ser un numero entero mayor a 0' });
+    }
+
     try {
         const plataformas = await plataformaModelo.obtenerPorId(id);
+        if (!plataformas) {
+            return res.status(404).json({ error: 'La plataforma no existe' });
+        }
         res.status(200).json(plataformas);
     } catch (err) {
         console.error(err);
@@ -93,6 +101,10 @@ router.put("/:id", async (req, res) => {
 
     if (!nombre || !logo_url || !costo_mensual || !pagina_url || !ceo || !disponible_en_argentina || !creador_id) {
         return res.status(400).json({ error: 'Faltan campos' });
+    }
+
+    if (!(Number.isInteger(parseFloat(id)) && id > 0)) {
+        return res.status(400).json({ error: 'El id tiene que ser un numero entero mayor a 0' });
     }
 
     if (costo_mensual < 0) {

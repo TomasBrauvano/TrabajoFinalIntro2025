@@ -10,14 +10,14 @@ async function cargarPeliculasDelUsuario() {
         try {
             const res = await fetch(`http://localhost:3000/api/peliculas/plataformas/${plataforma_id}`);
             const peliculas = await res.json();
-            if (!res.ok) return alert(peliculas.error);
+            if (!res.ok) {
+                return mostrador.innerHTML = `<p>${peliculas.error}</p>`;
+            };
 
             if (peliculas.length === 0) {
                 mostrador.innerHTML = '<p>Esta plataforma no tiene peliculas.</p>';
                 return;
             }
-
-            console.log(peliculas)
 
             titulo.textContent = `Peliculas de ${peliculas[0].nombre_plataforma}`;
 
