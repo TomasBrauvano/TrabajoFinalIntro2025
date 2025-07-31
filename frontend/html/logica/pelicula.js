@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("ID de la película:", pelicula_id);
         try {
             const response = await fetch(`http://localhost:3000/api/peliculas/${pelicula_id}`);
+            const pelicula = await response.json();
             if (response.ok) {
-                const pelicula = await response.json();
                 try {
                     const res = await fetch(`http://localhost:3000/api/categorias/${pelicula.categoria}`);
                     if (res.ok) {
@@ -89,12 +89,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     botones.appendChild(btnActualizar);
                     botones.appendChild(btnEliminar);
                 }
-            } else if (response.status === 404) {
-                console.error('Error al obtener los detalles de la película:', response.statusText);
-                container.innerHTML = `<p>Pelicula no encontrada</p>`;
             } else {
-                console.error('Error al obtener los detalles de la película:', response.statusText);
-                container.innerHTML = '<p>No se pudo cargar la película.</p>';
+                return container.innerHTML = `<p>${pelicula.error}</p>`;
             }
         } catch (error) {
             console.error('Error de red al obtener detalles de la película:', error);

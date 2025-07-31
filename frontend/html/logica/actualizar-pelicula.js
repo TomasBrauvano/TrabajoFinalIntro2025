@@ -48,7 +48,7 @@ async function cargarPlataformas() {
 }
 
 function cancelar() {
-    window.location.href="peliculas.html"
+    window.location.href = "peliculas.html"
 };
 document.addEventListener("DOMContentLoaded", async () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -65,9 +65,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (pelicula_id) {
         try {
             const respuesta = await fetch(`http://localhost:3000/api/peliculas/${pelicula_id}`);
+            pelicula = await respuesta.json();
             if (respuesta.ok) {
-                pelicula = await respuesta.json();
-
                 document.getElementById("nombre").value = pelicula.nombre || '';
                 document.getElementById("anio").value = pelicula.anio || '';
                 document.getElementById("director").value = pelicula.director || '';
@@ -79,15 +78,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 const plataformaSelect = document.getElementById("plataforma");
                 plataformaSelect.value = pelicula.plataforma;
-
-            } else if (respuesta.status === 404) {
-                container.innerHTML = "<h2>La pelicula no existe</h2>";
-            } else if (respuesta.status === 400) {
-                container.innerHTML = "<h2>La id tiene que ser un numero entero positivo</h2>";
             } else {
-                console.error(`Error al cargar película: ${respuesta.status} ${respuesta.statusText}`);
-                container.innerHTML = `<h2>Error al cargar película: ${respuesta.statusText}</h2>`;
-                boton.disabled = true;
+                return container.innerHTML = `<p>${pelicula.error}</p>`;
             }
         } catch (error) {
             console.error("Error al cargar película:", error);
